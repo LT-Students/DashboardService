@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{BB9F867A-473B-4CD0-BE91-FFAAFA5889C1}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		.github\workflows\main.yml = .github\workflows\main.yml
+		Common.Configurations.targets = Common.Configurations.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{99B62A09-A534-4323-822F-4DBDB560F770}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DashboardService", "src\DashboardService\DashboardService.csproj", "{EFF45EBF-5F37-47C0-B593-DD2F3669862A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{397B9E44-9797-46F2-A0DC-E70A953B6E8E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EFF45EBF-5F37-47C0-B593-DD2F3669862A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFF45EBF-5F37-47C0-B593-DD2F3669862A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFF45EBF-5F37-47C0-B593-DD2F3669862A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFF45EBF-5F37-47C0-B593-DD2F3669862A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EFF45EBF-5F37-47C0-B593-DD2F3669862A} = {99B62A09-A534-4323-822F-4DBDB560F770}
+	EndGlobalSection
+EndGlobal
