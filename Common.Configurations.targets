@@ -28,7 +28,6 @@
 	<ItemGroup Condition="$(AssemblyName.Contains('.UnitTests')) != 'true'">
 		<PackageReference Include="LTDO.Kernel" Version="1.0.34" />
 		<PackageReference Include="LTDO.Kernel.BrokerSupport" Version="1.0.18" />
-		<PackageReference Include="LTDO.Kernel.ImageSupport" Version="1.0.12" />
 		<PackageReference Include="LTDO.Kernel.EndpointSupport" Version="1.0.11" />
 		<PackageReference Include="LTDO.Kernel.EFSupport" Version="1.0.8" />
 		<PackageReference Include="LTDO.Models" Version="1.0.59" />
