@@ -9,7 +9,6 @@ public class DbTask
   
   public Guid Id { get; set; }
   public Guid GroupId { get; set; }
-  public Guid? ParentTaskId { get; set; }
   public Guid? TaskTypeId { get; set; }
   public Guid? PriorityId { get; set; }
 
@@ -20,7 +19,6 @@ public class DbTask
   public DateTime? DeadLineAtUtc { get; set; }
   
   public DbGroup Group { get; set; }
-  public DbTask? ParentTask { get; set; }
   public DbTaskType? TaskType { get; set; }
   public DbPriority? Priority { get; set; }
 
