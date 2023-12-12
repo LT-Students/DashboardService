@@ -16,6 +16,8 @@ public class InitialCreate : Migration
     CreateTaskTable(migrationBuilder);
     CreateGroupTable(migrationBuilder);
     CreateCommentTable(migrationBuilder);
+    CreateBoardTable(migrationBuilder);
+    CreateChangeLogTable(migrationBuilder);
   }
 
   protected override void Down(MigrationBuilder migrationBuilder)
@@ -25,6 +27,8 @@ public class InitialCreate : Migration
     migrationBuilder.DropTable(DbTaskType.ToTable);
     migrationBuilder.DropTable(DbGroup.ToTable);
     migrationBuilder.DropTable(DbComment.ToTable);
+    migrationBuilder.DropTable(DbBoard.ToTable);
+    migrationBuilder.DropTable(DbChangeLog.ToTable);
   }
 
   private void CreateTaskTypeTable(MigrationBuilder migrationBuilder)
@@ -122,4 +126,48 @@ public class InitialCreate : Migration
     );
   }
 
+  private void CreateBoardTable(MigrationBuilder migrationBuilder)
+  {
+    migrationBuilder.CreateTable(
+      name: DbBoard.ToTable,
+      columns: table => new
+      {
+        Id = table.Column<Guid>(nullable: false),
+        ProjectId = table.Column<Guid>(nullable: false),
+        Name = table.Column<string>(nullable: false, type: "nvarchar(50)", maxLength: 50),
+        CreatedBy = table.Column<Guid>(nullable: false),
+        ModifiedBy = table.Column<Guid>(nullable: false),
+        IsActive = table.Column<bool>(nullable: false),
+        CreatedAtUtc = table.Column<DateTime>(nullable: false),
+        ModifiedAtUtc = table.Column<DateTime>(nullable: false),
+      },
+      constraints: table =>
+      {
+        table.PrimaryKey($"PK_{DbBoard.ToTable}", x => x.Id);
+      }
+    );
+  }
+
+  private void CreateChangeLogTable(MigrationBuilder migrationBuilder)
+  {
+    migrationBuilder.CreateTable(
+      name: DbChangeLog.ToTable,
+      columns: table => new
+      {
+        Id = table.Column<Guid>(nullable: false),
+        TaskId = table.Column<Guid>(nullable: false),
+        EntityName = table.Column<string>(nullable: false, type: "nvarchar(50)", maxLength: 50),
+        PropertyName = table.Column<string>(nullable: false, type: "nvarchar(50)", maxLength: 50),
+        PropertyOldValue = table.Column<string>(nullable: false, type: "nvarchar(50)", maxLength: 50),
+        PropertyNewValue = table.Column<string>(nullable: false, type: "nvarchar(50)", maxLength: 50),
+        CreatedBy = table.Column<Guid>(nullable: false),
+                CreatedAtUtc = table.Column<DateTime>(nullable: false),
+      },
+      constraints: table =>
+      {
+        table.PrimaryKey($"PK_{DbChangeLog.ToTable}", x => x.Id);
+      }
+    );
+
+  }
 }
