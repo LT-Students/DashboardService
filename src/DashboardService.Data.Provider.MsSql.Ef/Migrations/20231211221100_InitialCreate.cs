@@ -7,7 +7,7 @@ namespace LT.DigitalOffice.DashboardService.Data.Provider.MsSql.Ef.Migrations;
 
 [DbContext(typeof(DashboardServiceDbContext))]
 [Migration("20220729014055_InitialCreate")]
-public class InitialCreate : Migration 
+public class InitialCreate : Migration
 {
   protected override void Up(MigrationBuilder migrationBuilder)
   {
@@ -15,7 +15,7 @@ public class InitialCreate : Migration
     CreatePriorityTable(migrationBuilder);
     CreateTaskTable(migrationBuilder);
   }
-  
+
   protected override void Down(MigrationBuilder migrationBuilder)
   {
     migrationBuilder.DropTable(DbTask.ToTable);
@@ -54,7 +54,7 @@ public class InitialCreate : Migration
       }
     );
   }
-  
+
   private void CreateTaskTable(MigrationBuilder migrationBuilder)
   {
     migrationBuilder.CreateTable(
@@ -68,7 +68,7 @@ public class InitialCreate : Migration
         Name = table.Column<string>(nullable: false, type: "nvarchar(50)", maxLength:50),
         Content = table.Column<string>(nullable: false, type: "nvarchar(max)"),
         CreatedAtUtc = table.Column<DateTime>(nullable: false),
-        DeadLineAtUtc = table.Column<DateTime>(nullable: true),
+        DeadlineAtUtc = table.Column<DateTime>(nullable: true),
       },
       constraints: table =>
       {
@@ -97,5 +97,60 @@ public class InitialCreate : Migration
       }
     );
   }
-  
+
+  private void CreateGroupTable(MigrationBuilder migrationBuilder)
+  {
+    migrationBuilder.CreateTable(
+      name: DbGroup.ToTable,
+      columns: table => new
+      {
+        Id = table.Column<Guid>(nullable: false),
+        BoardId = table.Column<Guid>(nullable: false),
+        CreatedBy = table.Column<Guid>(nullable: false),
+        ModifiedBy = table.Column<Guid>(nullable: false),
+        Name = table.Column<string>(nullable: false, type: "nvarchar(50)", maxLength: 50),
+        IsActive = table.Column<bool>(nullable: false),
+        CreatedAtUtc = table.Column<DateTime>(nullable: false),
+        ModifiedAtUtc = table.Column<DateTime>(nullable: false),
+      },
+      constraints: table =>
+      {
+        table.PrimaryKey($"PK_{DbGroup.ToTable}", x => x.Id);
+        table.ForeignKey(
+          name: $"FK_{DbGroup.ToTable}_{DbBoard.ToTable}_BoardId",
+          column: x => x.DbBoardId,
+          principalTable: $"{DbBoard.ToTable}",
+          principalColumn: $"{nameof(DbBoard.Id)}",
+          onDelete: ReferentialAction.Cascade
+        );
+      }
+    );
+  }
+
+  private void CreateCommentTable(MigrationBuilder migrationBuilder)
+  {
+    migrationBuilder.CreateTable(
+      name: DbComment.ToTable,
+      columns: table => new
+      {
+        Id = table.Column<Guid>(nullable: false),
+        TaskId = table.Column<Guid>(nullable: false),
+        CreatedBy = table.Column<Guid>(nullable: false),
+        Content = table.Column<string>(nullable: false, type: "nvarchar(max)"),
+        CreatedAtUtc = table.Column<DateTime>(nullable: false),
+      },
+      constraints: table =>
+      {
+        table.PrimaryKey($"PK_{DbComment.ToTable}", x => x.Id);
+        table.ForeignKey(
+          name: $"FK_{DbComment.ToTable}_{DbTask.ToTable}_TaskId",
+          column: x => x.DbTaskId,
+          principalTable: $"{DbTask.ToTable}",
+          principalColumn: $"{nameof(DbTask.Id)}",
+          onDelete: ReferentialAction.Cascade
+        );
+      }
+    );
+  }
+
 }
