@@ -14,6 +14,8 @@ public class InitialCreate : Migration
     CreateTaskTypeTable(migrationBuilder);
     CreatePriorityTable(migrationBuilder);
     CreateTaskTable(migrationBuilder);
+    CreateGroupTable(migrationBuilder);
+    CreateCommentTable(migrationBuilder);
   }
 
   protected override void Down(MigrationBuilder migrationBuilder)
@@ -21,6 +23,8 @@ public class InitialCreate : Migration
     migrationBuilder.DropTable(DbTask.ToTable);
     migrationBuilder.DropTable(DbPriority.ToTable);
     migrationBuilder.DropTable(DbTaskType.ToTable);
+    migrationBuilder.DropTable(DbGroup.ToTable);
+    migrationBuilder.DropTable(DbComment.ToTable);
   }
 
   private void CreateTaskTypeTable(MigrationBuilder migrationBuilder)
