@@ -11,15 +11,11 @@ public class DbGroup
   public Guid BoardId { get; set; }
   public Guid CreatedBy { get; set; }
   public Guid ModifiedBy { get; set; }
-  
   public string Name { get; set; }
-  
   public bool IsActive { get; set; }
-  
   public DateTime CreatedAtUtc { get; set; }
   public DateTime ModifiedAtUtc { get; set; }
   
   public DbBoard Board { get; set; }
-
   public List<DbTask> Tasks { get; set; } = new();
 }

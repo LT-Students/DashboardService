@@ -11,9 +11,7 @@ public class DbBoard
   public Guid ProjectId { get; set; }
   public Guid CreatedBy { get; set; }
   public Guid ModifierBy { get; set; }
-  
   public string Name { get; set; }
-  
   public DateTime CreatedAtUtc { get; set; }
   public DateTime ModifiedAtUtc { get; set; }
 

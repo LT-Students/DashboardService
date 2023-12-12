@@ -9,9 +9,7 @@ public class DbComment
   public Guid Id { get; set; }
   public Guid TaskId { get; set; }
   public Guid CreatedBy { get; set; }
-  
   public string Content { get; set; }
-  
   public DateTime CreatedAtUtc { get; set; }
 
   public DbTask Task { get; set; }
