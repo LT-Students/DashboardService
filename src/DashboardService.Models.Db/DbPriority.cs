@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 
@@ -10,5 +12,26 @@ public class DbPriority
   public Guid Id { get; set; }
   public string Name { get; set; }
 
-  public List<DbTask> Tasks { get; set; } = new();
+  public ICollection<DbTask> Tasks { get; set; }
+}
+
+public class DbPriorityConfiguration : IEntityTypeConfiguration<DbPriority>
+{
+  public void Configure(EntityTypeBuilder<DbPriority> builder)
+  {
+    builder
+      .ToTable(DbPriority.ToTable);
+
+    builder
+      .HasKey(p => p.Id);
+
+    builder
+      .Property(p => p.Name)
+      .HasMaxLength(50)
+      .IsRequired();
+
+    builder
+      .HasMany(p => p.Tasks)
+      .WithOne(t => t.Priority);
+  }
 }

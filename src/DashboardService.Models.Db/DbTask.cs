@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 
@@ -19,6 +21,51 @@ public class DbTask
   public DbGroup Group { get; set; }
   public DbTaskType TaskType { get; set; }
   public DbPriority Priority { get; set; }
-  public List<DbComment> Comments { get; set; } = new();
-  public List<DbChangeLog> Logs { get; set; } = new();
+  public ICollection<DbComment> Comments { get; set; }
+  public ICollection<DbChangeLog> Logs { get; set; }
+}
+
+public class DbTaskConfiguration : IEntityTypeConfiguration<DbTask>
+{
+  public void Configure(EntityTypeBuilder<DbTask> builder)
+  {
+    builder
+      .ToTable(DbTaskType.ToTable);
+
+    builder
+      .HasKey(d => d.Id);
+
+    builder
+      .HasOne(t => t.Group)
+      .WithMany(g => g.Tasks);
+
+    builder
+      .HasOne(t => t.TaskType)
+      .WithMany(tt => tt.Tasks);
+
+    builder
+      .HasOne(t => t.Priority)
+      .WithMany(p => p.Tasks);
+
+    builder
+      .Property(t => t.Name)
+      .HasMaxLength(50)
+      .IsRequired();
+    
+    builder
+      .Property(t => t.Content)
+      .IsRequired();
+
+    builder
+      .Property(t => t.CreatedAtUtc)
+      .IsRequired();
+
+    builder
+      .HasMany(t => t.Comments)
+      .WithOne(c => c.Task);
+
+    builder
+      .HasMany(t => t.Logs)
+      .WithOne(l => l.Task);
+  }
 }

@@ -17,5 +17,5 @@ public class DbGroup
   public DateTime ModifiedAtUtc { get; set; }
   
   public DbBoard Board { get; set; }
-  public List<DbTask> Tasks { get; set; } = new();
+  public ICollection<DbTask> Tasks { get; set; }
 }

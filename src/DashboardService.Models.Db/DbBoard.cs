@@ -15,5 +15,5 @@ public class DbBoard
   public DateTime CreatedAtUtc { get; set; }
   public DateTime ModifiedAtUtc { get; set; }
 
-  public List<DbGroup> Groups { get; set; } = new();
+  public ICollection<DbGroup> Groups { get; set; }
 }
