@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 
 namespace LT.DigitalOffice.DashboardService.Models.Db;
@@ -26,10 +28,6 @@ public class DbCommentConfiguration : IEntityTypeConfiguration<DbComment>
       .HasKey(p => p.Id);
 
     builder
-      .Property(p => p.Task)
-      .IsRequired();
-
-    builder
       .Property(p => p.CreatedBy)
       .IsRequired();
 
@@ -43,11 +41,7 @@ public class DbCommentConfiguration : IEntityTypeConfiguration<DbComment>
       .IsRequired();
 
     builder
-      .Property(p => p.CreatedAtUtc)
-      .IsRequired();
-
-    builder
-      .WithMany(t => t.Task)
-      .HasOne(p => p.Comment);
+      .HasOne(t => t.Task)
+      .WithMany(p => p.Comments);
   }
 }

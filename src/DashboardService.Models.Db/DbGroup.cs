@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 
@@ -32,14 +34,14 @@ public class DbGroupConfiguration : IEntityTypeConfiguration<DbGroup>
 
     builder
       .HasOne(t => t.Board)
-      .WithMany(p => p.Group);
+      .WithMany(p => p.Groups);
 
     builder
       .Property(p => p.CreatedBy)
       .IsRequired();
 
     builder
-      .Property(p => p.ModifierBy)
+      .Property(p => p.ModifiedBy)
       .IsRequired();
 
     builder
@@ -56,12 +58,8 @@ public class DbGroupConfiguration : IEntityTypeConfiguration<DbGroup>
       .IsRequired();
 
     builder
-      .Property(p => p.CreatedAtUtc)
-      .IsRequired();
-
-    builder
-      .WithMany(t => t.Task)
-      .HasOne(p => p.Group);
+      .HasMany(t => t.Tasks)
+      .WithOne(p => p.Group);
   }
 }
 
