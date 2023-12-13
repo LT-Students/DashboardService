@@ -1,5 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="$(ProjectDir)..\..\Common.Configurations.targets" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\DashboardService.Models.Dto\DashboardService.Models.Dto.csproj" />
+  </ItemGroup>
   
 </Project>
