@@ -1,3 +1,4 @@
+using LT.DigitalOffice.DashboardService.Business.Priority;
 using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Priority;
 using LT.DigitalOffice.Kernel.Responses;
@@ -14,34 +15,42 @@ public class PriorityController : ControllerBase
 {
   [HttpPost("create")]
   public async Task<OperationResultResponse<Guid?>> CreateAsync(
-    [FromBody] CreatePriorityRequest request)
+    [FromBody] CreatePriorityRequest request,
+    [FromServices] CreatePriorityCommand command)
   {
-    throw new NotImplementedException();
+    return await command.ExecuteAsync(request);
   }
 
   [HttpGet("find")]
-  public async Task<OperationResultResponse<IEnumerable<PriorityInfo>>> FindAsync()
+  public async Task<FindResultResponse<IEnumerable<PriorityInfo>>> FindAsync(
+    [FromServices] FindAllPrioritiesCommand command
+    )
   {
-    throw new NotImplementedException();
+    return await command.ExecuteAsync();
   }
   
   [HttpGet("find/{id}")]
-  public async Task<OperationResultResponse<PriorityInfo>> FindAsync([FromRoute] Guid id)
+  public async Task<OperationResultResponse<PriorityInfo>> FindAsync(
+    [FromRoute] Guid id,
+    [FromServices] FindPriorityCommand command)
   {
-    throw new NotImplementedException();
+    return await command.ExecuteAsync(id);
   }
 
   [HttpPatch("edit/{id}")]
   public async Task<OperationResultResponse<bool>> Patch(
     [FromRoute] Guid id, 
-    [FromBody] PatchPriorityRequest request)
+    [FromBody] PatchPriorityRequest request,
+    [FromServices] EditPriorityCommand command)
   {
-    throw new NotImplementedException();
+    return await command.ExecuteAsync(id, request);
   }
   
-  [HttpDelete("{id}")]
-  public async Task<OperationResultResponse<bool>> Delete([FromRoute] Guid id)
+  [HttpDelete("delete/{id}")]
+  public async Task<OperationResultResponse<bool>> Delete(
+    [FromRoute] Guid id,
+    [FromServices] DeletePriorityCommand command)
   {
-    throw new NotImplementedException();
+    return await command.ExecuteAsync(id);
   }
 }
