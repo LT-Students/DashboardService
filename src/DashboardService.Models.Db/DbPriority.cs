@@ -7,7 +7,7 @@ namespace LT.DigitalOffice.DashboardService.Models.Db;
 
 public class DbPriority
 {
-  public const string ToTable = "Priorities";
+  public const string TableName = "Priorities";
   
   public Guid Id { get; set; }
   public string Name { get; set; }
@@ -20,7 +20,7 @@ public class DbPriorityConfiguration : IEntityTypeConfiguration<DbPriority>
   public void Configure(EntityTypeBuilder<DbPriority> builder)
   {
     builder
-      .ToTable(DbPriority.ToTable);
+      .ToTable(DbPriority.TableName);
 
     builder
       .HasKey(p => p.Id);

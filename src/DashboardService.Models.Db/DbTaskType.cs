@@ -7,7 +7,7 @@ namespace LT.DigitalOffice.DashboardService.Models.Db;
 
 public class DbTaskType
 {
-  public const string ToTable = "TaskTypes";
+  public const string TableName = "TaskTypes";
   
   public Guid Id { get; set; }
   public string Name { get; set; }
@@ -20,7 +20,7 @@ public class DbTaskTypeConfiguration : IEntityTypeConfiguration<DbTaskType>
   public void Configure(EntityTypeBuilder<DbTaskType> builder)
   {
     builder
-      .ToTable(DbTaskType.ToTable);
+      .ToTable(DbTaskType.TableName);
 
     builder
       .HasKey(d => d.Id);

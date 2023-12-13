@@ -6,7 +6,7 @@ namespace LT.DigitalOffice.DashboardService.Models.Db;
 
 public class DbChangeLog
 {
-  public const string ToTable = "ChangeLogs";
+  public const string TableName = "ChangeLogs";
 
   public Guid Id { get; set; }
   public Guid TaskId { get; set; }
@@ -24,7 +24,7 @@ public class DbChangeLogConfiguration : IEntityTypeConfiguration<DbChangeLog>
 {
   public void Configure(EntityTypeBuilder<DbChangeLog> builder)
   {
-    builder.ToTable(DbChangeLog.ToTable);
+    builder.ToTable(DbChangeLog.TableName);
 
     builder
       .HasKey(t => t.Id);
