@@ -21,18 +21,18 @@ public class PriorityController : ControllerBase
     return await command.ExecuteAsync(request);
   }
 
-  [HttpGet("find")]
-  public async Task<FindResultResponse<IEnumerable<PriorityInfo>>> FindAsync(
-    [FromServices] FindAllPrioritiesCommand command
+  [HttpGet("get")]
+  public async Task<FindResultResponse<IEnumerable<PriorityInfo>>> GetAsync(
+    [FromServices] GetAllPrioritiesCommand command
     )
   {
     return await command.ExecuteAsync();
   }
   
-  [HttpGet("find/{id}")]
-  public async Task<OperationResultResponse<PriorityInfo>> FindAsync(
+  [HttpGet("get/{id}")]
+  public async Task<OperationResultResponse<PriorityInfo>> GetAsync(
     [FromRoute] Guid id,
-    [FromServices] FindPriorityCommand command)
+    [FromServices] GetPriorityCommand command)
   {
     return await command.ExecuteAsync(id);
   }
