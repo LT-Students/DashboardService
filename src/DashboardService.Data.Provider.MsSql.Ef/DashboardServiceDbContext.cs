@@ -15,30 +15,30 @@ public class DashboardServiceDbContext : DbContext, IDataProvider
   public DbSet<DbPriority> Priorities { get; set; }
   public DbSet<DbTask> Tasks { get; set; }
   public DbSet<DbTaskType> TaskTypes { get; set; }
-  
+
   public DashboardServiceDbContext(DbContextOptions<DashboardServiceDbContext> options) : base(options) { }
-  
+
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
     modelBuilder.ApplyConfigurationsFromAssembly(Assembly.Load("LT.DigitalOffice.DashboardService.Models.Db"));
   }
-  
+
   public object MakeEntityDetached(object obj)
   {
     Entry(obj).State = EntityState.Detached;
     return Entry(obj).State;
   }
-  
+
   public void EnsureDeleted()
   {
     Database.EnsureDeleted();
   }
-  
+
   public bool IsInMemory()
   {
     return Database.IsInMemory();
   }
-  
+
   public void Save()
   {
     SaveChanges();
