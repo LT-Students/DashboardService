@@ -20,3 +20,48 @@ public class DbGroup
   public ICollection<DbTask> Tasks { get; set; }
 }
 
+public class DbGroupConfiguration : IEntityTypeConfiguration<DbGroup>
+{
+  public void Configure(EntityTypeBuilder<DbGroup> builder)
+  {
+    builder
+      .ToTable(DbGroup.ToTable);
+
+    builder
+      .HasKey(p => p.Id);
+
+    builder
+      .HasOne(t => t.Board)
+      .WithMany(p => p.Group);
+
+    builder
+      .Property(p => p.CreatedBy)
+      .IsRequired();
+
+    builder
+      .Property(p => p.ModifierBy)
+      .IsRequired();
+
+    builder
+      .Property(p => p.Name)
+      .HasMaxLength(50)
+      .IsRequired();
+
+    builder
+      .Property(p => p.IsActive)
+      .IsRequired();
+
+    builder
+      .Property(p => p.CreatedAtUtc)
+      .IsRequired();
+
+    builder
+      .Property(p => p.CreatedAtUtc)
+      .IsRequired();
+
+    builder
+      .WithMany(t => t.Task)
+      .HasOne(p => p.Group);
+  }
+}
+
