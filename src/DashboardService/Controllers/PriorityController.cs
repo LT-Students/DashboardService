@@ -1,5 +1,5 @@
+using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Priority;
-using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 using LT.DigitalOffice.Kernel.Responses;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,13 +20,13 @@ public class PriorityController : ControllerBase
   }
 
   [HttpGet("find")]
-  public async Task<OperationResultResponse<IEnumerable<GetPriorityResponse>>> FindAsync()
+  public async Task<OperationResultResponse<IEnumerable<PriorityInfo>>> FindAsync()
   {
     throw new NotImplementedException();
   }
   
   [HttpGet("find/{id}")]
-  public async Task<OperationResultResponse<GetPriorityResponse>> FindAsync([FromRoute] Guid id)
+  public async Task<OperationResultResponse<PriorityInfo>> FindAsync([FromRoute] Guid id)
   {
     throw new NotImplementedException();
   }
