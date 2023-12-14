@@ -8,7 +8,7 @@ namespace LT.DigitalOffice.DashboardService.Models.Db;
 public class DbPriority
 {
   public const string TableName = "Priorities";
-  
+
   public Guid Id { get; set; }
   public string Name { get; set; }
 
