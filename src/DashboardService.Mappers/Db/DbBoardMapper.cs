@@ -1,6 +1,7 @@
 ﻿using LT.DigitalOffice.DashboardService.Mappers.Db.Interfaces;
 using LT.DigitalOffice.DashboardService.Models.Db;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Board;
+using LT.DigitalOffice.Kernel.Extensions;
 using Microsoft.AspNetCore.Http;
 using System;
 
@@ -8,9 +9,6 @@ namespace LT.DigitalOffice.DashboardService.Mappers.Db
 {
   public class DbBoardMapper : IDbBoardMapper
   {
-    /// <summary>
-    /// ????????????????
-    /// </summary>
     private readonly IHttpContextAccessor _httpContextAccessor;
 
     public DbBoardMapper(IHttpContextAccessor httpContextAccessor)
@@ -28,7 +26,7 @@ namespace LT.DigitalOffice.DashboardService.Mappers.Db
           ProjectId = request.ProjectId,
           Name = request.Name,
           IsActive = true,
-          CreatedBy = request.CreatedBy, // _httpContextAccessor.HttpContext.GetUserId() ?????
+          CreatedBy = _httpContextAccessor.HttpContext.GetUserId(),
           CreatedAtUtc = DateTime.UtcNow,
         };
     }

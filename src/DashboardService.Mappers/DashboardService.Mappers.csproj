@@ -6,4 +6,9 @@
     <Folder Include="Db\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DashboardService.Models.Db\DashboardService.Models.Db.csproj" />
+    <ProjectReference Include="..\DashboardService.Models.Dto\DashboardService.Models.Dto.csproj" />
+  </ItemGroup>
+
 </Project>
