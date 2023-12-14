@@ -1,6 +1,7 @@
 using LT.DigitalOffice.DashboardService.Business.Priority;
 using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Priority;
+using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 using LT.DigitalOffice.Kernel.Responses;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -30,7 +31,7 @@ public class PriorityController : ControllerBase
   }
   
   [HttpGet("get/{id}")]
-  public async Task<OperationResultResponse<PriorityInfo>> GetAsync(
+  public async Task<OperationResultResponse<PriorityResponse>> GetAsync(
     [FromRoute] Guid id,
     [FromServices] GetPriorityCommand command)
   {

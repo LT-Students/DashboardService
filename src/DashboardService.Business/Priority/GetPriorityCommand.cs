@@ -1,6 +1,6 @@
 using LT.DigitalOffice.DashboardService.Business.Priority.Interfaces;
 using LT.DigitalOffice.DashboardService.Data;
-using LT.DigitalOffice.DashboardService.Models.Dto.Models;
+using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 using LT.DigitalOffice.Kernel.Responses;
 using System;
 using System.Threading.Tasks;
@@ -16,7 +16,7 @@ public class GetPriorityCommand : IGetPriorityCommand
     _priorityRepository = priorityRepository;
   }
   
-  public Task<OperationResultResponse<PriorityInfo>> ExecuteAsync(Guid id)
+  public Task<OperationResultResponse<PriorityResponse>> ExecuteAsync(Guid id)
   {
     throw new NotImplementedException();
   }
