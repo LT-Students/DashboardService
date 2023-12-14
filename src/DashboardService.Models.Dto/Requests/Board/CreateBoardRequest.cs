@@ -10,7 +10,4 @@ public record class CreateBoardRequest
 
   [Required]
   public string Name { get; set; }
-
-  [Required]
-  public Guid CreatedBy { get; set; }
 }
