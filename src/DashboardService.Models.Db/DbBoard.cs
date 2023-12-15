@@ -18,7 +18,7 @@ public class DbBoard
   public Guid? ModifiedBy { get; set; }
   public DateTime? ModifiedAtUtc { get; set; }
 
-  public ICollection<DbGroup> Groups { get; set; }
+  public ICollection<DbGroup> Groups { get; set; } = new List<DbGroup>();
 }
 
 public class DbBoardConfiguration : IEntityTypeConfiguration<DbBoard>

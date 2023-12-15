@@ -21,8 +21,8 @@ public class DbTask
   public DbGroup Group { get; set; }
   public DbTaskType TaskType { get; set; }
   public DbPriority Priority { get; set; }
-  public ICollection<DbComment> Comments { get; set; }
-  public ICollection<DbChangeLog> Logs { get; set; }
+  public ICollection<DbComment> Comments { get; set; } = new List<DbComment>();
+  public ICollection<DbChangeLog> Logs { get; set; } = new List<DbChangeLog>();
 }
 
 public class DbTaskConfiguration : IEntityTypeConfiguration<DbTask>

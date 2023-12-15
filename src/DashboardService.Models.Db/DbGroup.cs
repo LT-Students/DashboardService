@@ -19,7 +19,7 @@ public class DbGroup
   public DateTime? ModifiedAtUtc { get; set; }
 
   public DbBoard Board { get; set; }
-  public ICollection<DbTask> Tasks { get; set; }
+  public ICollection<DbTask> Tasks { get; set; } = new List<DbTask>();
 }
 
 public class DbGroupConfiguration : IEntityTypeConfiguration<DbGroup>

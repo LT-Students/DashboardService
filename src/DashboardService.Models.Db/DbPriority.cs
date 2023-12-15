@@ -12,7 +12,7 @@ public class DbPriority
   public Guid Id { get; set; }
   public string Name { get; set; }
 
-  public ICollection<DbTask> Tasks { get; set; }
+  public ICollection<DbTask> Tasks { get; set; } = new List<DbTask>();
 }
 
 public class DbPriorityConfiguration : IEntityTypeConfiguration<DbPriority>
