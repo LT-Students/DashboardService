@@ -7,7 +7,7 @@ using System;
 
 namespace LT.DigitalOffice.DashboardService.Business.Board;
 
-public class PatchBoardCommand : IPatchBoardCommand
+public class EditBoardCommand : IEditBoardCommand
 {
   public Task<OperationResultResponse<bool>> ExecuteAsync(Guid id, PatchBoardRequest request)
   {

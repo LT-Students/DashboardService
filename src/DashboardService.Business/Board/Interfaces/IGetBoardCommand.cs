@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Business.Board.Interfaces;
 
-public interface IFindBoardCommand
+public interface IGetBoardCommand
 {
   Task<FindResultResponse<BoardInfo>> ExecuteAsync(Guid? id);
 }
