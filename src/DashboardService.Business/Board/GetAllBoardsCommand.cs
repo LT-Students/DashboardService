@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Business.Board;
 
-public class FindBoardsCommand : IFindBoardsCommand
+public class GetAllBoardsCommand : IFindBoardsCommand
 {
   public Task<OperationResultResponse<IEnumerable<BoardInfo>>> ExecuteAsync()
   {

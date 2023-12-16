@@ -23,23 +23,23 @@ public class BoardsController : ControllerBase
   }
 
   [HttpGet("find")]
-  public async Task<OperationResultResponse<IEnumerable<BoardInfo>>> FindAsync(
-    [FromServices] IFindBoardsCommand command)
+  public async Task<OperationResultResponse<IEnumerable<BoardInfo>>> GetAsync(
+    [FromServices] IGetAllBoardsCommand command)
   {
     return await command.ExecuteAsync();
   }
 
   [HttpGet("find/{id}")]
-  public async Task<FindResultResponse<BoardInfo>> FindAsync(
-    [FromServices] IFindBoardCommand command,
+  public async Task<FindResultResponse<BoardInfo>> GetAsync(
+    [FromServices] IGetBoardCommand command,
     [FromRoute] Guid id)
   {
     return await command.ExecuteAsync(id);
   }
 
   [HttpPatch("edit/{id}")]
-  public async Task<OperationResultResponse<bool>> PatchAsync(
-    [FromServices] IPatchBoardCommand command,
+  public async Task<OperationResultResponse<bool>> EditAsync(
+    [FromServices] IEditBoardCommand command,
     [FromRoute] Guid id,
     [FromBody] PatchBoardRequest request)
   {

@@ -13,7 +13,7 @@ public interface IBoardRepository
 
   Task<IEnumerable<DbBoard>> GetAllAsync();
 
-  Task<DbBoard> FindAsync(Guid id);
+  Task<DbBoard> GetAsync(Guid id);
 
   Task<bool> EditAsync(Guid id);
 

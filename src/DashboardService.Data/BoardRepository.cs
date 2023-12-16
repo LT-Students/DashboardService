@@ -27,7 +27,7 @@ public class BoardRepository : IBoardRepository
     throw new NotImplementedException();
   }
 
-  public Task<DbBoard> FindAsync(Guid id)
+  public Task<DbBoard> GetAsync(Guid id)
   {
     throw new NotImplementedException();
   }
