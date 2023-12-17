@@ -1,5 +1,5 @@
 using LT.DigitalOffice.DashboardService.Business.Priority.Interfaces;
-using LT.DigitalOffice.DashboardService.Data;
+using LT.DigitalOffice.DashboardService.Data.Interfaces;
 using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 using LT.DigitalOffice.Kernel.Responses;
 using System;
@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Business.Priority;
 
-public class GetAllPrioritiesCommand : IGetAllPrioritiesCommand
+public class GetPrioritiesCommand : IGetPrioritiesCommand
 {
-  private readonly PriorityRepository _priorityRepository;
+  private readonly IPriorityRepository _priorityRepository;
 
-  public GetAllPrioritiesCommand(PriorityRepository priorityRepository)
+  public GetPrioritiesCommand(IPriorityRepository priorityRepository)
   {
     _priorityRepository = priorityRepository;
   }
   
-  public Task<FindResultResponse<IEnumerable<PriorityInfo>>> ExecuteAsync()
+  public Task<FindResultResponse<PriorityInfo>> ExecuteAsync()
   {
     throw new NotImplementedException();
   }

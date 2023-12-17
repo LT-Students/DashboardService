@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LT.DigitalOffice.DashboardService.Business.Priority.Interfaces;
 
 [AutoInject]
-public interface IGetAllPrioritiesCommand
+public interface IGetPrioritiesCommand
 {
-  Task<FindResultResponse<IEnumerable<PriorityInfo>>> ExecuteAsync();
+  Task<FindResultResponse<PriorityInfo>> ExecuteAsync();
 }
