@@ -8,7 +8,7 @@ namespace LT.DigitalOffice.DashboardService.Validation.Priority;
 
 public class PatchPriorityRequestValidator : AbstractValidator<PatchPriorityRequest>, IPatchPriorityRequestValidator
 {
-  public PatchPriorityRequestValidator([FromServices] IPriorityRepository repository)
+  public PatchPriorityRequestValidator(IPriorityRepository repository)
   {
     
   }

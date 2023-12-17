@@ -1,53 +1,50 @@
 using LT.DigitalOffice.DashboardService.Business.Priority;
 using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Priority;
-using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 using LT.DigitalOffice.Kernel.Responses;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Controllers;
 
 [Route("[controller]")]
 [ApiController]
-public class PriorityController : ControllerBase
+public class PrioritiesController : ControllerBase
 {
-  [HttpPost("create")]
   public async Task<OperationResultResponse<Guid?>> CreateAsync(
     [FromBody] CreatePriorityRequest request,
     [FromServices] CreatePriorityCommand command)
   {
     return await command.ExecuteAsync(request);
   }
-
-  [HttpGet("get")]
-  public async Task<FindResultResponse<IEnumerable<PriorityInfo>>> GetAsync(
-    [FromServices] GetAllPrioritiesCommand command
+  
+  public async Task<FindResultResponse<PriorityInfo>> GetAsync(
+    [FromServices] GetPrioritiesCommand command
     )
   {
     return await command.ExecuteAsync();
   }
   
-  [HttpGet("get/{id}")]
-  public async Task<OperationResultResponse<PriorityResponse>> GetAsync(
+  [HttpGet("{id}")]
+  public async Task<OperationResultResponse<PriorityInfo>> GetAsync(
     [FromRoute] Guid id,
     [FromServices] GetPriorityCommand command)
   {
     return await command.ExecuteAsync(id);
   }
 
-  [HttpPatch("edit/{id}")]
+  [HttpPatch("{id}")]
   public async Task<OperationResultResponse<bool>> Patch(
     [FromRoute] Guid id, 
-    [FromBody] PatchPriorityRequest request,
+    [FromBody] JsonPatchDocument<PatchPriorityRequest> request,
     [FromServices] EditPriorityCommand command)
   {
     return await command.ExecuteAsync(id, request);
   }
   
-  [HttpDelete("delete/{id}")]
+  [HttpDelete("{id}")]
   public async Task<OperationResultResponse<bool>> Delete(
     [FromRoute] Guid id,
     [FromServices] DeletePriorityCommand command)

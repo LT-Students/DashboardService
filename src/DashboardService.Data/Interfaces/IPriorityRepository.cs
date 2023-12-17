@@ -10,7 +10,7 @@ namespace LT.DigitalOffice.DashboardService.Data.Interfaces;
 public interface IPriorityRepository
 {
   Task<Guid?> CreateAsync(DbPriority dbDepartment);
-  Task<IEnumerable<DbPriority>> GetAllAsync();
+  Task<List<DbPriority>> GetAllAsync();
   Task<DbPriority> GetAsync(Guid id);
   Task<bool> EditAsync(Guid id);
   Task<bool> DeleteAsync(Guid id);

@@ -12,7 +12,7 @@ public class PriorityRepository : IPriorityRepository
 {
   private readonly IDataProvider _provider;
 
-  public PriorityRepository([FromServices] IDataProvider provider)
+  public PriorityRepository(IDataProvider provider)
   {
     _provider = provider;
   }
@@ -22,7 +22,7 @@ public class PriorityRepository : IPriorityRepository
     throw new NotImplementedException();
   }
 
-  public Task<IEnumerable<DbPriority>> GetAllAsync()
+  public Task<List<DbPriority>> GetAllAsync()
   {
     throw new NotImplementedException();
   }

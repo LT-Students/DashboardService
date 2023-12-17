@@ -1,5 +1,5 @@
 using LT.DigitalOffice.DashboardService.Business.Priority.Interfaces;
-using LT.DigitalOffice.DashboardService.Data;
+using LT.DigitalOffice.DashboardService.Data.Interfaces;
 using LT.DigitalOffice.Kernel.Responses;
 using System;
 using System.Threading.Tasks;
@@ -8,9 +8,9 @@ namespace LT.DigitalOffice.DashboardService.Business.Priority;
 
 public class DeletePriorityCommand : IDeletePriorityCommand
 {
-  private readonly PriorityRepository _priorityRepository;
+  private readonly IPriorityRepository _priorityRepository;
 
-  public DeletePriorityCommand(PriorityRepository priorityRepository)
+  public DeletePriorityCommand(IPriorityRepository priorityRepository)
   {
     _priorityRepository = priorityRepository;
   }

@@ -1,7 +1,8 @@
 using LT.DigitalOffice.DashboardService.Business.Priority.Interfaces;
-using LT.DigitalOffice.DashboardService.Data;
+using LT.DigitalOffice.DashboardService.Data.Interfaces;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Priority;
 using LT.DigitalOffice.Kernel.Responses;
+using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Threading.Tasks;
 
@@ -9,14 +10,14 @@ namespace LT.DigitalOffice.DashboardService.Business.Priority;
 
 public class EditPriorityCommand : IEditPriorityCommand
 {
-  private readonly PriorityRepository _priorityRepository;
+  private readonly IPriorityRepository _priorityRepository;
 
-  public EditPriorityCommand(PriorityRepository priorityRepository)
+  public EditPriorityCommand(IPriorityRepository priorityRepository)
   {
     _priorityRepository = priorityRepository;
   }
   
-  public Task<OperationResultResponse<bool>> ExecuteAsync(Guid id, PatchPriorityRequest request)
+  public Task<OperationResultResponse<bool>> ExecuteAsync(Guid id, JsonPatchDocument<PatchPriorityRequest> request)
   {
     throw new NotImplementedException();
   }

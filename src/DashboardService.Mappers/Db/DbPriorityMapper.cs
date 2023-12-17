@@ -14,7 +14,7 @@ public class DbPriorityMapper : IDbPriorityMapper
       : new()
       {
         Id = Guid.NewGuid(), 
-        Name = request.PriorityName
+        Name = request.Name
       };
   }
 }
