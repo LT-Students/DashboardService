@@ -2,6 +2,7 @@ using LT.DigitalOffice.DashboardService.Business.TaskType.Interfaces;
 using LT.DigitalOffice.DashboardService.Data.Interfaces;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.TaskType;
 using LT.DigitalOffice.Kernel.Responses;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ public class EditTaskTypeCommand : IEditTaskTypeCommand
     _repository = repository;
   }
   
-  public Task<OperationResultResponse<bool>> ExecuteAsync(Guid id, PatchTaskTypeRequest request)
+  public Task<OperationResultResponse<bool>> ExecuteAsync(Guid id, JsonPatchDocument<PatchTaskTypeRequest> request)
   {
     throw new NotImplementedException();
   }
