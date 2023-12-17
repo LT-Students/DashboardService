@@ -10,6 +10,5 @@ public class PatchGroupRequestValidator : AbstractValidator<PatchGroupRequest>, 
 {
   public PatchGroupRequestValidator(IGroupRepository repository)
   {
-
   }
 }

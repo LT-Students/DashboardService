@@ -10,6 +10,5 @@ public class CreateGroupRequestValidator : AbstractValidator<CreateGroupRequest>
 {
   public CreateGroupRequestValidator([FromServices] IGroupRepository reposisoty)
   {
-
   }
 }
