@@ -10,7 +10,7 @@ namespace LT.DigitalOffice.DashboardService.Data.Interfaces;
 public interface ITaskTypeRepository
 {
   Task<Guid?> CreateAsync(DbTaskType dbDepartment);
-  Task<IEnumerable<DbTaskType>> GetAllAsync();
+  Task<List<DbTaskType>> GetAllAsync();
   Task<DbTaskType> GetAsync(Guid id);
   Task<bool> EditAsync(Guid id);
   Task<bool> DeleteAsync(Guid id);

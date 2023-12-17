@@ -14,7 +14,7 @@ public class DbTaskTypeMapper : IDbTaskTypeMapper
       : new()
       {
         Id = Guid.NewGuid(), 
-        Name = request.TaskTypeName
+        Name = request.Name
       };
   }
 }

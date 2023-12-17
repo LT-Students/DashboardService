@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Business.TaskType.Interfaces;
 
-public interface IGetAllTaskTypesCommand
+public interface IGetTaskTypesCommand
 {
-  Task<FindResultResponse<IEnumerable<TaskTypeInfo>>> ExecuteAsync();
+  Task<FindResultResponse<TaskTypeInfo>> ExecuteAsync();
 }

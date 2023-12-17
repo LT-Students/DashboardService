@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Business.TaskType;
 
-public class GetAllTaskTypesCommand : IGetAllTaskTypesCommand
+public class GetTaskTypesCommand : IGetTaskTypesCommand
 {
   private readonly ITaskTypeRepository _repository;
   
-  public GetAllTaskTypesCommand(ITaskTypeRepository repository) 
+  public GetTaskTypesCommand(ITaskTypeRepository repository) 
   {
     _repository = repository;
   }
   
-  public Task<FindResultResponse<IEnumerable<TaskTypeInfo>>> ExecuteAsync()
+  public Task<FindResultResponse<TaskTypeInfo>> ExecuteAsync()
   {
     throw new System.NotImplementedException();
   }

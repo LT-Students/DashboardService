@@ -1,8 +1,7 @@
 using LT.DigitalOffice.DashboardService.Business.TaskType.Interfaces;
 using LT.DigitalOffice.DashboardService.Data.Interfaces;
-using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
+using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 using LT.DigitalOffice.Kernel.Responses;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
@@ -17,7 +16,7 @@ public class GetTaskTypeCommand : IGetTaskTypeCommand
     _repository = repository;
   }
   
-  public Task<OperationResultResponse<TaskTypeResponse>> ExecuteAsync(Guid id)
+  public Task<OperationResultResponse<TaskTypeInfo>> ExecuteAsync(Guid id)
   {
     throw new NotImplementedException();
   }
