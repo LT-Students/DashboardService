@@ -2,7 +2,7 @@
 
 namespace LT.DigitalOffice.DashboardService.Models.Dto.Responces;
 
-public class ChangeLogResponce
+public class ChangeLogResponse
 {
   public Guid Id { get; set; }
   public Guid CreatedBy { get; set; }

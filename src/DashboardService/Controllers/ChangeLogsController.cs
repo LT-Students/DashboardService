@@ -14,7 +14,7 @@ namespace LT.DigitalOffice.DashboardService.Controllers;
 [ApiController]
 public class ChangeLogsController : ControllerBase
 {
-  [HttpPost("create")]
+  [HttpPost]
   public async Task<OperationResultResponse<Guid?>> CreateAsync(
   [FromServices] ICreateChangeLogCommand command,
   [FromBody] CreateChangeLogRequest request)
@@ -22,6 +22,7 @@ public class ChangeLogsController : ControllerBase
     return await command.ExecuteAsync(request);
   }
 
+  [HttpGet]
   public async Task<FindResultResponse<ChangeLogInfo>> GetAsync(
     [FromServices] IGetAllChangeLogsCommand command,
     [FromQuery] GetChangeLogsFilter filter)
@@ -30,7 +31,7 @@ public class ChangeLogsController : ControllerBase
   }
 
   [HttpGet("{id}")]
-  public async Task<OperationResultResponse<ChangeLogResponce>> GetAsync(
+  public async Task<OperationResultResponse<ChangeLogResponse>> GetAsync(
     [FromServices] IGetChangeLogCommand command,
     [FromRoute] Guid id,
     [FromQuery] GetChangeLogFilter filter)
@@ -54,6 +55,4 @@ public class ChangeLogsController : ControllerBase
   {
     return await command.ExecuteAsync(id);
   }
-
-
 }

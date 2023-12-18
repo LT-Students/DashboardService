@@ -3,10 +3,12 @@ using System.Threading.Tasks;
 using LT.DigitalOffice.DashboardService.Models.Dto.Responces;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog.Filter;
 using System;
+using LT.DigitalOffice.Kernel.Attributes;
 
 namespace LT.DigitalOffice.DashboardService.Business.ChangeLog.Interfaces;
 
+[AutoInject]
 public interface IGetChangeLogCommand
 {
-  public Task<OperationResultResponse<ChangeLogResponce>> ExecuteAsync(Guid id, GetChangeLogFilter filter);
+  public Task<OperationResultResponse<ChangeLogResponse>> ExecuteAsync(Guid id, GetChangeLogFilter filter);
 }

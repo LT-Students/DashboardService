@@ -1,6 +1,5 @@
 ﻿using LT.DigitalOffice.DashboardService.Data.Interfaces;
 using LT.DigitalOffice.DashboardService.Models.Db;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
@@ -12,8 +11,7 @@ public class ChangeLogRepository : IChangeLogRepository
 {
   private readonly IDatabaseProvider _provider;
 
-  public ChangeLogRepository(
-    [FromServices] IDatabaseProvider provider)
+  public ChangeLogRepository(IDatabaseProvider provider)
   {
     _provider = provider;
   }
@@ -39,11 +37,6 @@ public class ChangeLogRepository : IChangeLogRepository
   }
 
   public Task<bool> RemoveAsync(Guid id)
-  {
-    throw new NotImplementedException();
-  }
-
-  public Task<IEnumerable<DbTask>> GetTasksAsync(Guid id)
   {
     throw new NotImplementedException();
   }

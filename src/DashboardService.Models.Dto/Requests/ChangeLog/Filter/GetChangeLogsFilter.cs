@@ -4,10 +4,13 @@ using System;
 
 namespace LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog.Filter;
 
-public record class GetChangeLogsFilter : BaseFindFilter
+public record GetChangeLogsFilter : BaseFindFilter
 {
   [FromQuery]
   public Guid? TaskId { get; set; }
+
+  [FromQuery]
+  public DateTime? LastDateTime { get; set; }
 
   [FromQuery(Name = "isAscendingSort")]
   public bool? IsAscendingSort { get; set; }

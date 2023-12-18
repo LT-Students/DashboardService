@@ -17,7 +17,7 @@ public class GetChangeLogCommand : IGetChangeLogCommand
     _repository = repository;
   }
 
-  public Task<OperationResultResponse<ChangeLogResponce>> ExecuteAsync(Guid id, GetChangeLogFilter filter)
+  public Task<OperationResultResponse<ChangeLogResponse>> ExecuteAsync(Guid id, GetChangeLogFilter filter)
   {
     throw new NotImplementedException();
   }

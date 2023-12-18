@@ -1,4 +1,5 @@
-﻿using LT.DigitalOffice.DashboardService.Mappers.Db.Interfaces;
+﻿using LT.DigitalOffice.DashboardService.Data.Interfaces;
+using LT.DigitalOffice.DashboardService.Mappers.Db.Interfaces;
 using LT.DigitalOffice.DashboardService.Models.Db;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog;
 using LT.DigitalOffice.Kernel.Extensions;
@@ -11,9 +12,14 @@ public class DbChangeLogMapper : IDbChangeLogMapper
 {
   private readonly IHttpContextAccessor _httpContextAccessor;
 
-  public DbChangeLogMapper(IHttpContextAccessor httpContextAccessor)
+  // TODO
+  // How to set a value on PropertyOldValue ?
+  private readonly IChangeLogRepository _repository;
+
+  public DbChangeLogMapper(IHttpContextAccessor httpContextAccessor, IChangeLogRepository repository)
   {
     _httpContextAccessor = httpContextAccessor;
+    _repository = repository;
   }
 
   public DbChangeLog Map(CreateChangeLogRequest request)
@@ -27,7 +33,7 @@ public class DbChangeLogMapper : IDbChangeLogMapper
         CreatedBy = _httpContextAccessor.HttpContext.GetUserId(),
         EntityName = request.EntityName,
         PropertyName = request.PropertyName,
-        PropertyOldValue = request.PropertyOldValue,
+        //PropertyOldValue = _repository.GetLogByLastChange(request.TaskId).PropertyOldValue,
         PropertyNewValue = request.PropertyNewValue,
         CreatedAtUtc = DateTime.UtcNow,
       };
