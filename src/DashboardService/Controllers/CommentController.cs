@@ -24,8 +24,7 @@ public class CommentController : ControllerBase
 
   [HttpGet("get")]
   public async Task<FindResultResponse<IEnumerable<CommentInfo>>> GetAsync(
-    [FromServices] GetAllCommentsCommand command
-  )
+    [FromServices] GetAllCommentsCommand command)
   {
     return await command.ExecuteAsync();
   }
@@ -54,5 +53,4 @@ public class CommentController : ControllerBase
   {
     return await command.ExecuteAsync(id);
   }
-
 }

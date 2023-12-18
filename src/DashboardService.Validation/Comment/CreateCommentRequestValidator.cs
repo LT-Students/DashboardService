@@ -8,7 +8,7 @@ namespace LT.DigitalOffice.DashboardService.Validation.Comment;
 
 public class CreateCommentRequestValidator : AbstractValidator<CreateCommentRequest>, ICreateCommentRequestValidator
 {
-  public CreateCommentRequestValidator([FromServices] ICommentRepository reposisoty)
+  public CreateCommentRequestValidator(ICommentRepository reposisoty)
   {
 
   }
