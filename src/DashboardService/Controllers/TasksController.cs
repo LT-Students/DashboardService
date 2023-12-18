@@ -50,7 +50,7 @@ public class TasksController : ControllerBase
   [HttpDelete("{id}")]
   public async Task<OperationResultResponse<bool>> Delete(
     [FromRoute] Guid id,
-    [FromServices] DeleteTaskCommand command)
+    [FromServices] RemoveTaskCommand command)
   {
     return await command.ExecuteAsync(id);
   }

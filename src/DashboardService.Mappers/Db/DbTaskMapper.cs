@@ -1,12 +1,21 @@
 using LT.DigitalOffice.DashboardService.Mappers.Db.Interfaces;
 using LT.DigitalOffice.DashboardService.Models.Db;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Task;
+using LT.DigitalOffice.Kernel.Extensions;
+using Microsoft.AspNetCore.Http;
 using System;
 
 namespace LT.DigitalOffice.DashboardService.Mappers.Db;
 
 public class DbTaskMapper : IDbTaskMapper
 {
+  private readonly IHttpContextAccessor _httpContextAccessor;
+
+  public DbTaskMapper(IHttpContextAccessor httpContextAccessor)
+  {
+    _httpContextAccessor = httpContextAccessor;
+  }
+  
   public DbTask Map(CreateTaskRequest request)
   {
     return request is null
@@ -20,6 +29,7 @@ public class DbTaskMapper : IDbTaskMapper
         Name = request.Name,
         Content = request.Content,
         CreatedAtUtc = DateTime.Now,
+        CreatedBy = _httpContextAccessor.HttpContext.GetUserId(),
         DeadlineAtUtc = request.DeadlineAtUtc
       };
   }

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Business.Task;
 
-public class DeleteTaskCommand : IDeleteTaskCommand
+public class RemoveTaskCommand : IRemoveTaskCommand
 {
   private readonly ITaskRepository _taskRepository;
 
-  public DeleteTaskCommand(ITaskRepository taskRepository)
+  public RemoveTaskCommand(ITaskRepository taskRepository)
   {
     _taskRepository = taskRepository;
   }

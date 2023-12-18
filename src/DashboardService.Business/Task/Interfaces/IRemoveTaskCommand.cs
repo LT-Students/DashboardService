@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace LT.DigitalOffice.DashboardService.Business.Task.Interfaces;
 
 [AutoInject]
-public interface IDeleteTaskCommand
+public interface IRemoveTaskCommand
 {
   Task<OperationResultResponse<bool>> ExecuteAsync(Guid id);
 }
