@@ -39,7 +39,7 @@ public class TaskTypesController : ControllerBase
   }
 
   [HttpPatch("{id}")]
-  public async Task<OperationResultResponse<bool>> Patch(
+  public async Task<OperationResultResponse<bool>> PatchAsync(
     [FromRoute] Guid id,
     [FromBody] JsonPatchDocument<PatchTaskTypeRequest> request,
     [FromServices] EditTaskTypeCommand command)
@@ -48,7 +48,7 @@ public class TaskTypesController : ControllerBase
   }
   
   [HttpDelete("{id}")]
-  public async Task<OperationResultResponse<bool>> Delete(
+  public async Task<OperationResultResponse<bool>> RemoveAsync(
     [FromRoute] Guid id,
     [FromServices] RemoveTaskTypeCommand command)
   {
