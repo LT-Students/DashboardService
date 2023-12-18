@@ -13,6 +13,4 @@ public class PatchBoardRequest
   public bool IsActive { get; set; }
 
   public Guid ModifiedBy { get; set; }
-
-  public DateTime ModifiedAtUtc { get; set; }
 }

@@ -5,30 +5,29 @@ using LT.DigitalOffice.Kernel.Extensions;
 using Microsoft.AspNetCore.Http;
 using System;
 
-namespace LT.DigitalOffice.DashboardService.Mappers.Db
+namespace LT.DigitalOffice.DashboardService.Mappers.Db;
+
+public class DbBoardMapper : IDbBoardMapper
 {
-  public class DbBoardMapper : IDbBoardMapper
+  private readonly IHttpContextAccessor _httpContextAccessor;
+
+  public DbBoardMapper(IHttpContextAccessor httpContextAccessor)
   {
-    private readonly IHttpContextAccessor _httpContextAccessor;
+    _httpContextAccessor = httpContextAccessor;
+  }
 
-    public DbBoardMapper(IHttpContextAccessor httpContextAccessor)
-    {
-      _httpContextAccessor = httpContextAccessor;
-    }
-
-    public DbBoard Map(CreateBoardRequest request)
-    {
-      return request is null
-        ? null
-        : new()
-        {
-          Id = Guid.NewGuid(),
-          ProjectId = request.ProjectId,
-          Name = request.Name,
-          IsActive = true,
-          CreatedBy = _httpContextAccessor.HttpContext.GetUserId(),
-          CreatedAtUtc = DateTime.UtcNow,
-        };
-    }
+  public DbBoard Map(CreateBoardRequest request)
+  {
+    return request is null
+      ? null
+      : new()
+      {
+        Id = Guid.NewGuid(),
+        ProjectId = request.ProjectId,
+        Name = request.Name,
+        IsActive = true,
+        CreatedBy = _httpContextAccessor.HttpContext.GetUserId(),
+        CreatedAtUtc = DateTime.UtcNow,
+      };
   }
 }

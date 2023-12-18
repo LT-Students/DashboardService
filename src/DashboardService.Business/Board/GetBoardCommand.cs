@@ -4,13 +4,12 @@ using LT.DigitalOffice.Kernel.Responses;
 using System;
 using System.Threading.Tasks;
 
-namespace LT.DigitalOffice.DashboardService.Business.Board
+namespace LT.DigitalOffice.DashboardService.Business.Board;
+
+public class GetBoardCommand : IGetBoardCommand
 {
-  public class GetBoardCommand : IGetBoardCommand
+  public Task<FindResultResponse<BoardInfo>> ExecuteAsync(Guid? id)
   {
-    public Task<FindResultResponse<BoardInfo>> ExecuteAsync(Guid? id)
-    {
-      throw new NotImplementedException();
-    }
+    throw new NotImplementedException();
   }
 }
