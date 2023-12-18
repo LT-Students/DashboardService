@@ -3,13 +3,12 @@ using LT.DigitalOffice.Kernel.Responses;
 using System;
 using System.Threading.Tasks;
 
-namespace LT.DigitalOffice.DashboardService.Business.Board
+namespace LT.DigitalOffice.DashboardService.Business.Board;
+
+public class RemoveBoardCommand : IRemoveBoardCommand
 {
-  public class RemoveBoardCommand : IRemoveBoardCommand
+  public Task<OperationResultResponse<bool>> ExecuteAsync(Guid? boardId)
   {
-    public Task<OperationResultResponse<bool>> ExecuteAsync(Guid? boardId)
-    {
-      throw new NotImplementedException();
-    }
+    throw new NotImplementedException();
   }
 }
