@@ -14,6 +14,7 @@ namespace LT.DigitalOffice.DashboardService.Controllers;
 [ApiController]
 public class PrioritiesController : ControllerBase
 {
+  [HttpPost]
   public async Task<OperationResultResponse<Guid?>> CreateAsync(
     [FromBody] CreatePriorityRequest request,
     [FromServices] CreatePriorityCommand command)
@@ -21,6 +22,7 @@ public class PrioritiesController : ControllerBase
     return await command.ExecuteAsync(request);
   }
   
+  [HttpGet]
   public async Task<FindResultResponse<PriorityInfo>> GetAsync(
     [FromServices] GetPrioritiesCommand command,
     [FromQuery] GetPrioritiesFilter filter)
