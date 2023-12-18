@@ -1,6 +1,7 @@
 using LT.DigitalOffice.DashboardService.Business.Priority;
 using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Priority;
+using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Priority.Filters;
 using LT.DigitalOffice.Kernel.Responses;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,8 @@ public class PrioritiesController : ControllerBase
   }
   
   public async Task<FindResultResponse<PriorityInfo>> GetAsync(
-    [FromServices] GetPrioritiesCommand command
+    [FromServices] GetPrioritiesCommand command,
+    [FromQuery] GetPrioritiesFilter filter
     )
   {
     return await command.ExecuteAsync();
