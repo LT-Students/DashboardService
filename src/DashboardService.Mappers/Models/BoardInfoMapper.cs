@@ -16,7 +16,7 @@ public class BoardInfoMapper : IBoardInfoMapper
         ProjectId = dbBoard.ProjectId,
         Name = dbBoard.Name,
         IsActive = dbBoard.IsActive,
-        Groups = dbBoard.Groups
+        // Groups = dbBoard.Groups
       };
   }
 }
