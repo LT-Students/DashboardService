@@ -23,8 +23,7 @@ public class PrioritiesController : ControllerBase
   
   public async Task<FindResultResponse<PriorityInfo>> GetAsync(
     [FromServices] GetPrioritiesCommand command,
-    [FromQuery] GetPrioritiesFilter filter
-    )
+    [FromQuery] GetPrioritiesFilter filter)
   {
     return await command.ExecuteAsync();
   }

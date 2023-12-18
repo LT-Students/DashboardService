@@ -8,7 +8,6 @@ namespace LT.DigitalOffice.DashboardService.Validation.Priority;
 
 public class CreatePriorityRequestValidator : AbstractValidator<CreatePriorityRequest>, ICreatePriorityRequestValidator
 {
-
   public CreatePriorityRequestValidator(IPriorityRepository reposisoty)
   {
     
