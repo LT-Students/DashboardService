@@ -37,7 +37,7 @@ public class PriorityRepository : IPriorityRepository
     throw new NotImplementedException();
   }
 
-  public Task<bool> DeleteAsync(Guid id)
+  public Task<bool> RemoveAsync(Guid id)
   {
     throw new NotImplementedException();
   }

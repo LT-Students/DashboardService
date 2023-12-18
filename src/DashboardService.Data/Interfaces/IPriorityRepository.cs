@@ -13,5 +13,5 @@ public interface IPriorityRepository
   Task<List<DbPriority>> GetAllAsync();
   Task<DbPriority> GetAsync(Guid id);
   Task<bool> EditAsync(Guid id);
-  Task<bool> DeleteAsync(Guid id);
+  Task<bool> RemoveAsync(Guid id);
 }

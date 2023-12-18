@@ -39,7 +39,7 @@ public class PrioritiesController : ControllerBase
   }
 
   [HttpPatch("{id}")]
-  public async Task<OperationResultResponse<bool>> Patch(
+  public async Task<OperationResultResponse<bool>> PatchAsync(
     [FromRoute] Guid id, 
     [FromBody] JsonPatchDocument<PatchPriorityRequest> request,
     [FromServices] EditPriorityCommand command)
@@ -48,7 +48,7 @@ public class PrioritiesController : ControllerBase
   }
   
   [HttpDelete("{id}")]
-  public async Task<OperationResultResponse<bool>> Delete(
+  public async Task<OperationResultResponse<bool>> RemoveAsync(
     [FromRoute] Guid id,
     [FromServices] RemovePriorityCommand command)
   {
