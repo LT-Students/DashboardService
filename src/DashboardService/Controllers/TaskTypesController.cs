@@ -1,6 +1,7 @@
 using LT.DigitalOffice.DashboardService.Business.TaskType;
 using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.TaskType;
+using LT.DigitalOffice.DashboardService.Models.Dto.Requests.TaskType.Filters;
 using LT.DigitalOffice.Kernel.Responses;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -37,6 +38,7 @@ public class TaskTypesController : ControllerBase
   [HttpPatch("{id}")]
   public async Task<OperationResultResponse<bool>> Patch(
     [FromRoute] Guid id, 
+    [FromQuery] GetTaskTypesFilter filter,
     [FromBody] JsonPatchDocument<PatchTaskTypeRequest> request,
     [FromServices] EditTaskTypeCommand command)
   {
