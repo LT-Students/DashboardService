@@ -22,7 +22,8 @@ public class TaskTypesController : ControllerBase
   }
   
   public async Task<FindResultResponse<TaskTypeInfo>> GetAsync(
-    [FromServices] GetTaskTypesCommand command)
+    [FromServices] GetTaskTypesCommand command,
+    [FromQuery] GetTaskTypesFilter filter)
   {
     return await command.ExecuteAsync();
   }
@@ -37,8 +38,7 @@ public class TaskTypesController : ControllerBase
 
   [HttpPatch("{id}")]
   public async Task<OperationResultResponse<bool>> Patch(
-    [FromRoute] Guid id, 
-    [FromQuery] GetTaskTypesFilter filter,
+    [FromRoute] Guid id,
     [FromBody] JsonPatchDocument<PatchTaskTypeRequest> request,
     [FromServices] EditTaskTypeCommand command)
   {
