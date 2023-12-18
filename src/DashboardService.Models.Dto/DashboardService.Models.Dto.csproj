@@ -3,7 +3,9 @@
   <Import Project="$(ProjectDir)..\..\Common.Configurations.targets" />
 
   <ItemGroup>
-    <Folder Include="Responces\Board\" />
+    <Compile Remove="Responses\Board\**" />
+    <EmbeddedResource Remove="Responses\Board\**" />
+    <None Remove="Responses\Board\**" />
   </ItemGroup>
 
 </Project>

@@ -12,7 +12,7 @@ public class BoardRepository : IBoardRepository
 {
   private readonly IDataProvider _provider;
 
-  public BoardRepository([FromServices] IDataProvider provider)
+  public BoardRepository(IDataProvider provider)
   {
     _provider = provider;
   }
@@ -22,7 +22,7 @@ public class BoardRepository : IBoardRepository
     throw new NotImplementedException();
   }
 
-  public Task<bool> EditAsync(Guid id)
+  public Task<bool> EditByIdAsync(Guid id)
   {
     throw new NotImplementedException();
   }

@@ -18,16 +18,14 @@ public class DbBoardMapper : IDbBoardMapper
 
   public DbBoard Map(CreateBoardRequest request)
   {
-    return request is null
-      ? null
-      : new()
-      {
-        Id = Guid.NewGuid(),
-        ProjectId = request.ProjectId,
-        Name = request.Name,
-        IsActive = true,
-        CreatedBy = _httpContextAccessor.HttpContext.GetUserId(),
-        CreatedAtUtc = DateTime.UtcNow,
-      };
+    return new()
+    {
+      Id = Guid.NewGuid(),
+      ProjectId = request.ProjectId,
+      Name = request.Name,
+      IsActive = true,
+      CreatedBy = _httpContextAccessor.HttpContext.GetUserId(),
+      CreatedAtUtc = DateTime.UtcNow,
+    };
   }
 }

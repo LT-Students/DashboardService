@@ -7,7 +7,7 @@ namespace LT.DigitalOffice.DashboardService.Business.Board;
 
 public class RemoveBoardCommand : IRemoveBoardCommand
 {
-  public Task<OperationResultResponse<bool>> ExecuteAsync(Guid? boardId)
+  public Task<OperationResultResponse<bool>> ExecuteAsync(Guid boardId)
   {
     throw new NotImplementedException();
   }

@@ -8,7 +8,7 @@ namespace LT.DigitalOffice.DashboardService.Business.Board;
 
 public class GetAllBoardsCommand : IGetAllBoardsCommand
 {
-  public Task<OperationResultResponse<IEnumerable<BoardInfo>>> ExecuteAsync()
+  public Task<FindResultResponse<BoardInfo>> ExecuteAsync()
   {
     throw new System.NotImplementedException();
   }
