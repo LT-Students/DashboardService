@@ -7,5 +7,4 @@ namespace LT.DigitalOffice.DashboardService.Validation.Board.Interfaces;
 [AutoInject]
 public interface ICreateBoardRequestValidator : IValidator<CreateBoardRequest>
 {
-
 }

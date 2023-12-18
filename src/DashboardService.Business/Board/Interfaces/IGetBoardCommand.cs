@@ -1,5 +1,4 @@
 ﻿using LT.DigitalOffice.DashboardService.Models.Dto.Models;
-using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Board;
 using LT.DigitalOffice.Kernel.Responses;
 using System;
 using System.Threading.Tasks;
