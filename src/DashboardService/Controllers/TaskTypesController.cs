@@ -14,6 +14,7 @@ namespace LT.DigitalOffice.DashboardService.Controllers;
 [ApiController]
 public class TaskTypesController : ControllerBase
 {
+  [HttpPost]
   public async Task<OperationResultResponse<Guid?>> CreateAsync(
     [FromBody] CreateTaskTypeRequest request,
     [FromServices] CreateTaskTypeCommand command)
@@ -21,6 +22,7 @@ public class TaskTypesController : ControllerBase
     return await command.ExecuteAsync(request);
   }
   
+  [HttpGet]
   public async Task<FindResultResponse<TaskTypeInfo>> GetAsync(
     [FromServices] GetTaskTypesCommand command,
     [FromQuery] GetTaskTypesFilter filter)
