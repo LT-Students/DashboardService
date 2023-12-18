@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Business.TaskType;
 
-public class DeleteTaskTypeCommand : IDeleteTaskTypeCommand
+public class RemoveTaskTypeCommand : IRemoveTaskTypeCommand
 {
   private readonly ITaskTypeRepository _repository;
 
-  public DeleteTaskTypeCommand(ITaskTypeRepository repository)
+  public RemoveTaskTypeCommand(ITaskTypeRepository repository)
   {
     _repository = repository;
   }
