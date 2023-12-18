@@ -3,7 +3,7 @@
   <Import Project="$(ProjectDir)..\..\Common.Configurations.targets" />
 
   <ItemGroup>
-    <Folder Include="Responses" />
+    <ProjectReference Include="..\DashboardService.Models.Db\DashboardService.Models.Db.csproj" />
   </ItemGroup>
 
 </Project>
