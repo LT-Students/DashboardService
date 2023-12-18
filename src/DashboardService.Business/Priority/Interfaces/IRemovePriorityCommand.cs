@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace LT.DigitalOffice.DashboardService.Business.Priority.Interfaces;
 
 [AutoInject]
-public interface IDeletePriorityCommand
+public interface IRemovePriorityCommand
 {
   Task<OperationResultResponse<bool>> ExecuteAsync(Guid id);
 }

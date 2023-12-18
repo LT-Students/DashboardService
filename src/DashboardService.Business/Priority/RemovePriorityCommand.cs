@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Business.Priority;
 
-public class DeletePriorityCommand : IDeletePriorityCommand
+public class RemovePriorityCommand : IRemovePriorityCommand
 {
   private readonly IPriorityRepository _priorityRepository;
 
-  public DeletePriorityCommand(IPriorityRepository priorityRepository)
+  public RemovePriorityCommand(IPriorityRepository priorityRepository)
   {
     _priorityRepository = priorityRepository;
   }

@@ -48,7 +48,7 @@ public class PrioritiesController : ControllerBase
   [HttpDelete("{id}")]
   public async Task<OperationResultResponse<bool>> Delete(
     [FromRoute] Guid id,
-    [FromServices] DeletePriorityCommand command)
+    [FromServices] RemovePriorityCommand command)
   {
     return await command.ExecuteAsync(id);
   }
