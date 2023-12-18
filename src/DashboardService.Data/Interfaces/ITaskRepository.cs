@@ -13,5 +13,5 @@ public interface ITaskRepository
   Task<List<DbTask>> GetAllAsync();
   Task<DbTask> GetAsync(Guid id);
   Task<bool> EditAsync(Guid id);
-  Task<bool> DeleteAsync(Guid id);
+  Task<bool> RemoveeAsync(Guid id);
 }
