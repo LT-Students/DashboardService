@@ -15,7 +15,7 @@ public interface IBoardRepository
 
   Task<DbBoard> GetAsync(Guid id);
 
-  Task<bool> EditAsync(Guid id);
+  Task<bool> EditByIdAsync(Guid id);
 
   Task<bool> RemoveAsync(Guid id);
 }

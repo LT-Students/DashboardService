@@ -1,11 +1,11 @@
 ﻿using LT.DigitalOffice.DashboardService.Business.Board.Interfaces;
 using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Board;
+using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 using LT.DigitalOffice.Kernel.Responses;
-
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Controllers;
@@ -14,7 +14,7 @@ namespace LT.DigitalOffice.DashboardService.Controllers;
 [ApiController]
 public class BoardsController : ControllerBase
 {
-  [HttpPost("create")]
+  [HttpPost]
   public async Task<OperationResultResponse<Guid?>> CreateAsync(
     [FromServices] ICreateBoardCommand command,
     [FromBody] CreateBoardRequest request)
@@ -22,31 +22,31 @@ public class BoardsController : ControllerBase
     return await command.ExecuteAsync(request);
   }
 
-  [HttpGet("find")]
-  public async Task<OperationResultResponse<IEnumerable<BoardInfo>>> GetAsync(
+  [HttpGet]
+  public async Task<FindResultResponse<BoardInfo>> GetAsync(
     [FromServices] IGetAllBoardsCommand command)
   {
     return await command.ExecuteAsync();
   }
 
-  [HttpGet("find/{id}")]
-  public async Task<FindResultResponse<BoardInfo>> GetAsync(
+  [HttpGet("{id}")]
+  public async Task<OperationResultResponse<BoardResponse>> GetAsync(
     [FromServices] IGetBoardCommand command,
     [FromRoute] Guid id)
   {
     return await command.ExecuteAsync(id);
   }
 
-  [HttpPatch("edit/{id}")]
+  [HttpPatch("{id}")]
   public async Task<OperationResultResponse<bool>> EditAsync(
     [FromServices] IEditBoardCommand command,
     [FromRoute] Guid id,
-    [FromBody] PatchBoardRequest request)
+    [FromBody] JsonPatchDocument<PatchBoardRequest> request)
   {
     return await command.ExecuteAsync(id, request);
   }
 
-  [HttpGet("remove/{id}")]
+  [HttpDelete("{id}")]
   public async Task<OperationResultResponse<bool>> RemoveAsync(
     [FromServices] IRemoveBoardCommand command,
     [FromRoute] Guid id)
