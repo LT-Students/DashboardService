@@ -14,6 +14,7 @@ public record TaskResponse
   public DateTime CreatedAtUtc { get; set; }
   public DateTime DeadlineAtUtc { get; set; }
   
+  // TODO Convert to DTO after all infrastructure PR`s will be merged
   public DbGroup Group { get; set; }
   public DbTaskType TaskType { get; set; }
   public DbPriority Priority { get; set; }
