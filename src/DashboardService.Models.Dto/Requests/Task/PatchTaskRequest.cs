@@ -8,5 +8,5 @@ public record PatchTaskRequest
   public Guid? PriorityId { get; set; }
   public string Name { get; set; }
   public string Content { get; set; }
-  public DateTime DeadlineAtUtc { get; set; }
+  public DateTime? DeadlineAtUtc { get; set; }
 }

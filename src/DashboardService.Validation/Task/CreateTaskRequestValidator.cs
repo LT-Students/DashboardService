@@ -7,8 +7,7 @@ namespace LT.DigitalOffice.DashboardService.Validation.Task;
 
 public class CreateTaskRequestValidator : AbstractValidator<CreateTaskRequest>, ICreateTaskRequestValidator
 {
-  public CreateTaskRequestValidator(ITaskRepository reposisoty)
+  public CreateTaskRequestValidator(ITaskRepository repository)
   {
-    
   }
 }

@@ -10,6 +10,7 @@ public record CreateTaskRequest
   public Guid? PriorityId { get; set; }
   [Required]
   public string Name { get; set; }
+  [Required]
   public string Content { get; set; }
   public DateTime? DeadlineAtUtc { get; set; }
 }
