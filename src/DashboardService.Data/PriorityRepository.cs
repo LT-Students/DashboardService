@@ -1,7 +1,7 @@
 using LT.DigitalOffice.DashboardService.Data.Interfaces;
 using LT.DigitalOffice.DashboardService.Data.Provider;
 using LT.DigitalOffice.DashboardService.Models.Db;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -32,7 +32,7 @@ public class PriorityRepository : IPriorityRepository
     throw new NotImplementedException();
   }
 
-  public Task<bool> EditAsync(Guid id)
+  public Task<bool> EditAsync(Guid id, JsonPatchDocument<DbPriority> request)
   {
     throw new NotImplementedException();
   }

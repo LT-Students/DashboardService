@@ -16,8 +16,8 @@ public class PrioritiesController : ControllerBase
 {
   [HttpPost]
   public async Task<OperationResultResponse<Guid?>> CreateAsync(
-    [FromBody] CreatePriorityRequest request,
-    [FromServices] CreatePriorityCommand command)
+    [FromServices] CreatePriorityCommand command,
+    [FromBody] CreatePriorityRequest request)
   {
     return await command.ExecuteAsync(request);
   }
@@ -32,25 +32,25 @@ public class PrioritiesController : ControllerBase
   
   [HttpGet("{id}")]
   public async Task<OperationResultResponse<PriorityInfo>> GetAsync(
-    [FromRoute] Guid id,
-    [FromServices] GetPriorityCommand command)
+    [FromServices] GetPriorityCommand command,
+    [FromRoute] Guid id)
   {
     return await command.ExecuteAsync(id);
   }
 
   [HttpPatch("{id}")]
   public async Task<OperationResultResponse<bool>> PatchAsync(
+    [FromServices] EditPriorityCommand command,
     [FromRoute] Guid id, 
-    [FromBody] JsonPatchDocument<PatchPriorityRequest> request,
-    [FromServices] EditPriorityCommand command)
+    [FromBody] JsonPatchDocument<PatchPriorityRequest> request)
   {
     return await command.ExecuteAsync(id, request);
   }
   
   [HttpDelete("{id}")]
   public async Task<OperationResultResponse<bool>> RemoveAsync(
-    [FromRoute] Guid id,
-    [FromServices] RemovePriorityCommand command)
+    [FromServices] RemovePriorityCommand command,
+    [FromRoute] Guid id)
   {
     return await command.ExecuteAsync(id);
   }
