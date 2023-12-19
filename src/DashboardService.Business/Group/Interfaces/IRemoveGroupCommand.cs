@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace LT.DigitalOffice.DashboardService.Business.Group.Interfaces;
 
 [AutoInject]
-public interface IDeleteGroupCommand
+public interface IRemoveGroupCommand
 {
   Task<OperationResultResponse<bool>> ExecuteAsync(Guid id);
 }

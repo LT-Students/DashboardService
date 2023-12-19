@@ -10,8 +10,8 @@ namespace LT.DigitalOffice.DashboardService.Data.Interfaces;
 public interface IGroupRepository
 {
   Task<Guid?> CreateAsync(DbGroup dbDepartment);
-  Task<IEnumerable<DbGroup>> GetAllAsync();
+  Task<DbGroup> GetAllAsync();
   Task<DbGroup> GetAsync(Guid id);
   Task<bool> EditAsync(Guid id);
-  Task<bool> DeleteAsync(Guid id);
+  Task<bool> RemoveAsync(Guid id);
 }

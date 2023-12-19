@@ -2,7 +2,7 @@
 
 namespace LT.DigitalOffice.DashboardService.Models.Dto.Models;
 
-public class GroupInfo
+public record GroupInfo
 {
   public Guid Id { get; set; }
   public Guid BoardId { get; set; }

@@ -13,7 +13,7 @@ public class GroupRepository : IGroupRepository
     throw new NotImplementedException();
   }
 
-  public Task<IEnumerable<DbGroup>> GetAllAsync()
+  public Task<DbGroup> GetAllAsync()
   {
     throw new NotImplementedException();
   }
@@ -28,7 +28,7 @@ public class GroupRepository : IGroupRepository
     throw new NotImplementedException();
   }
 
-  public Task<bool> DeleteAsync(Guid id)
+  public Task<bool> RemoveAsync(Guid id)
   {
     throw new NotImplementedException();
   }

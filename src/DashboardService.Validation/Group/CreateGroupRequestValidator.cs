@@ -8,7 +8,7 @@ namespace LT.DigitalOffice.DashboardService.Validation.Group;
 
 public class CreateGroupRequestValidator : AbstractValidator<CreateGroupRequest>, ICreateGroupRequestValidator
 {
-  public CreateGroupRequestValidator([FromServices] IGroupRepository reposisoty)
+  public CreateGroupRequestValidator(IGroupRepository reposisoty)
   {
   }
 }

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Business.Group;
 
-public class DeleteGroupCommand : IDeleteGroupCommand
+public class RemoveGroupCommand : IRemoveGroupCommand
 {
   private readonly IGroupRepository _repository;
 
-  public DeleteGroupCommand(IGroupRepository repository)
+  public RemoveGroupCommand(IGroupRepository repository)
   {
     _repository = repository;
   }

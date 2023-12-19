@@ -12,9 +12,9 @@ namespace LT.DigitalOffice.DashboardService.Controllers;
 
 [Route("[controller]")]
 [ApiController]
-public class GroupController : ControllerBase
+public class GroupsController : ControllerBase
 {
-  [HttpPost("create")]
+  [HttpPost]
   public async Task<OperationResultResponse<Guid?>> CreateAsync(
     [FromBody] CreateGroupRequest request,
     [FromServices] CreateGroupCommand command)
@@ -22,15 +22,15 @@ public class GroupController : ControllerBase
     return await command.ExecuteAsync(request);
   }
 
-  [HttpGet("get")]
-  public async Task<FindResultResponse<IEnumerable<GroupInfo>>> GetAsync(
+  [HttpGet]
+  public async Task<FindResultResponse<GroupInfo>> GetAsync(
     [FromServices] GetAllGroupsCommand command
   )
   {
     return await command.ExecuteAsync();
   }
 
-  [HttpGet("get/{id}")]
+  [HttpGet("{id}")]
   public async Task<OperationResultResponse<GroupResponse>> GetAsync(
     [FromRoute] Guid id,
     [FromServices] GetGroupCommand command)
@@ -38,7 +38,7 @@ public class GroupController : ControllerBase
     return await command.ExecuteAsync(id);
   }
 
-  [HttpPatch("edit/{id}")]
+  [HttpPatch("{id}")]
   public async Task<OperationResultResponse<bool>> Patch(
     [FromRoute] Guid id,
     [FromBody] PatchGroupRequest request,
@@ -47,10 +47,10 @@ public class GroupController : ControllerBase
     return await command.ExecuteAsync(id, request);
   }
 
-  [HttpDelete("delete/{id}")]
+  [HttpDelete("{id}")]
   public async Task<OperationResultResponse<bool>> Delete(
     [FromRoute] Guid id,
-    [FromServices] DeleteGroupCommand command)
+    [FromServices] RemoveGroupCommand command)
   {
     return await command.ExecuteAsync(id);
   }

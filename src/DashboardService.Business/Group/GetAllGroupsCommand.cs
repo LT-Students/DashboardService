@@ -17,7 +17,7 @@ public class GetAllGroupsCommand : IGetAllGroupsCommand
     _repository = repository;
   }
 
-  public Task<FindResultResponse<IEnumerable<GroupInfo>>> ExecuteAsync()
+  public Task<FindResultResponse<GroupInfo>> ExecuteAsync()
   {
     throw new System.NotImplementedException();
   }

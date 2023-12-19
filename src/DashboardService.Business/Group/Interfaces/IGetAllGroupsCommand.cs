@@ -9,5 +9,5 @@ namespace LT.DigitalOffice.DashboardService.Business.Group.Interfaces;
 [AutoInject]
 public interface IGetAllGroupsCommand
 {
-  Task<FindResultResponse<IEnumerable<GroupInfo>>> ExecuteAsync();
+  Task<FindResultResponse<GroupInfo>> ExecuteAsync();
 }
