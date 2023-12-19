@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Business.Comment;
 
-public class DeleteCommentCommand : IDeleteCommentCommand
+public class RemoveCommentCommand : IRemoveCommentCommand
 {
   private readonly ICommentRepository _repository;
 
-  public DeleteCommentCommand(ICommentRepository repository)
+  public RemoveCommentCommand(ICommentRepository repository)
   {
     _repository = repository;
   }

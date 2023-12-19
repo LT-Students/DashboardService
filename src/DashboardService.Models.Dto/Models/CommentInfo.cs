@@ -2,7 +2,7 @@
 
 namespace LT.DigitalOffice.DashboardService.Models.Dto.Models;
 
-public class CommentInfo
+public record CommentInfo
 {
   public Guid Id { get; set; }
   public Guid TaskId { get; set; }

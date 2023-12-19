@@ -2,7 +2,7 @@
 
 namespace LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 
-public class CommentResponse
+public record CommentResponse
 {
   public Guid CommentId { get; set; }
   public Guid TaskId { get; set; }

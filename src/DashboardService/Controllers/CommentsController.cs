@@ -12,9 +12,9 @@ namespace LT.DigitalOffice.DashboardService.Controllers;
 
 [Route("[controller]")]
 [ApiController]
-public class CommentController : ControllerBase
+public class CommentsController : ControllerBase
 {
-  [HttpPost("create")]
+  [HttpPost]
   public async Task<OperationResultResponse<Guid?>> CreateAsync(
     [FromBody] CreateCommentRequest request,
     [FromServices] CreateCommentCommand command)
@@ -22,14 +22,14 @@ public class CommentController : ControllerBase
     return await command.ExecuteAsync(request);
   }
 
-  [HttpGet("get")]
-  public async Task<FindResultResponse<IEnumerable<CommentInfo>>> GetAsync(
+  [HttpGet]
+  public async Task<FindResultResponse<CommentInfo>> GetAsync(
     [FromServices] GetAllCommentsCommand command)
   {
     return await command.ExecuteAsync();
   }
 
-  [HttpGet("get/{id}")]
+  [HttpGet("{id}")]
   public async Task<OperationResultResponse<CommentResponse>> GetAsync(
     [FromRoute] Guid id,
     [FromServices] GetCommentCommand command)
@@ -37,8 +37,8 @@ public class CommentController : ControllerBase
     return await command.ExecuteAsync(id);
   }
 
-  [HttpPatch("edit/{id}")]
-  public async Task<OperationResultResponse<bool>> Patch(
+  [HttpPatch("{id}")]
+  public async Task<OperationResultResponse<bool>> PatchAsync(
     [FromRoute] Guid id,
     [FromBody] PatchCommentRequest request,
     [FromServices] EditCommentCommand command)
@@ -46,10 +46,10 @@ public class CommentController : ControllerBase
     return await command.ExecuteAsync(id, request);
   }
 
-  [HttpDelete("delete/{id}")]
-  public async Task<OperationResultResponse<bool>> Delete(
+  [HttpDelete("{id}")]
+  public async Task<OperationResultResponse<bool>> RemoveAsync(
     [FromRoute] Guid id,
-    [FromServices] DeleteCommentCommand command)
+    [FromServices] RemoveCommentCommand command)
   {
     return await command.ExecuteAsync(id);
   }

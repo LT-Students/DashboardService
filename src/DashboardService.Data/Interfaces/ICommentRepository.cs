@@ -10,8 +10,8 @@ namespace LT.DigitalOffice.DashboardService.Data.Interfaces;
 public interface ICommentRepository
 {
   Task<Guid?> CreateAsync(DbComment dbDepartment);
-  Task<IEnumerable<DbComment>> GetAllAsync();
+  Task<DbComment> GetAllAsync();
   Task<DbComment> GetAsync(Guid id);
   Task<bool> EditAsync(Guid id);
-  Task<bool> DeleteAsync(Guid id);
+  Task<bool> RemoveAsync(Guid id);
 }

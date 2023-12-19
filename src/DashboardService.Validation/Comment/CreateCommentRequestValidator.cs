@@ -10,6 +10,5 @@ public class CreateCommentRequestValidator : AbstractValidator<CreateCommentRequ
 {
   public CreateCommentRequestValidator(ICommentRepository reposisoty)
   {
-
   }
 }

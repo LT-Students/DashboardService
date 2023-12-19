@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace LT.DigitalOffice.DashboardService.Business.Comment.Interfaces;
 
 [AutoInject]
-public interface IDeleteCommentCommand
+public interface IRemoveCommentCommand
 {
   Task<OperationResultResponse<bool>> ExecuteAsync(Guid id);
 }
