@@ -16,8 +16,8 @@ public class TaskTypesController : ControllerBase
 {
   [HttpPost]
   public async Task<OperationResultResponse<Guid?>> CreateAsync(
-    [FromBody] CreateTaskTypeRequest request,
-    [FromServices] CreateTaskTypeCommand command)
+    [FromServices] CreateTaskTypeCommand command,
+    [FromBody] CreateTaskTypeRequest request)
   {
     return await command.ExecuteAsync(request);
   }
@@ -32,25 +32,25 @@ public class TaskTypesController : ControllerBase
   
   [HttpGet("{id}")]
   public async Task<OperationResultResponse<TaskTypeInfo>> GetAsync(
-    [FromRoute] Guid id,
-    [FromServices] GetTaskTypeCommand command)
+    [FromServices] GetTaskTypeCommand command,
+    [FromRoute] Guid id)
   {
     return await command.ExecuteAsync(id);
   }
 
   [HttpPatch("{id}")]
   public async Task<OperationResultResponse<bool>> PatchAsync(
+    [FromServices] EditTaskTypeCommand command,
     [FromRoute] Guid id,
-    [FromBody] JsonPatchDocument<PatchTaskTypeRequest> request,
-    [FromServices] EditTaskTypeCommand command)
+    [FromBody] JsonPatchDocument<PatchTaskTypeRequest> request)
   {
     return await command.ExecuteAsync(id, request);
   }
   
   [HttpDelete("{id}")]
   public async Task<OperationResultResponse<bool>> RemoveAsync(
-    [FromRoute] Guid id,
-    [FromServices] RemoveTaskTypeCommand command)
+    [FromServices] RemoveTaskTypeCommand command,
+    [FromRoute] Guid id)
   {
     return await command.ExecuteAsync(id);
   }

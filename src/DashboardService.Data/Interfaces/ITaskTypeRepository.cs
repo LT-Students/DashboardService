@@ -1,5 +1,6 @@
 using LT.DigitalOffice.DashboardService.Models.Db;
 using LT.DigitalOffice.Kernel.Attributes;
+using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,6 +13,6 @@ public interface ITaskTypeRepository
   Task<Guid?> CreateAsync(DbTaskType dbDepartment);
   Task<List<DbTaskType>> GetAllAsync();
   Task<DbTaskType> GetAsync(Guid id);
-  Task<bool> EditAsync(Guid id);
+  Task<bool> EditAsync(Guid id, JsonPatchDocument<DbTaskType> request);
   Task<bool> RemoveAsync(Guid id);
 }
