@@ -28,7 +28,7 @@ public class DbTaskMapper : IDbTaskMapper
         PriorityId = request.PriorityId,
         Name = request.Name,
         Content = request.Content,
-        CreatedAtUtc = DateTime.Now,
+        CreatedAtUtc = DateTime.UtcNow,
         CreatedBy = _httpContextAccessor.HttpContext.GetUserId(),
         DeadlineAtUtc = request.DeadlineAtUtc
       };
