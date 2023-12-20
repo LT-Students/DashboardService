@@ -1,8 +1,10 @@
 ﻿using LT.DigitalOffice.DashboardService.Business.Group;
 using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Group;
+using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Group.Filters;
 using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 using LT.DigitalOffice.Kernel.Responses;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -24,18 +26,20 @@ public class GroupsController : ControllerBase
 
   [HttpGet]
   public async Task<FindResultResponse<GroupInfo>> GetAsync(
-    [FromServices] GetAllGroupsCommand command
+    [FromServices] GetAllGroupsCommand command,
+    [FromQuery] GetGroupFilter filter
   )
   {
-    return await command.ExecuteAsync();
+    return await command.ExecuteAsync(filter);
   }
 
   [HttpGet("{id}")]
   public async Task<OperationResultResponse<GroupResponse>> GetAsync(
     [FromRoute] Guid id,
-    [FromServices] GetGroupCommand command)
+    [FromServices] GetGroupCommand command,
+    [FromQuery] GetGroupFilter filter)
   {
-    return await command.ExecuteAsync(id);
+    return await command.ExecuteAsync(filter, id);
   }
 
   [HttpPatch("{id}")]
@@ -48,7 +52,7 @@ public class GroupsController : ControllerBase
   }
 
   [HttpDelete("{id}")]
-  public async Task<OperationResultResponse<bool>> Delete(
+  public async Task<OperationResultResponse<bool>> Remove(
     [FromRoute] Guid id,
     [FromServices] RemoveGroupCommand command)
   {

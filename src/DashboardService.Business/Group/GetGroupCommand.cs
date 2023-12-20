@@ -1,6 +1,7 @@
 ﻿using LT.DigitalOffice.DashboardService.Business.Group.Interfaces;
 using LT.DigitalOffice.DashboardService.Data.Interfaces;
 using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
+using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Group.Filters;
 using LT.DigitalOffice.Kernel.Responses;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -17,7 +18,7 @@ public class GetGroupCommand : IGetGroupCommand
     _repository = repository;
   }
 
-  public Task<OperationResultResponse<GroupResponse>> ExecuteAsync(Guid id)
+  public Task<OperationResultResponse<GroupResponse>> ExecuteAsync(GetGroupFilter filter, Guid id)
   {
     throw new NotImplementedException();
   }

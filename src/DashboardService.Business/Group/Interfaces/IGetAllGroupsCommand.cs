@@ -1,4 +1,5 @@
 ﻿using LT.DigitalOffice.DashboardService.Models.Dto.Models;
+using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Group.Filters;
 using LT.DigitalOffice.Kernel.Attributes;
 using LT.DigitalOffice.Kernel.Responses;
 using System.Collections.Generic;
@@ -9,5 +10,5 @@ namespace LT.DigitalOffice.DashboardService.Business.Group.Interfaces;
 [AutoInject]
 public interface IGetAllGroupsCommand
 {
-  Task<FindResultResponse<GroupInfo>> ExecuteAsync();
+  Task<FindResultResponse<GroupInfo>> ExecuteAsync(GetGroupFilter filter);
 }
