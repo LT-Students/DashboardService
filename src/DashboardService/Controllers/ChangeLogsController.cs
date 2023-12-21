@@ -7,6 +7,7 @@ using LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog.Filter;
 using LT.DigitalOffice.DashboardService.Models.Dto.Responces;
 
 namespace LT.DigitalOffice.DashboardService.Controllers;
+
 [Route("api/[controller]")]
 [ApiController]
 public class ChangeLogsController : ControllerBase
