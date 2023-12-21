@@ -15,18 +15,16 @@ public class ChangeLogInfoMapper : IChangeLogInfoMapper
 
   public ChangeLogInfo Map(DbChangeLog dbChangeLog)
   {
-    return dbChangeLog is null
-      ? null
-      : new()
-      {
-        Id = dbChangeLog.Id,
-        CreatedBy = dbChangeLog.CreatedBy,
-        EntityName = dbChangeLog.EntityName,
-        PropertyName = dbChangeLog.PropertyName,
-        PropertyOldValue = dbChangeLog.PropertyOldValue,
-        PropertyNewValue = dbChangeLog.PropertyNewValue,
-        CreatedAtUtc = dbChangeLog.CreatedAtUtc,
-        // Task = _taskInfoMapper.Map(dbChangeLog.Task);
-      };
+    return new()
+    {
+      Id = dbChangeLog.Id,
+      CreatedBy = dbChangeLog.CreatedBy,
+      EntityName = dbChangeLog.EntityName,
+      PropertyName = dbChangeLog.PropertyName,
+      PropertyOldValue = dbChangeLog.PropertyOldValue,
+      PropertyNewValue = dbChangeLog.PropertyNewValue,
+      CreatedAtUtc = dbChangeLog.CreatedAtUtc,
+      // Task = _taskInfoMapper.Map(dbChangeLog.Task);
+    };
   }
 }

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Business.ChangeLog;
 
-public class GetAllChangeLogCommand : IGetAllChangeLogsCommand
+public class GetAllChangeLogsCommand : IGetAllChangeLogsCommand
 {
   private readonly IChangeLogRepository _repository;
 
-  public GetAllChangeLogCommand(IChangeLogRepository repository)
+  public GetAllChangeLogsCommand(IChangeLogRepository repository)
   {
     _repository = repository;
   }

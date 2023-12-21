@@ -25,18 +25,16 @@ public class DbChangeLogMapper : IDbChangeLogMapper
 
   public DbChangeLog Map(CreateChangeLogRequest request)
   {
-    return request is null
-      ? null
-      : new()
-      {
-        Id = Guid.NewGuid(),
-        TaskId = request.TaskId,
-        CreatedBy = _httpContextAccessor.HttpContext.GetUserId(),
-        EntityName = request.EntityName,
-        PropertyName = request.PropertyName,
-        //PropertyOldValue = _repository.GetLogByLastChange(request.TaskId).PropertyOldValue,
-        PropertyNewValue = request.PropertyNewValue,
-        CreatedAtUtc = DateTime.UtcNow,
-      };
+    return new()
+    {
+      Id = Guid.NewGuid(),
+      TaskId = request.TaskId,
+      CreatedBy = _httpContextAccessor.HttpContext.GetUserId(),
+      EntityName = request.EntityName,
+      PropertyName = request.PropertyName,
+      //PropertyOldValue = _repository.GetLogByLastChange(request.TaskId).PropertyOldValue,
+      PropertyNewValue = request.PropertyNewValue,
+      CreatedAtUtc = DateTime.UtcNow,
+    };
   }
 }
