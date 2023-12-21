@@ -13,6 +13,7 @@ public class TaskInfoMapper : ITaskInfoMapper
       : new()
       {
         Id = dbTask.Id,
+        GroupId = dbTask.GroupId,
         TaskTypeId = dbTask.TaskTypeId,
         PriorityId = dbTask.PriorityId,
         Name = dbTask.Name,

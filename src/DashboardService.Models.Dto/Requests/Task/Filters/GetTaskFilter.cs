@@ -17,5 +17,5 @@ public record GetTaskFilter
   public bool IncludeComments { get; set; } = true;
   
   [FromQuery(Name = "includelogs")]
-  public bool IncludeLogs { get; set; } = true;
+  public bool IncludeLogs { get; set; }
 }

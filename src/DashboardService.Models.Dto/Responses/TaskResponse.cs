@@ -7,6 +7,7 @@ namespace LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 public record TaskResponse
 {
   public Guid Id { get; set; }
+  public Guid GroupId { get; set; }
   public Guid? TaskTypeId { get; set; }
   public Guid? PriorityId { get; set; }
   public string Name { get; set; }
@@ -18,6 +19,6 @@ public record TaskResponse
   public DbGroup Group { get; set; }
   public DbTaskType TaskType { get; set; }
   public DbPriority Priority { get; set; }
-  public ICollection<DbComment> Comments { get; set; }
-  public ICollection<DbChangeLog> Logs { get; set; }
+  public List<DbComment> Comments { get; set; }
+  public List<DbChangeLog> Logs { get; set; }
 }

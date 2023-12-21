@@ -1,3 +1,4 @@
+using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Task.Filters;
 using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 using LT.DigitalOffice.Kernel.Attributes;
 using LT.DigitalOffice.Kernel.Responses;
@@ -9,5 +10,5 @@ namespace LT.DigitalOffice.DashboardService.Business.Task.Interfaces;
 [AutoInject]
 public interface IGetTaskCommand
 {
-  Task<OperationResultResponse<TaskResponse>> ExecuteAsync(Guid id);
+  Task<OperationResultResponse<TaskResponse>> ExecuteAsync(Guid id, GetTaskFilter filter);
 }

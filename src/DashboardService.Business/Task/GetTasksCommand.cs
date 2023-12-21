@@ -1,6 +1,7 @@
 using LT.DigitalOffice.DashboardService.Business.Task.Interfaces;
 using LT.DigitalOffice.DashboardService.Data.Interfaces;
 using LT.DigitalOffice.DashboardService.Models.Dto.Models;
+using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Task.Filters;
 using LT.DigitalOffice.Kernel.Responses;
 using System;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ public class GetTasksCommand : IGetTasksCommand
     _priorityRepository = priorityRepository;
   }
   
-  public Task<FindResultResponse<TaskInfo>> ExecuteAsync()
+  public Task<FindResultResponse<TaskInfo>> ExecuteAsync(GetTasksFilter filter)
   {
     throw new NotImplementedException();
   }

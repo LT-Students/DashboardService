@@ -28,7 +28,7 @@ public class TasksController : ControllerBase
     [FromServices] GetTasksCommand command,
     [FromQuery] GetTasksFilter filter)
   {
-    return await command.ExecuteAsync();
+    return await command.ExecuteAsync(filter);
   }
 
   [HttpGet("{id}")]
@@ -37,7 +37,7 @@ public class TasksController : ControllerBase
     [FromRoute] Guid id,
     [FromQuery] GetTaskFilter filter)
   {
-    return await command.ExecuteAsync(id);
+    return await command.ExecuteAsync(id, filter);
   }
 
   [HttpPatch("{id}")]

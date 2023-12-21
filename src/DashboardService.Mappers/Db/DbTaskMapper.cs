@@ -9,14 +9,7 @@ namespace LT.DigitalOffice.DashboardService.Mappers.Db;
 
 public class DbTaskMapper : IDbTaskMapper
 {
-  private readonly IHttpContextAccessor _httpContextAccessor;
-
-  public DbTaskMapper(IHttpContextAccessor httpContextAccessor)
-  {
-    _httpContextAccessor = httpContextAccessor;
-  }
-  
-  public DbTask Map(CreateTaskRequest request)
+  public DbTask Map(Guid createdBy, CreateTaskRequest request)
   {
     return request is null
       ? null
@@ -29,7 +22,7 @@ public class DbTaskMapper : IDbTaskMapper
         Name = request.Name,
         Content = request.Content,
         CreatedAtUtc = DateTime.UtcNow,
-        CreatedBy = _httpContextAccessor.HttpContext.GetUserId(),
+        CreatedBy = createdBy,
         DeadlineAtUtc = request.DeadlineAtUtc
       };
   }
