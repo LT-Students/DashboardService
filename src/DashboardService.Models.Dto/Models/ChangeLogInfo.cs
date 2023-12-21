@@ -11,5 +11,5 @@ public class ChangeLogInfo
   public string PropertyOldValue { get; set; }
   public string PropertyNewValue { get; set; }
   public DateTime CreatedAtUtc { get; set; }
-  // public TaskInfo Task { get; set; }
+  public TaskInfo Task { get; set; }
 }
