@@ -1,7 +1,7 @@
 ﻿using LT.DigitalOffice.DashboardService.Business.ChangeLog.Interfaces;
 using LT.DigitalOffice.DashboardService.Data.Interfaces;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog.Filter;
-using LT.DigitalOffice.DashboardService.Models.Dto.Responces;
+using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 using LT.DigitalOffice.Kernel.Responses;
 using System;
 using System.Threading.Tasks;

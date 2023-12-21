@@ -1,4 +1,4 @@
-﻿using LT.DigitalOffice.DashboardService.Mappers.Models.Intarfaces;
+﻿using LT.DigitalOffice.DashboardService.Mappers.Models.Interfaces;
 using LT.DigitalOffice.DashboardService.Models.Db;
 using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 

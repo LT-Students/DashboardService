@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System;
 using LT.DigitalOffice.Kernel.Attributes;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog.Filter;
-using Azure;
 using Microsoft.AspNetCore.JsonPatch;
 
 namespace LT.DigitalOffice.DashboardService.Data.Interfaces;

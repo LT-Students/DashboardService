@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LT.DigitalOffice.DashboardService.Models.Dto.Responces;
+namespace LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 
 public class ChangeLogResponse
 {

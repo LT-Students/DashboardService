@@ -5,6 +5,6 @@ using LT.DigitalOffice.Kernel.Attributes;
 namespace LT.DigitalOffice.DashboardService.Validation.ChangeLog.Interfaces;
 
 [AutoInject]
-public interface IEditChangeLogValidator : IValidator<PatchChangeLogRequest>
+public interface IEditChangeLogValidator : IValidator<EditChangeLogRequest>
 {
 }

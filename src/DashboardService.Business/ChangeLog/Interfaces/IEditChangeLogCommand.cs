@@ -10,5 +10,5 @@ namespace LT.DigitalOffice.DashboardService.Business.ChangeLog.Interfaces;
 [AutoInject]
 public interface IEditChangeLogCommand
 {
-  public Task<OperationResultResponse<bool>> ExecuteAsync(Guid id, JsonPatchDocument<PatchChangeLogRequest> request);
+  public Task<OperationResultResponse<bool>> ExecuteAsync(Guid id, JsonPatchDocument<EditChangeLogRequest> request);
 }

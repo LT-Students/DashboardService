@@ -1,6 +1,6 @@
 ﻿using LT.DigitalOffice.Kernel.Responses;
 using System.Threading.Tasks;
-using LT.DigitalOffice.DashboardService.Models.Dto.Responces;
+using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog.Filter;
 using System;
 using LT.DigitalOffice.Kernel.Attributes;

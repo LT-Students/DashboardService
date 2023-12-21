@@ -2,7 +2,7 @@
 using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 using LT.DigitalOffice.Kernel.Attributes;
 
-namespace LT.DigitalOffice.DashboardService.Mappers.Models.Intarfaces;
+namespace LT.DigitalOffice.DashboardService.Mappers.Models.Interfaces;
 
 [AutoInject]
 public interface IChangeLogInfoMapper

@@ -5,7 +5,7 @@ using LT.DigitalOffice.DashboardService.Validation.ChangeLog.Interfaces;
 
 namespace LT.DigitalOffice.DashboardService.Validation.ChangeLog;
 
-public class EditChangeLogValidator : AbstractValidator<PatchChangeLogRequest>, IEditChangeLogValidator
+public class EditChangeLogValidator : AbstractValidator<EditChangeLogRequest>, IEditChangeLogValidator
 {
   public EditChangeLogValidator(IChangeLogRepository changeLogRepository)
   {

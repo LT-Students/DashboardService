@@ -1,9 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System;
+﻿using System;
 
 namespace LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog;
 
-public class PatchChangeLogRequest
+public class EditChangeLogRequest
 {
   public Guid? TaskId { get; set; }
   public string EntityName { get; set; }

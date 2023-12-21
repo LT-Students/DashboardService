@@ -17,7 +17,7 @@ public class EditChangeLogCommand : IEditChangeLogCommand
     _repository = repository;
   }
 
-  public Task<OperationResultResponse<bool>> ExecuteAsync(Guid id, JsonPatchDocument<PatchChangeLogRequest> request)
+  public Task<OperationResultResponse<bool>> ExecuteAsync(Guid id, JsonPatchDocument<EditChangeLogRequest> request)
   {
     throw new NotImplementedException();
   }
