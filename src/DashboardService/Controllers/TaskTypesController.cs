@@ -27,7 +27,7 @@ public class TaskTypesController : ControllerBase
     [FromServices] GetTaskTypesCommand command,
     [FromQuery] GetTaskTypesFilter filter)
   {
-    return await command.ExecuteAsync();
+    return await command.ExecuteAsync(filter);
   }
   
   [HttpGet("{id}")]

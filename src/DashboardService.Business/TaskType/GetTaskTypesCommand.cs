@@ -1,6 +1,7 @@
 using LT.DigitalOffice.DashboardService.Business.TaskType.Interfaces;
 using LT.DigitalOffice.DashboardService.Data.Interfaces;
 using LT.DigitalOffice.DashboardService.Models.Dto.Models;
+using LT.DigitalOffice.DashboardService.Models.Dto.Requests.TaskType.Filters;
 using LT.DigitalOffice.Kernel.Responses;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ public class GetTaskTypesCommand : IGetTaskTypesCommand
     _repository = repository;
   }
   
-  public Task<FindResultResponse<TaskTypeInfo>> ExecuteAsync()
+  public Task<FindResultResponse<TaskTypeInfo>> ExecuteAsync(GetTaskTypesFilter filter)
   {
     throw new System.NotImplementedException();
   }

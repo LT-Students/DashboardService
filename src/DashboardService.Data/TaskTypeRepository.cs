@@ -1,6 +1,7 @@
 using LT.DigitalOffice.DashboardService.Data.Interfaces;
 using LT.DigitalOffice.DashboardService.Data.Provider;
 using LT.DigitalOffice.DashboardService.Models.Db;
+using LT.DigitalOffice.DashboardService.Models.Dto.Requests.TaskType.Filters;
 using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ public class TaskTypeRepository : ITaskTypeRepository
     throw new NotImplementedException();
   }
 
-  public Task<List<DbTaskType>> GetAllAsync()
+  public Task<List<DbTaskType>> GetAllAsync(GetTaskTypesFilter filter)
   {
     throw new NotImplementedException();
   }
