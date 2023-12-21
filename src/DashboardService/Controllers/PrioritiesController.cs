@@ -39,7 +39,7 @@ public class PrioritiesController : ControllerBase
   }
 
   [HttpPatch("{id}")]
-  public async Task<OperationResultResponse<bool>> PatchAsync(
+  public async Task<OperationResultResponse<bool>> EditAsync(
     [FromServices] EditPriorityCommand command,
     [FromRoute] Guid id, 
     [FromBody] JsonPatchDocument<PatchPriorityRequest> request)
