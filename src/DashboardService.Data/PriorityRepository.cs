@@ -1,6 +1,7 @@
 using LT.DigitalOffice.DashboardService.Data.Interfaces;
 using LT.DigitalOffice.DashboardService.Data.Provider;
 using LT.DigitalOffice.DashboardService.Models.Db;
+using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Priority.Filters;
 using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ public class PriorityRepository : IPriorityRepository
     throw new NotImplementedException();
   }
 
-  public Task<List<DbPriority>> GetAllAsync()
+  public Task<List<DbPriority>> GetAllAsync(GetPrioritiesFilter filter)
   {
     throw new NotImplementedException();
   }

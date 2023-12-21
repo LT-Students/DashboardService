@@ -27,7 +27,7 @@ public class PrioritiesController : ControllerBase
     [FromServices] GetPrioritiesCommand command,
     [FromQuery] GetPrioritiesFilter filter)
   {
-    return await command.ExecuteAsync();
+    return await command.ExecuteAsync(filter);
   }
   
   [HttpGet("{id}")]
