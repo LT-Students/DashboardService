@@ -16,6 +16,7 @@ public class DbTask
   public string Name { get; set; }
   public string Content { get; set; }
   public DateTime CreatedAtUtc { get; set; }
+  public Guid CreatedBy { get; set; }
   public DateTime? DeadlineAtUtc { get; set; }
   
   public DbGroup Group { get; set; }
@@ -58,6 +59,10 @@ public class DbTaskConfiguration : IEntityTypeConfiguration<DbTask>
 
     builder
       .Property(t => t.CreatedAtUtc)
+      .IsRequired();
+
+    builder
+      .Property(t => t.CreatedBy)
       .IsRequired();
 
     builder
