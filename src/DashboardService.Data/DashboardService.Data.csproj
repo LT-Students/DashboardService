@@ -2,4 +2,10 @@
 
   <Import Project="$(ProjectDir)..\..\Common.Configurations.targets" />
 
+  <ItemGroup>
+    <ProjectReference Include="..\DashboardService.Data.Provider\DashboardService.Data.Provider.csproj" />
+    <ProjectReference Include="..\DashboardService.Models.Db\DashboardService.Models.Db.csproj" />
+    <ProjectReference Include="..\DashboardService.Models.Dto\DashboardService.Models.Dto.csproj" />
+  </ItemGroup>
+
 </Project>
