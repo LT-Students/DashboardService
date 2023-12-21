@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 using LT.DigitalOffice.Kernel.Attributes;
+using LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog.Filter;
+using Azure;
+using Microsoft.AspNetCore.JsonPatch;
 
 namespace LT.DigitalOffice.DashboardService.Data.Interfaces;
 
@@ -11,11 +14,11 @@ public interface IChangeLogRepository
 {
   Task<Guid?> CreateAsync(DbChangeLog board);
 
-  Task<IEnumerable<DbChangeLog>> GetAllAsync();
+  Task<List<DbChangeLog>> GetChangeLogsAsync();
 
-  Task<DbChangeLog> GetAsync(Guid id);
+  Task<DbChangeLog> GetAsync(Guid id, GetChangeLogFilter filter);
 
-  Task<bool> EditAsync(Guid id);
+  Task<bool> EditAsync(Guid id, JsonPatchDocument<DbChangeLog> request);
 
   Task<bool> RemoveAsync(Guid id);
 }

@@ -14,6 +14,7 @@ public class DbChangeLogMapper : IDbChangeLogMapper
 
   // TODO
   // How to set a value on PropertyOldValue ?
+
   private readonly IChangeLogRepository _repository;
 
   public DbChangeLogMapper(IHttpContextAccessor httpContextAccessor, IChangeLogRepository repository)
@@ -24,9 +25,9 @@ public class DbChangeLogMapper : IDbChangeLogMapper
 
   public DbChangeLog Map(CreateChangeLogRequest request)
   {
-    return request is null ?
-      null :
-      new()
+    return request is null
+      ? null
+      : new()
       {
         Id = Guid.NewGuid(),
         TaskId = request.TaskId,

@@ -15,9 +15,9 @@ public class ChangeLogInfoMapper : IChangeLogInfoMapper
 
   public ChangeLogInfo Map(DbChangeLog dbChangeLog)
   {
-    return dbChangeLog is null ?
-      null :
-      new()
+    return dbChangeLog is null
+      ? null
+      : new()
       {
         Id = dbChangeLog.Id,
         CreatedBy = dbChangeLog.CreatedBy,

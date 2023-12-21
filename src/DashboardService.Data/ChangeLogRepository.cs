@@ -1,5 +1,7 @@
 ﻿using LT.DigitalOffice.DashboardService.Data.Interfaces;
 using LT.DigitalOffice.DashboardService.Models.Db;
+using LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog.Filter;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
@@ -21,17 +23,17 @@ public class ChangeLogRepository : IChangeLogRepository
     throw new NotImplementedException();
   }
 
-  public Task<bool> EditAsync(Guid id)
+  public Task<bool> EditAsync(Guid id, JsonPatchDocument<DbChangeLog> request)
   {
     throw new NotImplementedException();
   }
 
-  public Task<DbChangeLog> GetAsync(Guid id)
+  public Task<DbChangeLog> GetAsync(Guid id, GetChangeLogFilter filter)
   {
     throw new NotImplementedException();
   }
 
-  public Task<IEnumerable<DbChangeLog>> GetAllAsync()
+  public Task<List<DbChangeLog>> GetChangeLogsAsync()
   {
     throw new NotImplementedException();
   }
