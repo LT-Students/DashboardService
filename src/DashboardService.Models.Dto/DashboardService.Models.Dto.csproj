@@ -8,4 +8,8 @@
     <None Remove="Responses\Board\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DashboardService.Models.Db\DashboardService.Models.Db.csproj" />
+  </ItemGroup>
+
 </Project>
