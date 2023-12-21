@@ -39,7 +39,7 @@ public class TaskTypesController : ControllerBase
   }
 
   [HttpPatch("{id}")]
-  public async Task<OperationResultResponse<bool>> PatchAsync(
+  public async Task<OperationResultResponse<bool>> EditAsync(
     [FromServices] EditTaskTypeCommand command,
     [FromRoute] Guid id,
     [FromBody] JsonPatchDocument<PatchTaskTypeRequest> request)
