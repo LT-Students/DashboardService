@@ -1,6 +1,7 @@
 ﻿using LT.DigitalOffice.DashboardService.Business.Board.Interfaces;
 using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Board;
+using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Board.Filters;
 using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 using LT.DigitalOffice.Kernel.Responses;
 using Microsoft.AspNetCore.JsonPatch;
@@ -24,17 +25,19 @@ public class BoardsController : ControllerBase
 
   [HttpGet]
   public async Task<FindResultResponse<BoardInfo>> GetAsync(
-    [FromServices] IGetAllBoardsCommand command)
+    [FromServices] IGetBoardsCommand command,
+    [FromQuery] GetBoardsFilter filter)
   {
-    return await command.ExecuteAsync();
+    return await command.ExecuteAsync(filter);
   }
 
   [HttpGet("{id}")]
   public async Task<OperationResultResponse<BoardResponse>> GetAsync(
     [FromServices] IGetBoardCommand command,
-    [FromRoute] Guid id)
+    [FromRoute] Guid id,
+    [FromQuery] GetBoardFilter filter)
   {
-    return await command.ExecuteAsync(id);
+    return await command.ExecuteAsync(id, filter);
   }
 
   [HttpPatch("{id}")]

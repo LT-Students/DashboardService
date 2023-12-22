@@ -8,15 +8,13 @@ public class BoardInfoMapper : IBoardInfoMapper
 {
   public BoardInfo Map(DbBoard dbBoard)
   {
-    return dbBoard is null
-      ? null
-      : new BoardInfo
-      {
-        Id = dbBoard.Id,
-        ProjectId = dbBoard.ProjectId,
-        Name = dbBoard.Name,
-        IsActive = dbBoard.IsActive,
-        // Groups = dbBoard.Groups
-      };
+    return new BoardInfo
+    {
+      Id = dbBoard.Id,
+      ProjectId = dbBoard.ProjectId,
+      Name = dbBoard.Name,
+      IsActive = dbBoard.IsActive,
+      // Groups = dbBoard.Groups
+    };
   }
 }

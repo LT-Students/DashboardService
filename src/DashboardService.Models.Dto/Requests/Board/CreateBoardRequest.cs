@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LT.DigitalOffice.DashboardService.Models.Dto.Requests.Board;
 
-public record class CreateBoardRequest
+public class CreateBoardRequest
 {
   public Guid ProjectId { get; set; }
 

@@ -8,7 +8,7 @@ namespace LT.DigitalOffice.DashboardService.Mappers.Db;
 
 public class PatchDbBoardMapper : IPatchDbBoardMapper
 {
-  public JsonPatchDocument<DbBoard> Map(JsonPatchDocument<PatchBoardRequest> request)
+  public JsonPatchDocument<DbBoard> Map(JsonPatchDocument<PatchBoardRequest> request, Guid modifiedById)
   {
     throw new NotImplementedException();
   }

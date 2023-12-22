@@ -1,6 +1,7 @@
 ﻿using LT.DigitalOffice.DashboardService.Data.Interfaces;
 using LT.DigitalOffice.DashboardService.Data.Provider;
 using LT.DigitalOffice.DashboardService.Models.Db;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ public class BoardRepository : IBoardRepository
     throw new NotImplementedException();
   }
 
-  public Task<bool> EditByIdAsync(Guid id)
+  public Task<bool> EditByIdAsync(Guid id, JsonPatchDocument<DbChangeLog> dbChangeLog)
   {
     throw new NotImplementedException();
   }
@@ -32,7 +33,7 @@ public class BoardRepository : IBoardRepository
     throw new NotImplementedException();
   }
 
-  public Task<IEnumerable<DbBoard>> GetAllAsync()
+  public Task<List<DbBoard>> GetAllAsync()
   {
     throw new NotImplementedException();
   }
