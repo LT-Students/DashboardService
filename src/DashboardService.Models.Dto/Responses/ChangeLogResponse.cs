@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LT.DigitalOffice.DashboardService.Models.Dto.Models;
+using System;
 
 namespace LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 
@@ -11,6 +12,5 @@ public class ChangeLogResponse
   public string PropertyOldValue { get; set; }
   public string PropertyNewValue { get; set; }
   public DateTime CreatedAtUtc { get; set; }
-
-  // public TaskInfo Task { get; set; }
+  public TaskInfo Task { get; set; }
 }

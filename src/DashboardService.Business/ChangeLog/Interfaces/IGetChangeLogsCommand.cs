@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace LT.DigitalOffice.DashboardService.Business.ChangeLog.Interfaces;
 
 [AutoInject]
-public interface IGetAllChangeLogsCommand
+public interface IGetChangeLogsCommand
 {
   public Task<FindResultResponse<ChangeLogInfo>> ExecuteAsync(GetChangeLogsFilter filter);
 }

@@ -4,35 +4,26 @@ using LT.DigitalOffice.DashboardService.Models.Db;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog;
 using LT.DigitalOffice.Kernel.Extensions;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 
 namespace LT.DigitalOffice.DashboardService.Mappers.Db;
 
 public class DbChangeLogMapper : IDbChangeLogMapper
 {
-  private readonly IHttpContextAccessor _httpContextAccessor;
-
   // TODO
   // How to set a value on PropertyOldValue ?
 
-  private readonly IChangeLogRepository _repository;
-
-  public DbChangeLogMapper(IHttpContextAccessor httpContextAccessor, IChangeLogRepository repository)
-  {
-    _httpContextAccessor = httpContextAccessor;
-    _repository = repository;
-  }
-
-  public DbChangeLog Map(CreateChangeLogRequest request)
+  public DbChangeLog Map(CreateChangeLogRequest request, Guid createdById, string propertyOldValue)
   {
     return new()
     {
       Id = Guid.NewGuid(),
       TaskId = request.TaskId,
-      CreatedBy = _httpContextAccessor.HttpContext.GetUserId(),
+      CreatedBy = createdById,
       EntityName = request.EntityName,
       PropertyName = request.PropertyName,
-      //PropertyOldValue = _repository.GetLogByLastChange(request.TaskId).PropertyOldValue,
+      PropertyOldValue = propertyOldValue,
       PropertyNewValue = request.PropertyNewValue,
       CreatedAtUtc = DateTime.UtcNow,
     };

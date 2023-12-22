@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog.Filter;
 using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
+using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 
 namespace LT.DigitalOffice.DashboardService.Controllers;
 
@@ -19,5 +20,13 @@ public class ChangeLogsController : ControllerBase
     [FromQuery] GetChangeLogFilter filter)
   {
     return await command.ExecuteAsync(id, filter);
+  }
+
+  [HttpGet]
+  public async Task<FindResultResponse<ChangeLogInfo>> GetAsync(
+  [FromServices] IGetChangeLogsCommand command,
+  [FromQuery] GetChangeLogsFilter filter)
+  {
+    return await command.ExecuteAsync(filter);
   }
 }
