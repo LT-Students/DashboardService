@@ -31,7 +31,7 @@ public class DbTaskConfiguration : IEntityTypeConfiguration<DbTask>
   public void Configure(EntityTypeBuilder<DbTask> builder)
   {
     builder
-      .ToTable(DbTaskType.TableName);
+      .ToTable(DbTask.TableName);
 
     builder
       .HasKey(d => d.Id);

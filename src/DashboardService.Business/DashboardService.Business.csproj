@@ -4,7 +4,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DashboardService.Data\DashboardService.Data.csproj" />
+    <ProjectReference Include="..\DashboardService.Mappers\DashboardService.Mappers.csproj" />
     <ProjectReference Include="..\DashboardService.Models.Dto\DashboardService.Models.Dto.csproj" />
+    <ProjectReference Include="..\DashboardService.Validation\DashboardService.Validation.csproj" />
   </ItemGroup>
   
 </Project>
