@@ -20,7 +20,6 @@ public class EditBoardCommand : IEditBoardCommand
   private readonly IAccessValidator _accessValidator;
   private readonly IResponseCreator _responseCreator;
 
-
   public EditBoardCommand(
     IBoardRepository repository,
     IPatchDbBoardMapper _patchMapper,

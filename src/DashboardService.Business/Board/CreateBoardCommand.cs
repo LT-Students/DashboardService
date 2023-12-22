@@ -24,8 +24,7 @@ public class CreateBoardCommand : ICreateBoardCommand
     IDbBoardMapper dbBoardMapper,
     IHttpContextAccessor httpContext,
     IAccessValidator accessValidator,
-    IResponseCreator responseCreator
-    )
+    IResponseCreator responseCreator)
   {
     _boardRepository = repository;
     _dbBoardMapper = dbBoardMapper;
