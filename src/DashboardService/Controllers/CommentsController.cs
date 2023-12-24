@@ -1,6 +1,7 @@
 ﻿using LT.DigitalOffice.DashboardService.Business.Comment;
 using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Comment;
+using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Comment.Filters;
 using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 using LT.DigitalOffice.Kernel.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -24,17 +25,19 @@ public class CommentsController : ControllerBase
 
   [HttpGet]
   public async Task<FindResultResponse<CommentInfo>> GetAsync(
-    [FromServices] GetAllCommentsCommand command)
+    [FromServices] GetCommentsCommand command,
+    [FromQuery] GetCommentsFilter filter)
   {
-    return await command.ExecuteAsync();
+    return await command.ExecuteAsync(filter);
   }
 
   [HttpGet("{id}")]
   public async Task<OperationResultResponse<CommentResponse>> GetAsync(
     [FromRoute] Guid id,
-    [FromServices] GetCommentCommand command)
+    [FromServices] GetCommentCommand command,
+    [FromQuery] GetCommentFilter filter)
   {
-    return await command.ExecuteAsync(id);
+    return await command.ExecuteAsync(id, filter);
   }
 
   [HttpPatch("{id}")]

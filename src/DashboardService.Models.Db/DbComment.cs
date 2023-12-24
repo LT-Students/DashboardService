@@ -13,7 +13,7 @@ public class DbComment
   public Guid CreatedBy { get; set; }
   public DateTime CreatedAtUtc { get; set; }
   public string Content { get; set; }
-    
+
   public DbTask Task { get; set; }
 }
 

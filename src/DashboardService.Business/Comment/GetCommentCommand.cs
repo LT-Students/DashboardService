@@ -1,5 +1,6 @@
 ﻿using LT.DigitalOffice.DashboardService.Business.Comment.Interfaces;
 using LT.DigitalOffice.DashboardService.Data.Interfaces;
+using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Comment.Filters;
 using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 using LT.DigitalOffice.Kernel.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -17,7 +18,7 @@ public class GetCommentCommand : IGetCommentCommand
     _repository = repository;
   }
 
-  public Task<OperationResultResponse<CommentResponse>> ExecuteAsync(Guid id)
+  public Task<OperationResultResponse<CommentResponse>> ExecuteAsync(Guid id, GetCommentFilter filter)
   {
     throw new NotImplementedException();
   }

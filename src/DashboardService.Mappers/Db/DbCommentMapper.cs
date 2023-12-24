@@ -19,9 +19,8 @@ public class DbCommentMapper : IDbCommentMapper
 
   public DbComment Map(CreateCommentRequest request)
   {
-    return request is null
-      ? null
-      : new()
+    return
+      new()
       {
         Id = Guid.NewGuid(),
         TaskId = request.TaskId,
