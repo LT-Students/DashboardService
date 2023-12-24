@@ -1,15 +1,18 @@
 ﻿using AspNetCoreRateLimit;
 using HealthChecks.UI.Client;
 using LT.DigitalOffice.DashboardService.Broker;
+using LT.DigitalOffice.DashboardService.Data.Provider.MsSql.Ef;
 using LT.DigitalOffice.Kernel.BrokerSupport.Configurations;
 using LT.DigitalOffice.Kernel.BrokerSupport.Extensions;
 using LT.DigitalOffice.Kernel.BrokerSupport.Middlewares.Token;
 using LT.DigitalOffice.Kernel.Configurations;
+using LT.DigitalOffice.Kernel.EFSupport.Extensions;
 using LT.DigitalOffice.Kernel.EFSupport.Helpers;
 using LT.DigitalOffice.Kernel.Extensions;
 using LT.DigitalOffice.Kernel.Middlewares.ApiInformation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -81,11 +84,10 @@ public class Startup : BaseApiInfo
 
     string connStr = ConnectionStringHandler.Get(Configuration);
     
-    // TODO: Add db context here
-    // services.AddDbContext<HERE>(options =>
-    // {
-    //   options.UseSqlServer(connStr);
-    // });
+    services.AddDbContext<DashboardServiceDbContext>(options =>
+    {
+      options.UseSqlServer(connStr);
+    });
 
     services.AddBusinessObjects();
 
@@ -108,8 +110,7 @@ public class Startup : BaseApiInfo
 
   public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
   {
-    //TODO: Add db context here
-    //app.UpdateDatabase<HERE>();
+    app.UpdateDatabase<DashboardServiceDbContext>();
 
     app.UseForwardedHeaders();
 

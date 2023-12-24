@@ -8,9 +8,7 @@ public class TaskInfoMapper : ITaskInfoMapper
 {
   public TaskInfo Map(DbTask dbTask)
   {
-    return dbTask is null
-      ? null
-      : new()
+    return new()
       {
         Id = dbTask.Id,
         GroupId = dbTask.GroupId,

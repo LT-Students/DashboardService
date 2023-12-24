@@ -16,4 +16,5 @@ public interface ITaskTypeRepository
   Task<DbTaskType> GetAsync(Guid id);
   Task<bool> EditAsync(Guid id, JsonPatchDocument<DbTaskType> request);
   Task<bool> RemoveAsync(Guid id);
+  Task<bool> ExistAsync(Guid id);
 }

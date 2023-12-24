@@ -7,6 +7,7 @@ using LT.DigitalOffice.Kernel.Responses;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Controllers;
@@ -26,18 +27,20 @@ public class TasksController : ControllerBase
   [HttpGet]
   public async Task<FindResultResponse<TaskInfo>> GetAsync(
     [FromServices] GetTasksCommand command,
-    [FromQuery] GetTasksFilter filter)
+    [FromQuery] GetTasksFilter filter,
+    CancellationToken cancellationToken)
   {
-    return await command.ExecuteAsync(filter);
+    return await command.ExecuteAsync(filter, cancellationToken);
   }
 
   [HttpGet("{id}")]
   public async Task<OperationResultResponse<TaskResponse>> GetAsync(
     [FromServices] GetTaskCommand command,
     [FromRoute] Guid id,
-    [FromQuery] GetTaskFilter filter)
+    [FromQuery] GetTaskFilter filter,
+    CancellationToken cancellationToken)
   {
-    return await command.ExecuteAsync(id, filter);
+    return await command.ExecuteAsync(id, filter, cancellationToken);
   }
 
   [HttpPatch("{id}")]

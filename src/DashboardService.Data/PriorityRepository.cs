@@ -42,4 +42,9 @@ public class PriorityRepository : IPriorityRepository
   {
     throw new NotImplementedException();
   }
+
+  public async Task<bool> ExistAsync(Guid id)
+  {
+    return await GetAsync(id) is not null;
+  }
 }

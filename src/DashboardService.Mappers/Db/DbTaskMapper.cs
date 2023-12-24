@@ -11,9 +11,7 @@ public class DbTaskMapper : IDbTaskMapper
 {
   public DbTask Map(Guid createdBy, CreateTaskRequest request)
   {
-    return request is null
-      ? null
-      : new()
+    return new()
       {
         Id = Guid.NewGuid(),
         GroupId = request.GroupId,

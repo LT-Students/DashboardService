@@ -16,4 +16,5 @@ public interface IPriorityRepository
   Task<DbPriority> GetAsync(Guid id);
   Task<bool> EditAsync(Guid id, JsonPatchDocument<DbPriority> request);
   Task<bool> RemoveAsync(Guid id);
+  Task<bool> ExistAsync(Guid id);
 }

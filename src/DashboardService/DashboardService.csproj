@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DashboardService.Broker\DashboardService.Broker.csproj" />
     <ProjectReference Include="..\DashboardService.Business\DashboardService.Business.csproj" />
+    <ProjectReference Include="..\DashboardService.Data.Provider.MsSql.Ef\DashboardService.Data.Provider.MsSql.Ef.csproj" />
     <ProjectReference Include="..\DashboardService.Models.Dto\DashboardService.Models.Dto.csproj" />
   </ItemGroup>
 
