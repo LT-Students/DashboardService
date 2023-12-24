@@ -2,7 +2,7 @@ using System;
 
 namespace LT.DigitalOffice.DashboardService.Models.Dto.Requests.Task;
 
-public record PatchTaskRequest
+public record EditTaskRequest
 {
   public Guid? TaskTypeId { get; set; }
   public Guid? PriorityId { get; set; }

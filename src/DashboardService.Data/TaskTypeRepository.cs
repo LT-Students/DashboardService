@@ -95,4 +95,9 @@ public class TaskTypeRepository : ITaskTypeRepository
       ? _provider.TaskTypes.AnyAsync(d => d.Name == name && d.Id != taskTypeId, ct)
       : _provider.TaskTypes.AnyAsync(d => d.Name == name, ct);
   }
+
+  public async Task<bool> ExistAsync(Guid id, CancellationToken ct)
+  {
+    return await GetAsync(id, ct) is not null;
+  }
 }

@@ -1,4 +1,5 @@
 using LT.DigitalOffice.DashboardService.Models.Db;
+using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 using System;
 using System.Collections.Generic;
 
@@ -13,12 +14,11 @@ public record TaskResponse
   public string Name { get; set; }
   public string Content { get; set; }
   public DateTime CreatedAtUtc { get; set; }
-  public DateTime DeadlineAtUtc { get; set; }
+  public DateTime? DeadlineAtUtc { get; set; }
   
-  // TODO Convert to DTO after all infrastructure PR`s will be merged
-  public DbGroup Group { get; set; }
-  public DbTaskType TaskType { get; set; }
-  public DbPriority Priority { get; set; }
-  public List<DbComment> Comments { get; set; }
-  public List<DbChangeLog> Logs { get; set; }
+  public GroupInfo Group { get; set; }
+  public TaskTypeInfo TaskType { get; set; }
+  public PriorityInfo Priority { get; set; }
+  public List<CommentInfo> Comments { get; set; }
+  public List<ChangeLogInfo> Logs { get; set; }
 }

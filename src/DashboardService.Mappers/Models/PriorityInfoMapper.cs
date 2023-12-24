@@ -8,9 +8,7 @@ public class PriorityInfoMapper : IPriorityInfoMapper
 {
   public PriorityInfo Map(DbPriority dbPriority)
   {
-    return dbPriority is null
-      ? null
-      : new()
+    return new()
       {
         Id = dbPriority.Id, 
         Name = dbPriority.Name
