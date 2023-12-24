@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Business.Group;
 
-public class GetAllGroupsCommand : IGetAllGroupsCommand
+public class GetGroupsCommand : IGetGroupsCommand
 {
   private readonly IGroupRepository _repository;
 
-  public GetAllGroupsCommand(IGroupRepository repository)
+  public GetGroupsCommand(IGroupRepository repository)
   {
     _repository = repository;
   }
 
-  public Task<FindResultResponse<GroupInfo>> ExecuteAsync(GetGroupFilter filter)
+  public Task<FindResultResponse<GroupInfo>> ExecuteAsync(GetGroupsFilter filter)
   {
     throw new System.NotImplementedException();
   }

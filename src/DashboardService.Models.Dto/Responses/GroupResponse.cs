@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LT.DigitalOffice.DashboardService.Models.Db;
+using System;
+using System.Collections.Generic;
 
 namespace LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 
@@ -12,4 +14,7 @@ public record GroupResponse
   public DateTime GroupCreatedAtUtc { get; set; }
   public Guid? GroupModifiedBy { get; set; }
   public DateTime? GroupModifiedAtUtc { get; set; }
+
+  //public BoardInfo Board { get; set; }
+  public List<DbTask> Tasks { get; set; }
 }

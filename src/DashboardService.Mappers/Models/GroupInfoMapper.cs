@@ -18,6 +18,8 @@ public class GroupInfoMapper : IGroupInfoMapper
 
   public GroupInfo Map(DbGroup dbGroup)
   {
+    var dataTime = DateTime.UtcNow;
+    var httpAccessorUserId = _httpContextAccessor.HttpContext.GetUserId();
     return dbGroup is null
       ? null
       : new()
@@ -26,10 +28,10 @@ public class GroupInfoMapper : IGroupInfoMapper
         BoardId = dbGroup.BoardId,
         Name = dbGroup.Name,
         IsActive = dbGroup.IsActive,
-        CreatedBy = _httpContextAccessor.HttpContext.GetUserId(),
-        CreatedAtUtc = DateTime.UtcNow,
-        ModifiedBy = _httpContextAccessor.HttpContext.GetUserId(),
-        ModifiedAtUtc = DateTime.UtcNow
+        CreatedBy = httpAccessorUserId,
+        CreatedAtUtc = dataTime,
+        ModifiedBy = httpAccessorUserId,
+        ModifiedAtUtc = dataTime
       };
   }
 }

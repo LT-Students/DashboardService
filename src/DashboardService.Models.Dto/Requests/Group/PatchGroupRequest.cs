@@ -8,5 +8,4 @@ public record PatchGroupRequest
   public string GroupName { get; set; }
   public bool GroupIsActive { get; set; }
   public Guid? GroupModifiedBy { get; set; }
-  public DateTime? GroupModifiedAtUtc { get; set; }
 }

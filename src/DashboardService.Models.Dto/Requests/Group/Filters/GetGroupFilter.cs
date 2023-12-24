@@ -5,9 +5,9 @@ using System;
 namespace LT.DigitalOffice.DashboardService.Models.Dto.Requests.Group.Filters;
 public record GetGroupFilter : BaseFindFilter
 {
-  [FromQuery]
-  public Guid? BoardId { get; set; }
+  [FromQuery(Name = "includeboard")]
+  public bool IncludeBoard { get; set; } = true;
 
-  [FromQuery(Name = "nameIncludeSubstring")]
-  public string NameIncludeSubstring { get; set; }
+  [FromQuery(Name = "includelogs")]
+  public bool IncludeLogs { get; set; }
 }

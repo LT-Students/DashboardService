@@ -19,9 +19,8 @@ public class DbGroupMapper : IDbGroupMapper
 
   public DbGroup Map(CreateGroupRequest request)
   {
-    return request is null
-      ? null
-      : new()
+    return
+      new()
       {
         Id = Guid.NewGuid(),
         BoardId = request.BoardId,
@@ -29,8 +28,6 @@ public class DbGroupMapper : IDbGroupMapper
         IsActive = request.GroupIsActive,
         CreatedBy = _httpContextAccessor.HttpContext.GetUserId(),
         CreatedAtUtc = DateTime.UtcNow,
-        ModifiedBy = _httpContextAccessor.HttpContext.GetUserId(),
-        ModifiedAtUtc = DateTime.UtcNow
       };
   }
 }

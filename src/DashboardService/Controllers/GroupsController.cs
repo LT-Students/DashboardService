@@ -26,7 +26,7 @@ public class GroupsController : ControllerBase
 
   [HttpGet]
   public async Task<FindResultResponse<GroupInfo>> GetAsync(
-    [FromServices] GetAllGroupsCommand command,
+    [FromServices] GetGroupsCommand command,
     [FromQuery] GetGroupFilter filter
   )
   {
@@ -58,5 +58,4 @@ public class GroupsController : ControllerBase
   {
     return await command.ExecuteAsync(id);
   }
-
 }

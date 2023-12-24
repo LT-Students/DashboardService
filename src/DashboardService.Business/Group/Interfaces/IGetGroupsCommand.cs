@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace LT.DigitalOffice.DashboardService.Business.Group.Interfaces;
 
 [AutoInject]
-public interface IGetAllGroupsCommand
+public interface IGetGroupsCommand
 {
-  Task<FindResultResponse<GroupInfo>> ExecuteAsync(GetGroupFilter filter);
+  Task<FindResultResponse<GroupInfo>> ExecuteAsync(GetGroupsFilter filter);
 }
