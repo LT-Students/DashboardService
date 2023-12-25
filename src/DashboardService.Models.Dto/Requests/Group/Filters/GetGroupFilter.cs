@@ -8,6 +8,6 @@ public record GetGroupFilter : BaseFindFilter
   [FromQuery(Name = "includeboard")]
   public bool IncludeBoard { get; set; } = true;
 
-  [FromQuery(Name = "includelogs")]
-  public bool IncludeLogs { get; set; }
+  [FromQuery(Name = "includetask")]
+  public bool IncludeTask { get; set; } = true;
 }

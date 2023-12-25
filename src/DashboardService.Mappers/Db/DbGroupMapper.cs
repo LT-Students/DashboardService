@@ -10,23 +10,15 @@ namespace LT.DigitalOffice.DashboardService.Mappers.Db;
 
 public class DbGroupMapper : IDbGroupMapper
 {
-  private readonly IHttpContextAccessor _httpContextAccessor;
-
-  public DbGroupMapper(IHttpContextAccessor httpContextAccessor)
+  public DbGroup Map(Guid createdBy, CreateGroupRequest request)
   {
-    _httpContextAccessor = httpContextAccessor;
-  }
-
-  public DbGroup Map(CreateGroupRequest request)
-  {
-    return
-      new()
+    return new()
       {
         Id = Guid.NewGuid(),
         BoardId = request.BoardId,
-        Name = request.GroupName,
-        IsActive = request.GroupIsActive,
-        CreatedBy = _httpContextAccessor.HttpContext.GetUserId(),
+        Name = request.Name,
+        IsActive = request.IsActive,
+        CreatedBy = createdBy,
         CreatedAtUtc = DateTime.UtcNow,
       };
   }
