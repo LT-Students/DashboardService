@@ -24,8 +24,8 @@ public class ChangeLogsController : ControllerBase
 
   [HttpGet]
   public async Task<FindResultResponse<ChangeLogInfo>> GetAsync(
-  [FromServices] IGetChangeLogsCommand command,
-  [FromQuery] GetChangeLogsFilter filter)
+    [FromServices] IGetChangeLogsCommand command,
+    [FromQuery] GetChangeLogsFilter filter)
   {
     return await command.ExecuteAsync(filter);
   }

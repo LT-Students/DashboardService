@@ -11,9 +11,6 @@ namespace LT.DigitalOffice.DashboardService.Mappers.Db;
 
 public class DbChangeLogMapper : IDbChangeLogMapper
 {
-  // TODO
-  // How to set a value on PropertyOldValue ?
-
   public DbChangeLog Map(CreateChangeLogRequest request, Guid createdById, string propertyOldValue)
   {
     return new()

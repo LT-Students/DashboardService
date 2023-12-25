@@ -5,6 +5,7 @@ namespace LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog;
 
 public class CreateChangeLogRequest
 {
+  [Required]
   public Guid TaskId { get; set; }
 
   [Required]
