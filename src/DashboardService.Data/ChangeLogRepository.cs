@@ -1,8 +1,8 @@
 ﻿using LT.DigitalOffice.DashboardService.Data.Interfaces;
+using LT.DigitalOffice.DashboardService.Data.Provider;
 using LT.DigitalOffice.DashboardService.Models.Db;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog.Filter;
 using Microsoft.AspNetCore.JsonPatch;
-using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -11,9 +11,9 @@ namespace LT.DigitalOffice.DashboardService.Data;
 
 public class ChangeLogRepository : IChangeLogRepository
 {
-  private readonly IDatabaseProvider _provider;
+  private readonly IDataProvider _provider;
 
-  public ChangeLogRepository(IDatabaseProvider provider)
+  public ChangeLogRepository(IDataProvider provider)
   {
     _provider = provider;
   }
@@ -33,7 +33,7 @@ public class ChangeLogRepository : IChangeLogRepository
     throw new NotImplementedException();
   }
 
-  public Task<List<DbChangeLog>> GetChangeLogsAsync()
+  public Task<List<DbChangeLog>> GetChangeLogsAsync(GetChangeLogsFilter filter)
   {
     throw new NotImplementedException();
   }

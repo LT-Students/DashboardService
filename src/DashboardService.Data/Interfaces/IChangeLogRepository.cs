@@ -13,7 +13,7 @@ public interface IChangeLogRepository
 {
   Task<Guid?> CreateAsync(DbChangeLog board);
 
-  Task<List<DbChangeLog>> GetChangeLogsAsync();
+  Task<List<DbChangeLog>> GetChangeLogsAsync(GetChangeLogsFilter filter);
 
   Task<DbChangeLog> GetAsync(Guid id, GetChangeLogFilter filter);
 

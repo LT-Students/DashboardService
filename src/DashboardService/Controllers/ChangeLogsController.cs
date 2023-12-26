@@ -9,7 +9,7 @@ using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 
 namespace LT.DigitalOffice.DashboardService.Controllers;
 
-[Route("api/[controller]")]
+[Route("[controller]")]
 [ApiController]
 public class ChangeLogsController : ControllerBase
 {
