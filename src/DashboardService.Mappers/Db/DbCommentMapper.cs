@@ -10,23 +10,15 @@ namespace LT.DigitalOffice.DashboardService.Mappers.Db;
 
 public class DbCommentMapper : IDbCommentMapper
 {
-  private readonly IHttpContextAccessor _httpContextAccessor;
-
-  public DbCommentMapper(IHttpContextAccessor httpContextAccessor)
+  public DbComment Map(Guid createdBy, CreateCommentRequest request)
   {
-     _httpContextAccessor = httpContextAccessor;
-  }
-
-  public DbComment Map(CreateCommentRequest request)
-  {
-    return
-      new()
+    return new()
       {
         Id = Guid.NewGuid(),
         TaskId = request.TaskId,
-        CreatedBy = _httpContextAccessor.HttpContext.GetUserId(),
+        CreatedBy = createdBy,
         CreatedAtUtc = DateTime.UtcNow,
-        Content = request.CommentContent
+        Content = request.Content
       };
   }
 }

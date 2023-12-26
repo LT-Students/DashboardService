@@ -15,16 +15,15 @@ public class CommentInfoMapper : ICommentInfoMapper
   {
     _httpContextAccessor = httpContextAccessor;
   }
+
   public CommentInfo Map(DbComment dbComment)
   {
-    return dbComment is null
-      ? null
-      : new()
+    return new()
       {
         Id = dbComment.Id,
         TaskId = dbComment.TaskId,
-        CreatedBy = _httpContextAccessor.HttpContext.GetUserId(),
-        CreatedAtUtc = DateTime.UtcNow,
+        CreatedBy = dbComment.CreatedBy,
+        CreatedAtUtc = dbComment.CreatedAtUtc,
         Content = dbComment.Content
       };
   }

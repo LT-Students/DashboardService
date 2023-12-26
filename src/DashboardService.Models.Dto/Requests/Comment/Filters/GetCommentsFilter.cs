@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Models.Dto.Requests.Comment.Filters;
+
 public class GetCommentsFilter
 {
   [FromQuery(Name = "isAscendingSort")]
