@@ -78,6 +78,7 @@ public class InitialCreate : Migration
         Name = table.Column<string>(nullable: false, type: "nvarchar(50)", maxLength:50),
         Content = table.Column<string>(nullable: false, type: "nvarchar(max)"),
         CreatedAtUtc = table.Column<DateTime>(nullable: false),
+        CreatedBy = table.Column<Guid>(nullable: false),
         DeadlineAtUtc = table.Column<DateTime>(nullable: true),
       },
       constraints: table =>
