@@ -5,6 +5,7 @@ using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog.Filter;
 using LT.DigitalOffice.Kernel.Helpers.Interfaces;
 using LT.DigitalOffice.Kernel.Responses;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Business.ChangeLog;
@@ -25,7 +26,7 @@ public class GetChangeLogsCommand : IGetChangeLogsCommand
     _changeLogInfoMapper = changeLogInfoMapper;
   }
 
-  public Task<FindResultResponse<ChangeLogInfo>> ExecuteAsync(GetChangeLogsFilter filter)
+  public Task<FindResultResponse<ChangeLogInfo>> ExecuteAsync(GetChangeLogsFilter filter, CancellationToken ct)
   {
     throw new System.NotImplementedException();
   }

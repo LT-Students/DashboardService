@@ -5,6 +5,7 @@ using LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog.Filter;
 using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Data;
@@ -18,27 +19,27 @@ public class ChangeLogRepository : IChangeLogRepository
     _provider = provider;
   }
 
-  public Task<Guid?> CreateAsync(DbChangeLog changeLog)
+  public Task<Guid?> CreateAsync(DbChangeLog changeLog, CancellationToken ct)
   {
     throw new NotImplementedException();
   }
 
-  public Task<bool> EditAsync(Guid id, JsonPatchDocument<DbChangeLog> request)
+  public Task<bool> EditAsync(Guid id, JsonPatchDocument<DbChangeLog> request, CancellationToken ct)
   {
     throw new NotImplementedException();
   }
 
-  public Task<DbChangeLog> GetAsync(Guid id, GetChangeLogFilter filter)
+  public Task<DbChangeLog> GetAsync(Guid id, GetChangeLogFilter filter, CancellationToken ct)
   {
     throw new NotImplementedException();
   }
 
-  public Task<List<DbChangeLog>> GetChangeLogsAsync(GetChangeLogsFilter filter)
+  public Task<List<DbChangeLog>> GetChangeLogsAsync(GetChangeLogsFilter filter, CancellationToken ct)
   {
     throw new NotImplementedException();
   }
 
-  public Task<bool> RemoveAsync(Guid id)
+  public Task<bool> RemoveAsync(Guid id, CancellationToken ct)
   {
     throw new NotImplementedException();
   }

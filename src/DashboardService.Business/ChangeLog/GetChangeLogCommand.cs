@@ -6,6 +6,7 @@ using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 using LT.DigitalOffice.Kernel.Helpers.Interfaces;
 using LT.DigitalOffice.Kernel.Responses;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Business.ChangeLog;
@@ -26,7 +27,7 @@ public class GetChangeLogCommand : IGetChangeLogCommand
     _responseCreator = responseCreator;
   }
 
-  public Task<OperationResultResponse<ChangeLogResponse>> ExecuteAsync(Guid id, GetChangeLogFilter filter)
+  public Task<OperationResultResponse<ChangeLogResponse>> ExecuteAsync(Guid id, GetChangeLogFilter filter, CancellationToken ct)
   {
     throw new NotImplementedException();
   }
