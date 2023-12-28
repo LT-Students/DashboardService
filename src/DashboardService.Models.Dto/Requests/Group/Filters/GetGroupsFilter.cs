@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 namespace LT.DigitalOffice.DashboardService.Models.Dto.Requests.Group.Filters;
+
 public record GetGroupsFilter : BaseFindFilter
 {
   [FromQuery(Name = "isAscendingSort")]

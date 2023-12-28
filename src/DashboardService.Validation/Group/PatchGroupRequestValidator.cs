@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LT.DigitalOffice.DashboardService.Validation.Group;
 
-public class PatchGroupRequestValidator : AbstractValidator<PatchGroupRequest>, IPatchGroupRequestValidator
+public class PatchGroupRequestValidator : AbstractValidator<EditGroupRequest>, IPatchGroupRequestValidator
 {
   public PatchGroupRequestValidator(IGroupRepository repository)
   {

@@ -2,7 +2,7 @@
 
 namespace LT.DigitalOffice.DashboardService.Models.Dto.Requests.Group;
 
-public record PatchGroupRequest
+public record EditGroupRequest
 {
   public Guid BoardId { get; set; }
   public string Name { get; set; }

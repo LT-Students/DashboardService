@@ -2,6 +2,7 @@
 using LT.DigitalOffice.DashboardService.Data.Interfaces;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Group;
 using LT.DigitalOffice.Kernel.Responses;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ public class EditGroupCommand : IEditGroupCommand
     _repository = repository;
   }
 
-  public Task<OperationResultResponse<bool>> ExecuteAsync(Guid id, PatchGroupRequest request)
+  public Task<OperationResultResponse<bool>> ExecuteAsync(Guid id, JsonPatchDocument<EditGroupRequest> request)
   {
     throw new NotImplementedException();
   }

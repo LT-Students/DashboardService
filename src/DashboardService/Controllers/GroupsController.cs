@@ -27,8 +27,7 @@ public class GroupsController : ControllerBase
   [HttpGet]
   public async Task<FindResultResponse<GroupInfo>> GetAsync(
     [FromServices] GetGroupsCommand command,
-    [FromQuery] GetGroupsFilter filter
-  )
+    [FromQuery] GetGroupsFilter filter)
   {
     return await command.ExecuteAsync(filter);
   }
@@ -45,7 +44,7 @@ public class GroupsController : ControllerBase
   [HttpPatch("{id}")]
   public async Task<OperationResultResponse<bool>> Patch(
     [FromRoute] Guid id,
-    [FromBody] PatchGroupRequest request,
+    [FromBody] JsonPatchDocument<EditGroupRequest> request,
     [FromServices] EditGroupCommand command)
   {
     return await command.ExecuteAsync(id, request);

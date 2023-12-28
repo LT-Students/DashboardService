@@ -5,4 +5,4 @@ using LT.DigitalOffice.Kernel.Attributes;
 namespace LT.DigitalOffice.DashboardService.Validation.Group.Interfaces;
 
 [AutoInject]
-public interface IPatchGroupRequestValidator : IValidator<PatchGroupRequest> { }
+public interface IPatchGroupRequestValidator : IValidator<EditGroupRequest> { }
