@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LT.DigitalOffice.DashboardService.Validation.Comment;
 
-public class PatchCommentRequestValidator : AbstractValidator<PatchCommentRequest>, IPatchCommentRequestValidator
+public class EditCommentRequestValidator : AbstractValidator<EditCommentRequest>, IPatchCommentRequestValidator
 {
-  public PatchCommentRequestValidator(ICommentRepository repository)
+  public EditCommentRequestValidator(ICommentRepository repository)
   {
   }
 }

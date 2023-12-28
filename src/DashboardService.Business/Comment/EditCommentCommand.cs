@@ -2,6 +2,7 @@
 using LT.DigitalOffice.DashboardService.Data.Interfaces;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Comment;
 using LT.DigitalOffice.Kernel.Responses;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ public class EditCommentCommand : IEditCommentCommand
     _repository = repository;
   }
 
-  public Task<OperationResultResponse<bool>> ExecuteAsync(Guid id, PatchCommentRequest request)
+  public Task<OperationResultResponse<bool>> ExecuteAsync(Guid id, JsonPatchDocument<EditCommentRequest> request)
   {
     throw new NotImplementedException();
   }

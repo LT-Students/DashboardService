@@ -13,12 +13,12 @@ public class DbCommentMapper : IDbCommentMapper
   public DbComment Map(Guid createdBy, CreateCommentRequest request)
   {
     return new()
-      {
-        Id = Guid.NewGuid(),
-        TaskId = request.TaskId,
-        CreatedBy = createdBy,
-        CreatedAtUtc = DateTime.UtcNow,
-        Content = request.Content
-      };
+    {
+      Id = Guid.NewGuid(),
+      TaskId = request.TaskId,
+      CreatedBy = createdBy,
+      CreatedAtUtc = DateTime.UtcNow,
+      Content = request.Content
+    };
   }
 }

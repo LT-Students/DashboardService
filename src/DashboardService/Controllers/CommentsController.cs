@@ -4,6 +4,7 @@ using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Comment;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Comment.Filters;
 using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 using LT.DigitalOffice.Kernel.Responses;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,7 @@ public class CommentsController : ControllerBase
   [HttpPatch("{id}")]
   public async Task<OperationResultResponse<bool>> PatchAsync(
     [FromRoute] Guid id,
-    [FromBody] PatchCommentRequest request,
+    [FromBody] JsonPatchDocument<EditCommentRequest> request,
     [FromServices] EditCommentCommand command)
   {
     return await command.ExecuteAsync(id, request);
