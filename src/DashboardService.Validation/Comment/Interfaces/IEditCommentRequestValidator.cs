@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Comment;
+using LT.DigitalOffice.Kernel.Attributes;
 
 namespace LT.DigitalOffice.DashboardService.Validation.Comment.Interfaces;
 
-public interface IPatchCommentRequestValidator : IValidator<EditCommentRequest> { }
+[AutoInject]
+public interface IEditCommentRequestValidator : IValidator<EditCommentRequest> { }
