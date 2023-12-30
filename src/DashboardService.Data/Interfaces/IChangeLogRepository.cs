@@ -16,7 +16,7 @@ public interface IChangeLogRepository
 
   Task<List<DbChangeLog>> GetChangeLogsAsync(GetChangeLogsFilter filter, CancellationToken ct);
 
-  Task<DbChangeLog> GetAsync(Guid id, GetChangeLogFilter filter, CancellationToken ct);
+  Task<DbChangeLog> GetAsync(Guid id, CancellationToken ct);
 
   Task<bool> EditAsync(Guid id, JsonPatchDocument<DbChangeLog> request, CancellationToken ct);
 

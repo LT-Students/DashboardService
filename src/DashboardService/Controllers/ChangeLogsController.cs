@@ -18,10 +18,9 @@ public class ChangeLogsController : ControllerBase
   public async Task<OperationResultResponse<ChangeLogInfo>> GetAsync(
     [FromServices] IGetChangeLogCommand command,
     [FromRoute] Guid id,
-    [FromQuery] GetChangeLogFilter filter,
     CancellationToken ct)
   {
-    return await command.ExecuteAsync(id, filter, ct);
+    return await command.ExecuteAsync(id, ct);
   }
 
   [HttpGet]

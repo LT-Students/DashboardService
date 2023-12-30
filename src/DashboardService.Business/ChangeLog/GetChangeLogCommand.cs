@@ -27,7 +27,7 @@ public class GetChangeLogCommand : IGetChangeLogCommand
     _responseCreator = responseCreator;
   }
 
-  public Task<OperationResultResponse<ChangeLogInfo>> ExecuteAsync(Guid id, GetChangeLogFilter filter, CancellationToken ct)
+  public Task<OperationResultResponse<ChangeLogInfo>> ExecuteAsync(Guid id, CancellationToken ct)
   {
     throw new NotImplementedException();
   }

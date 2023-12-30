@@ -29,7 +29,7 @@ public class ChangeLogRepository : IChangeLogRepository
     throw new NotImplementedException();
   }
 
-  public Task<DbChangeLog> GetAsync(Guid id, GetChangeLogFilter filter, CancellationToken ct)
+  public Task<DbChangeLog> GetAsync(Guid id, CancellationToken ct)
   {
     throw new NotImplementedException();
   }

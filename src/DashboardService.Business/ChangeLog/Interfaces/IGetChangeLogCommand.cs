@@ -11,5 +11,5 @@ namespace LT.DigitalOffice.DashboardService.Business.ChangeLog.Interfaces;
 [AutoInject]
 public interface IGetChangeLogCommand
 {
-  Task<OperationResultResponse<ChangeLogInfo>> ExecuteAsync(Guid id, GetChangeLogFilter filter, CancellationToken ct);
+  Task<OperationResultResponse<ChangeLogInfo>> ExecuteAsync(Guid id, CancellationToken ct);
 }
