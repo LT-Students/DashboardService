@@ -3,12 +3,6 @@
   <Import Project="$(ProjectDir)..\..\Common.Configurations.targets" />
 
   <ItemGroup>
-    <Compile Remove="Responses\Board\**" />
-    <EmbeddedResource Remove="Responses\Board\**" />
-    <None Remove="Responses\Board\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\DashboardService.Models.Db\DashboardService.Models.Db.csproj" />
   </ItemGroup>
 
