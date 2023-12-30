@@ -7,5 +7,5 @@
     <ProjectReference Include="..\DashboardService.Mappers\DashboardService.Mappers.csproj" />
     <ProjectReference Include="..\DashboardService.Models.Dto\DashboardService.Models.Dto.csproj" />
   </ItemGroup>
-  
+
 </Project>
