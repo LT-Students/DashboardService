@@ -6,13 +6,6 @@ namespace LT.DigitalOffice.DashboardService.Mappers.Models;
 
 public class ChangeLogInfoMapper : IChangeLogInfoMapper
 {
-  private readonly ITaskInfoMapper _taskInfoMapper;
-
-  public ChangeLogInfoMapper(ITaskInfoMapper taskInfoMapper)
-  {
-    _taskInfoMapper = taskInfoMapper;
-  }
-
   public ChangeLogInfo Map(DbChangeLog dbChangeLog)
   {
     return new()
@@ -24,7 +17,6 @@ public class ChangeLogInfoMapper : IChangeLogInfoMapper
       PropertyOldValue = dbChangeLog.PropertyOldValue,
       PropertyNewValue = dbChangeLog.PropertyNewValue,
       CreatedAtUtc = dbChangeLog.CreatedAtUtc,
-      Task = _taskInfoMapper.Map(dbChangeLog.Task)
     };
   }
 }

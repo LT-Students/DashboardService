@@ -1,8 +1,8 @@
 ﻿using LT.DigitalOffice.DashboardService.Business.ChangeLog.Interfaces;
 using LT.DigitalOffice.DashboardService.Data.Interfaces;
-using LT.DigitalOffice.DashboardService.Mappers.Responses.Interfaces;
+using LT.DigitalOffice.DashboardService.Mappers.Models.Interfaces;
+using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog.Filter;
-using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 using LT.DigitalOffice.Kernel.Helpers.Interfaces;
 using LT.DigitalOffice.Kernel.Responses;
 using System;
@@ -15,19 +15,19 @@ public class GetChangeLogCommand : IGetChangeLogCommand
 {
   private readonly IChangeLogRepository _repository;
   private readonly IResponseCreator _responseCreator;
-  private readonly IChangeLogResponseMapper _changeLogResponseMapper;
+  private readonly IChangeLogInfoMapper _changeLogInfoMapper;
 
   public GetChangeLogCommand(
     IChangeLogRepository repository,
-    IChangeLogResponseMapper changeLogResponseMapper,
+    IChangeLogInfoMapper changeLogInfoMapper,
     IResponseCreator responseCreator)
   {
     _repository = repository;
-    _changeLogResponseMapper = changeLogResponseMapper;
+    _changeLogInfoMapper = changeLogInfoMapper;
     _responseCreator = responseCreator;
   }
 
-  public Task<OperationResultResponse<ChangeLogResponse>> ExecuteAsync(Guid id, GetChangeLogFilter filter, CancellationToken ct)
+  public Task<OperationResultResponse<ChangeLogInfo>> ExecuteAsync(Guid id, GetChangeLogFilter filter, CancellationToken ct)
   {
     throw new NotImplementedException();
   }

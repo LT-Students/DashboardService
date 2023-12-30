@@ -15,7 +15,7 @@ namespace LT.DigitalOffice.DashboardService.Controllers;
 public class ChangeLogsController : ControllerBase
 {
   [HttpGet("{id}")]
-  public async Task<OperationResultResponse<ChangeLogResponse>> GetAsync(
+  public async Task<OperationResultResponse<ChangeLogInfo>> GetAsync(
     [FromServices] IGetChangeLogCommand command,
     [FromRoute] Guid id,
     [FromQuery] GetChangeLogFilter filter,

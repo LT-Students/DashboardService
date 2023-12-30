@@ -8,4 +8,8 @@
     <ProjectReference Include="..\DashboardService.Models.Dto\DashboardService.Models.Dto.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Responses\Interfaces\" />
+  </ItemGroup>
+
 </Project>
