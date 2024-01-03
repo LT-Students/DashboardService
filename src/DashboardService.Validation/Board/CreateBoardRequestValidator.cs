@@ -9,5 +9,18 @@ public class CreateBoardRequestValidator : AbstractValidator<CreateBoardRequest>
 {
   public CreateBoardRequestValidator(IBoardRepository boardRepository)
   {
+    RuleFor(request => request.ProjectId)
+      .NotEmpty()
+      .WithMessage("Project id can not be empty.");
+
+    RuleFor(request => request.Name)
+      .NotEmpty()
+      .WithMessage("Board name can not be empty.");
+
+    RuleFor(request => request.Name)
+      .MaximumLength(50)
+      .WithMessage("Board name is too long.")
+      .MustAsync(async (request, ct) => !await boardRepository.NameExistAsync(request, ct))
+      .WithMessage("Board with this name already exists.");
   }
 }

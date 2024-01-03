@@ -18,7 +18,7 @@ public class DbTask
   public DateTime CreatedAtUtc { get; set; }
   public Guid CreatedBy { get; set; }
   public DateTime? DeadlineAtUtc { get; set; }
-  
+
   public DbGroup Group { get; set; }
   public DbTaskType TaskType { get; set; }
   public DbPriority Priority { get; set; }
@@ -31,7 +31,7 @@ public class DbTaskConfiguration : IEntityTypeConfiguration<DbTask>
   public void Configure(EntityTypeBuilder<DbTask> builder)
   {
     builder
-      .ToTable(DbTaskType.TableName);
+      .ToTable(DbTask.TableName);
 
     builder
       .HasKey(d => d.Id);
@@ -52,7 +52,7 @@ public class DbTaskConfiguration : IEntityTypeConfiguration<DbTask>
       .Property(t => t.Name)
       .HasMaxLength(50)
       .IsRequired();
-    
+
     builder
       .Property(t => t.Content)
       .IsRequired();
