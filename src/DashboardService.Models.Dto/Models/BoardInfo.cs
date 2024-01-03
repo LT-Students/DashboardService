@@ -12,4 +12,3 @@ public class BoardInfo
 
   public bool IsActive { get; set; }
 }
-

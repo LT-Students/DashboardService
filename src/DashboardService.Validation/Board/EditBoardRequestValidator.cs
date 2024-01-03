@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
-
 namespace LT.DigitalOffice.DashboardService.Validation.Board;
 
 public class EditBoardRequestValidator : ExtendedEditRequestValidator<Guid, PatchBoardRequest>, IEditBoardRequestValidator

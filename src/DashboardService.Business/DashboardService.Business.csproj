@@ -8,5 +8,5 @@
     <ProjectReference Include="..\DashboardService.Models.Dto\DashboardService.Models.Dto.csproj" />
     <ProjectReference Include="..\DashboardService.Validation\DashboardService.Validation.csproj" />
   </ItemGroup>
-  
+
 </Project>
