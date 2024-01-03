@@ -1,10 +1,13 @@
 ﻿using LT.DigitalOffice.DashboardService.Data.Interfaces;
 using LT.DigitalOffice.DashboardService.Data.Provider;
 using LT.DigitalOffice.DashboardService.Models.Db;
+using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Board.Filters;
 using Microsoft.AspNetCore.JsonPatch;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Data;
@@ -18,28 +21,97 @@ public class BoardRepository : IBoardRepository
     _provider = provider;
   }
 
-  public Task CreateAsync(DbBoard board)
+  public async Task<Guid?> CreateAsync(DbBoard board)
   {
-    throw new NotImplementedException();
+    _provider.Boards.Add(board);
+
+    await _provider.SaveAsync();
+
+    return board.Id;
   }
 
-  public Task<bool> EditByIdAsync(Guid id, JsonPatchDocument<DbChangeLog> dbChangeLog)
+  public async Task<bool> EditByIdAsync(Guid id, Guid modifiedById, JsonPatchDocument<DbBoard> request, CancellationToken ct)
   {
-    throw new NotImplementedException();
+    DbBoard board = await _provider.Boards.FirstOrDefaultAsync(x => x.Id == id, ct);
+
+    if (board is null || request is null)
+    {
+      return false;
+    }
+
+    request.ApplyTo(board);
+
+    board.ModifiedBy = modifiedById;
+    board.ModifiedAtUtc = DateTime.UtcNow;
+
+    await _provider.SaveAsync();
+
+    return true;
   }
 
-  public Task<DbBoard> GetAsync(Guid id)
+  public async Task<DbBoard> GetAsync(Guid id, GetBoardFilter filter, CancellationToken ct)
   {
-    throw new NotImplementedException();
+    IQueryable<DbBoard> board = _provider.Boards.AsQueryable();
+
+    if (filter.IncludeGroups)
+    {
+      board.Include(db => db.Groups);
+    }
+
+    return await board.FirstOrDefaultAsync(db => db.Id == id, ct);
   }
 
-  public Task<List<DbBoard>> GetAllAsync()
+  public async Task<(List<DbBoard> boards, int totalCount)> GetAllAsync(GetBoardsFilter filter, CancellationToken ct)
   {
-    throw new NotImplementedException();
+    IQueryable<DbBoard> boards = _provider.Boards.AsQueryable();
+
+    if (filter.IsActive.HasValue)
+    {
+      boards = boards.Where(d => d.IsActive == filter.IsActive);
+    }
+
+    if (filter.IsAscendingSort.HasValue)
+    {
+      boards = filter.IsAscendingSort.Value
+        ? boards.OrderBy(db => db.Name)
+        : boards.OrderByDescending(db => db.Name);
+    }
+
+    if (!string.IsNullOrWhiteSpace(filter.NameIncludeSubstring))
+    {
+      boards = boards.Where(db => db.Name.Contains(filter.NameIncludeSubstring));
+    }
+
+    return (
+      await boards
+        .Skip(filter.SkipCount)
+        .Take(filter.TakeCount)
+        .ToListAsync(ct),
+      await boards.CountAsync(ct));
   }
 
-  public Task<bool> RemoveAsync(Guid id)
+  // TODO
+  // Remove entity or isActive = false?
+
+  public async Task<bool> RemoveAsync(Guid id, CancellationToken ct)
   {
-    throw new NotImplementedException();
+    DbBoard board = await _provider.Boards.FindAsync(id, ct);
+
+    if (board is null)
+    {
+      return false;
+    }
+
+    board.IsActive = false;
+
+    await _provider.SaveAsync();
+    return true;
+  }
+
+  public Task<bool> NameExistAsync(string name, CancellationToken ct, Guid? boardId = default)
+  {
+    return boardId.HasValue
+      ? _provider.Boards.AnyAsync(x => x.Name == name && boardId != x.Id, ct)
+      : _provider.Boards.AnyAsync(x => x.Name == name, ct);
   }
 }

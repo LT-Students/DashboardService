@@ -12,5 +12,5 @@ public class BoardResponse
 
   public bool IsActive { get; set; }
 
-  /* public GroupInfo Group {get; set;} */
+  /* public IEnumerable<GroupInfo> Groups {get; set;} */
 }

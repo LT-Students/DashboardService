@@ -1,10 +1,12 @@
 ﻿using FluentValidation;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Board;
 using LT.DigitalOffice.Kernel.Attributes;
+using Microsoft.AspNetCore.JsonPatch;
+using System;
 
 namespace LT.DigitalOffice.DashboardService.Validation.Board.Interfaces;
 
 [AutoInject]
-public interface IEditBoardRequestValidator : IValidator<PatchBoardRequest>
+public interface IEditBoardRequestValidator : IValidator<(Guid, JsonPatchDocument<PatchBoardRequest>)>
 {
 }
