@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LT.DigitalOffice.DashboardService.Models.Dto.Models;
+using System;
+using System.Collections.Generic;
 
 namespace LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 
@@ -12,5 +14,5 @@ public class BoardResponse
 
   public bool IsActive { get; set; }
 
-  /* public IEnumerable<GroupInfo> Groups {get; set;} */
+  public List<GroupInfo> Groups {get; set;}
 }
