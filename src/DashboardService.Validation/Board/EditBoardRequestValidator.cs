@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.JsonPatch.Operations;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 
 
 namespace LT.DigitalOffice.DashboardService.Validation.Board;
@@ -23,14 +24,14 @@ public class EditBoardRequestValidator : ExtendedEditRequestValidator<Guid, Patc
     RuleFor(x => x)
       .CustomAsync(async (x, context, ct) =>
       {
-        foreach (var op in x.Item2.Operations)
+        foreach (Operation<PatchBoardRequest> op in x.Item2.Operations)
         {
           await HandleInternalPropertyValidationAsync(op, x.Item1, context, ct);
         }
       });
   }
 
-  private async System.Threading.Tasks.Task HandleInternalPropertyValidationAsync(
+  private async Task HandleInternalPropertyValidationAsync(
     Operation<PatchBoardRequest> requestedOperation,
     Guid boardId,
     ValidationContext<(Guid, JsonPatchDocument<PatchBoardRequest>)> context,
@@ -55,7 +56,7 @@ public class EditBoardRequestValidator : ExtendedEditRequestValidator<Guid, Patc
       new()
       {
         { x => !string.IsNullOrEmpty(x.value?.ToString().Trim()), "Name must not be empty." },
-        { x => x.value.ToString().Trim().Length <= 50, "Name is too long." },
+        { x => x.value.ToString().Trim().Length < 51, "Name is too long." },
 
       }, CascadeMode.Stop);
 

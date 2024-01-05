@@ -17,16 +17,13 @@ public class GetBoardsCommand : IGetBoardsCommand
 {
   private readonly IBoardRepository _boardRepository;
   private readonly IBoardInfoMapper _boardInfoMapper;
-  private readonly IResponseCreator _responseCreator;
 
   public GetBoardsCommand(
     IBoardRepository repository,
-    IBoardInfoMapper boardInfoMapper,
-    IResponseCreator responseCreator)
+    IBoardInfoMapper boardInfoMapper)
   {
     _boardRepository = repository;
     _boardInfoMapper = boardInfoMapper;
-    _responseCreator = responseCreator;
   }
 
   public async Task<FindResultResponse<BoardInfo>> ExecuteAsync(GetBoardsFilter filter, CancellationToken ct)
@@ -43,7 +40,7 @@ public class GetBoardsCommand : IGetBoardsCommand
 
     return new()
     {
-      Body = boards.Select(x => _boardInfoMapper.Map(x)).ToList(),
+      Body = boards.ConvertAll(_boardInfoMapper.Map),
       TotalCount = totalCount
     };
   }
