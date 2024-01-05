@@ -59,7 +59,7 @@ public class EditBoardCommand : IEditBoardCommand
     {
       return _responseCreator.CreateFailureResponse<bool>(
         HttpStatusCode.BadRequest,
-        validationResult.Errors.Select(vf => vf.ErrorMessage).ToList());
+        validationResult.Errors.ConvertAll(vf => vf.ErrorMessage));
     }
 
     return new OperationResultResponse<bool>(

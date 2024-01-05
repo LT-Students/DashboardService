@@ -51,7 +51,7 @@ public class BoardRepository : IBoardRepository
 
   public async Task<DbBoard> GetAsync(Guid id, GetBoardFilter filter, CancellationToken ct)
   {
-    IQueryable<DbBoard> board = _provider.Boards.AsQueryable();
+    IQueryable<DbBoard> board = _provider.Boards.AsNoTracking();
 
     if (filter.IncludeGroups)
     {
@@ -63,7 +63,7 @@ public class BoardRepository : IBoardRepository
 
   public async Task<(List<DbBoard> boards, int totalCount)> GetAllAsync(GetBoardsFilter filter, CancellationToken ct)
   {
-    IQueryable<DbBoard> boards = _provider.Boards.AsQueryable();
+    IQueryable<DbBoard> boards = _provider.Boards.AsNoTracking();
 
     if (filter.IsActive.HasValue)
     {

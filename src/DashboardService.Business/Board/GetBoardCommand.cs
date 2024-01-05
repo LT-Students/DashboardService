@@ -33,7 +33,7 @@ public class GetBoardCommand : IGetBoardCommand
   {
     DbBoard dbBoard = await _boardRepository.GetAsync(id, filter, ct);
 
-    if (dbBoard == null)
+    if (dbBoard is null)
     {
       return _responseCreator.CreateFailureResponse<BoardResponse>(HttpStatusCode.NotFound);
     }
