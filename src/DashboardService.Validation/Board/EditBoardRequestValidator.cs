@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.JsonPatch.Operations;
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
 
 
 namespace LT.DigitalOffice.DashboardService.Validation.Board;
@@ -31,7 +30,7 @@ public class EditBoardRequestValidator : ExtendedEditRequestValidator<Guid, Patc
       });
   }
 
-  private async Task HandleInternalPropertyValidationAsync(
+  private async System.Threading.Tasks.Task HandleInternalPropertyValidationAsync(
     Operation<PatchBoardRequest> requestedOperation,
     Guid boardId,
     ValidationContext<(Guid, JsonPatchDocument<PatchBoardRequest>)> context,
