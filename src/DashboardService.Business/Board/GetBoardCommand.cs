@@ -43,6 +43,6 @@ public class GetBoardCommand : IGetBoardCommand
     }
 
     return new OperationResultResponse<BoardResponse>(
-      body: _boardResponseMapper.Map(dbBoard, (x) => _groupInfoMapper.Map(x)));
+      body: _boardResponseMapper.Map(dbBoard, _groupInfoMapper.Map));
   }
 }
