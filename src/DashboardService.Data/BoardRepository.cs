@@ -93,7 +93,7 @@ public class BoardRepository : IBoardRepository
   // TODO
   // Remove entity or isActive = false?
 
-  public async Task<bool> RemoveAsync(Guid id, CancellationToken ct)
+  public async Task<bool> RemoveAsync(Guid id, CancellationToken ct, IGroupRepository groupRepository)
   {
     DbBoard board = await _provider.Boards.FindAsync(id, ct);
 
@@ -104,14 +104,24 @@ public class BoardRepository : IBoardRepository
 
     board.IsActive = false;
 
+    // TODO
+    // isActive = false or every group of board?
+    board.Groups.Select(x => groupRepository.RemoveAsync(x.Id));
+
     await _provider.SaveAsync();
     return true;
   }
 
-  public Task<bool> NameExistAsync(string name, CancellationToken ct, Guid? boardId = default)
+  public Task<bool> NameExistAsync(string name, CancellationToken ct, Guid? boardId = default, Guid? projectId = default)
   {
+    Guid? project = boardId.HasValue
+    ? _provider.Boards.FirstOrDefault(x => x.Id == boardId).ProjectId
+    : projectId;
+
+    IQueryable<DbBoard> boards = _provider.Boards.Where(x => x.IsActive == true && x.ProjectId == project);
+
     return boardId.HasValue
-      ? _provider.Boards.AnyAsync(x => x.Name == name && boardId != x.Id, ct)
-      : _provider.Boards.AnyAsync(x => x.Name == name, ct);
+      ? boards.AnyAsync(x => x.Name == name && boardId != x.Id, ct)
+      : boards.AnyAsync(x => x.Name == name, ct);
   }
 }
