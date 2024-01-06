@@ -53,7 +53,9 @@ public class EditBoardCommand : IEditBoardCommand
       return _responseCreator.CreateFailureResponse<bool>(HttpStatusCode.Forbidden);
     }
 
-    ValidationResult validationResult = await _validator.ValidateAsync((id, request), ct);
+    ValidationResult validationResult = await _validator.ValidateAsync(
+      (await _boardRepository.GetAsync(id, new(), ct), request),
+      ct);
 
     if (!validationResult.IsValid)
     {

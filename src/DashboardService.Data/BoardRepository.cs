@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -93,7 +94,7 @@ public class BoardRepository : IBoardRepository
   // TODO
   // Remove entity or isActive = false?
 
-  public async Task<bool> RemoveAsync(Guid id, CancellationToken ct, IGroupRepository groupRepository)
+  public async Task<bool> RemoveAsync(Guid id, CancellationToken ct)
   {
     DbBoard board = await _provider.Boards.FindAsync(id, ct);
 
@@ -104,21 +105,18 @@ public class BoardRepository : IBoardRepository
 
     board.IsActive = false;
 
-    // TODO
-    // isActive = false or every group of board?
-    board.Groups.Select(x => groupRepository.RemoveAsync(x.Id));
+    foreach (DbGroup group in board.Groups)
+    {
+      group.IsActive = false;
+    }
 
     await _provider.SaveAsync();
     return true;
   }
 
-  public Task<bool> NameExistAsync(string name, CancellationToken ct, Guid? boardId = default, Guid? projectId = default)
+  public Task<bool> NameExistAsync(string name, Guid? projectId, CancellationToken ct, Guid? boardId = default)
   {
-    Guid? project = boardId.HasValue
-    ? _provider.Boards.FirstOrDefault(x => x.Id == boardId).ProjectId
-    : projectId;
-
-    IQueryable<DbBoard> boards = _provider.Boards.Where(x => x.IsActive == true && x.ProjectId == project);
+    IQueryable<DbBoard> boards = _provider.Boards.Where(x => x.IsActive && x.ProjectId == projectId);
 
     return boardId.HasValue
       ? boards.AnyAsync(x => x.Name == name && boardId != x.Id, ct)
