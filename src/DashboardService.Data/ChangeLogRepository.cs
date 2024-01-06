@@ -3,8 +3,10 @@ using LT.DigitalOffice.DashboardService.Data.Provider;
 using LT.DigitalOffice.DashboardService.Models.Db;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog.Filter;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -19,28 +21,94 @@ public class ChangeLogRepository : IChangeLogRepository
     _provider = provider;
   }
 
-  public Task<Guid?> CreateAsync(DbChangeLog changeLog, CancellationToken ct)
+  public async Task<Guid?> CreateAsync(DbChangeLog changeLog)
   {
-    throw new NotImplementedException();
+    _provider.ChangeLogs.Add(changeLog);
+
+    await _provider.SaveAsync();
+
+    return changeLog.Id;
   }
 
-  public Task<bool> EditAsync(Guid id, JsonPatchDocument<DbChangeLog> request, CancellationToken ct)
+  public async Task<bool> EditAsync(Guid id, JsonPatchDocument<DbChangeLog> request, CancellationToken ct)
   {
-    throw new NotImplementedException();
+    DbChangeLog changeLog = await _provider.ChangeLogs.FirstOrDefaultAsync(x => x.Id == id, ct);
+
+    if (changeLog is null || request is null)
+    {
+      return false;
+    }
+
+    request.ApplyTo(changeLog);
+
+    await _provider.SaveAsync();
+
+    return true;
   }
 
-  public Task<DbChangeLog> GetAsync(Guid id, CancellationToken ct)
+  public async Task<DbChangeLog> GetAsync(Guid id, CancellationToken ct)
   {
-    throw new NotImplementedException();
+    IQueryable<DbChangeLog> changeLog = _provider.ChangeLogs.AsNoTracking();
+
+    return await changeLog.FirstOrDefaultAsync(db => db.Id == id);
   }
 
-  public Task<List<DbChangeLog>> GetChangeLogsAsync(GetChangeLogsFilter filter, CancellationToken ct)
+  public async Task<(List<DbChangeLog>, int totalCount)> GetChangeLogsAsync(GetChangeLogsFilter filter, CancellationToken ct)
   {
-    throw new NotImplementedException();
+    IQueryable<DbChangeLog> changeLogs = _provider.ChangeLogs.AsNoTracking();
+
+    if (filter.TaskId.HasValue)
+    {
+      changeLogs = changeLogs.Where(d => d.TaskId == filter.TaskId);
+    }
+
+    if (filter.IsAscendingSortByCreatedAtUtc.HasValue)
+    {
+      changeLogs = filter.IsAscendingSortByCreatedAtUtc.Value
+        ? changeLogs.OrderBy(db => db.CreatedAtUtc)
+        : changeLogs.OrderByDescending(db => db.CreatedAtUtc);
+    }
+
+    if (filter.IsAscendingSortByEntityName.HasValue)
+    {
+      changeLogs = filter.IsAscendingSortByEntityName.Value
+        ? changeLogs.OrderBy(db => db.EntityName)
+                    .ThenByDescending(db => db.CreatedAtUtc)
+
+        : changeLogs.OrderByDescending(db => db.EntityName)
+                    .ThenByDescending(db => db.CreatedAtUtc);
+    }
+
+    if (!string.IsNullOrWhiteSpace(filter.EntityNameIncludeSubstring))
+    {
+      changeLogs = changeLogs.Where(db => db.EntityName.Contains(filter.EntityNameIncludeSubstring));
+    }
+
+    if (!string.IsNullOrWhiteSpace(filter.PropertyNameIncludeSubstring))
+    {
+      changeLogs = changeLogs.Where(db => db.PropertyName.Contains(filter.PropertyNameIncludeSubstring));
+    }
+
+    return (
+      await changeLogs
+        .Skip(filter.SkipCount)
+        .Take(filter.TakeCount)
+        .ToListAsync(ct),
+      await changeLogs.CountAsync(ct));
   }
 
-  public Task<bool> RemoveAsync(Guid id, CancellationToken ct)
+  public async Task<bool> RemoveAsync(Guid id, CancellationToken ct)
   {
-    throw new NotImplementedException();
+    DbChangeLog changeLog = await _provider.ChangeLogs.FindAsync(id, ct);
+
+    if (changeLog is null)
+    {
+      return false;
+    }
+
+    _provider.ChangeLogs.Remove(changeLog);
+    await _provider.SaveAsync();
+
+    return true;
   }
 }

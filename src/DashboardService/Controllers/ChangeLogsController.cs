@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog.Filter;
-using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 using System.Threading;
 

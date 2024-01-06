@@ -1,11 +1,12 @@
 ﻿using LT.DigitalOffice.DashboardService.Business.ChangeLog.Interfaces;
 using LT.DigitalOffice.DashboardService.Data.Interfaces;
 using LT.DigitalOffice.DashboardService.Mappers.Models.Interfaces;
+using LT.DigitalOffice.DashboardService.Models.Db;
 using LT.DigitalOffice.DashboardService.Models.Dto.Models;
-using LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog.Filter;
 using LT.DigitalOffice.Kernel.Helpers.Interfaces;
 using LT.DigitalOffice.Kernel.Responses;
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,8 +28,16 @@ public class GetChangeLogCommand : IGetChangeLogCommand
     _responseCreator = responseCreator;
   }
 
-  public Task<OperationResultResponse<ChangeLogInfo>> ExecuteAsync(Guid id, CancellationToken ct)
+  public async Task<OperationResultResponse<ChangeLogInfo>> ExecuteAsync(Guid id, CancellationToken ct)
   {
-    throw new NotImplementedException();
+    DbChangeLog dbChange = await _repository.GetAsync(id, ct);
+
+    if (dbChange is null)
+    {
+      return _responseCreator.CreateFailureResponse<ChangeLogInfo>(HttpStatusCode.NotFound);
+    }
+
+    return new OperationResultResponse<ChangeLogInfo>(
+      body: _changeLogInfoMapper.Map(dbChange));
   }
 }
