@@ -13,11 +13,16 @@ public class RemoveBoardCommand : IRemoveBoardCommand
 {
   private readonly IBoardRepository _boardRepository;
   private readonly IResponseCreator _responseCreator;
+  private readonly IGroupRepository _groupRepository;
 
-  public RemoveBoardCommand(IBoardRepository boardRepository, IResponseCreator responseCreator)
+  public RemoveBoardCommand(
+    IBoardRepository boardRepository,
+    IResponseCreator responseCreator,
+    IGroupRepository groupRepository)
   {
     _boardRepository = boardRepository;
     _responseCreator = responseCreator;
+    _groupRepository = groupRepository;
   }
 
   // TODO
@@ -25,7 +30,7 @@ public class RemoveBoardCommand : IRemoveBoardCommand
 
   public async Task<OperationResultResponse<bool>> ExecuteAsync(Guid boardId, CancellationToken ct)
   {
-    if (!await _boardRepository.RemoveAsync(boardId, ct))
+    if (!await _boardRepository.RemoveAsync(boardId, ct, _groupRepository))
     {
       return _responseCreator.CreateFailureResponse<bool>(
         HttpStatusCode.NotFound,

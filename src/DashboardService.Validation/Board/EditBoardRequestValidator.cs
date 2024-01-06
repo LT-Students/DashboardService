@@ -67,7 +67,7 @@ public class EditBoardRequestValidator : ExtendedEditRequestValidator<Guid, Patc
         {
           async x => !await _boardRepository.NameExistAsync(x.value?.ToString(), ct, boardId),
                       "This board name already exist."
-          },
+        },
       });
 
     AddFailureForPropertyIfNot(

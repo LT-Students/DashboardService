@@ -20,7 +20,7 @@ public class CreateBoardRequestValidator : AbstractValidator<CreateBoardRequest>
     RuleFor(request => request.Name)
       .MaximumLength(50)
       .WithMessage("Board name is too long.")
-      .MustAsync(async (request, ct) => !await boardRepository.NameExistAsync(request, ct))
+      .MustAsync(async (request, name, ct) => !await boardRepository.NameExistAsync(name, ct, default, request.ProjectId))
       .WithMessage("Board with this name already exists.");
   }
 }
