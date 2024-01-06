@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using LT.DigitalOffice.DashboardService.Data.Interfaces;
+using LT.DigitalOffice.DashboardService.Models.Db;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Board;
 using LT.DigitalOffice.DashboardService.Validation.Board.Interfaces;
 using LT.DigitalOffice.Kernel.Validators;
@@ -11,7 +12,7 @@ using System.Threading;
 
 namespace LT.DigitalOffice.DashboardService.Validation.Board;
 
-public class EditBoardRequestValidator : ExtendedEditRequestValidator<Guid, PatchBoardRequest>, IEditBoardRequestValidator
+public class EditBoardRequestValidator : ExtendedEditRequestValidator<DbBoard, PatchBoardRequest>, IEditBoardRequestValidator
 {
   private readonly IBoardRepository _boardRepository;
 
@@ -31,8 +32,8 @@ public class EditBoardRequestValidator : ExtendedEditRequestValidator<Guid, Patc
 
   private async System.Threading.Tasks.Task HandleInternalPropertyValidationAsync(
     Operation<PatchBoardRequest> requestedOperation,
-    Guid boardId,
-    ValidationContext<(Guid, JsonPatchDocument<PatchBoardRequest>)> context,
+    DbBoard board,
+    ValidationContext<(DbBoard, JsonPatchDocument<PatchBoardRequest>)> context,
     CancellationToken ct)
   {
     RequestedOperation = requestedOperation;
@@ -64,7 +65,7 @@ public class EditBoardRequestValidator : ExtendedEditRequestValidator<Guid, Patc
       new()
       {
         {
-          async x => !await _boardRepository.NameExistAsync(x.value?.ToString(), ct, boardId),
+          async x => !await _boardRepository.NameExistAsync(x.value?.ToString(), board.ProjectId, ct, board.Id),
                       "This board name already exist."
         },
       });
