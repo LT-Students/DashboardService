@@ -30,7 +30,7 @@ public class RemoveBoardCommand : IRemoveBoardCommand
 
   public async Task<OperationResultResponse<bool>> ExecuteAsync(Guid boardId, CancellationToken ct)
   {
-    if (!await _boardRepository.RemoveAsync(boardId, ct, _groupRepository))
+    if (!await _boardRepository.RemoveAsync(boardId, ct))
     {
       return _responseCreator.CreateFailureResponse<bool>(
         HttpStatusCode.NotFound,
