@@ -62,21 +62,29 @@ public class ChangeLogRepository : IChangeLogRepository
       changeLogs = changeLogs.Where(d => d.TaskId == filter.TaskId);
     }
 
-    if (filter.IsAscendingSortByCreatedAtUtc.HasValue)
+    if (filter.IsAscendingSortByCreatedAtUtc.HasValue && !filter.IsAscendingSortByEntityName.HasValue)
     {
       changeLogs = filter.IsAscendingSortByCreatedAtUtc.Value
         ? changeLogs.OrderBy(db => db.CreatedAtUtc)
         : changeLogs.OrderByDescending(db => db.CreatedAtUtc);
     }
 
-    if (filter.IsAscendingSortByEntityName.HasValue)
+    if (filter.IsAscendingSortByEntityName.HasValue && !filter.IsAscendingSortByCreatedAtUtc.HasValue)
     {
       changeLogs = filter.IsAscendingSortByEntityName.Value
-        ? changeLogs.OrderBy(db => db.EntityName)
-                    .ThenByDescending(db => db.CreatedAtUtc)
+              ? changeLogs.OrderBy(x => x.EntityName)
+              : changeLogs.OrderByDescending(x => x.EntityName);
+    }
 
-        : changeLogs.OrderByDescending(db => db.EntityName)
-                    .ThenByDescending(db => db.CreatedAtUtc);
+    if (filter.IsAscendingSortByEntityName.HasValue && filter.IsAscendingSortByCreatedAtUtc.HasValue)
+    {
+      changeLogs = (filter.IsAscendingSortByEntityName.Value
+              ? (filter.IsAscendingSortByCreatedAtUtc.Value
+                  ? changeLogs.OrderBy(x => x.EntityName).ThenBy(x => x.CreatedAtUtc)
+                  : changeLogs.OrderBy(x => x.EntityName).ThenByDescending(x => x.CreatedAtUtc))
+              : (filter.IsAscendingSortByCreatedAtUtc.Value
+                  ? changeLogs.OrderByDescending(x => x.EntityName).ThenBy(x => x.CreatedAtUtc)
+                  : changeLogs.OrderByDescending(x => x.EntityName).ThenByDescending(x => x.CreatedAtUtc)));
     }
 
     if (!string.IsNullOrWhiteSpace(filter.EntityNameIncludeSubstring))

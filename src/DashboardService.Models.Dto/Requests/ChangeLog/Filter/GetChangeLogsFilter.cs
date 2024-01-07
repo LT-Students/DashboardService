@@ -18,6 +18,6 @@ public record GetChangeLogsFilter : BaseFindFilter
   [FromQuery(Name = "entityNameIncludeSubstring")]
   public string EntityNameIncludeSubstring { get; set; }
 
-  [FromQuery(Name = "PropertyNameIncludeSubstring")]
+  [FromQuery(Name = "propertyNameIncludeSubstring")]
   public string PropertyNameIncludeSubstring { get; set; }
 }
