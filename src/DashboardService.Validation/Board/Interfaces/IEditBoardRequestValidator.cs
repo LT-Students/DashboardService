@@ -8,6 +8,6 @@ using System;
 namespace LT.DigitalOffice.DashboardService.Validation.Board.Interfaces;
 
 [AutoInject]
-public interface IEditBoardRequestValidator : IValidator<(DbBoard, JsonPatchDocument<PatchBoardRequest>)>
+public interface IEditBoardRequestValidator : IValidator<(Guid, JsonPatchDocument<PatchBoardRequest>)>
 {
 }
