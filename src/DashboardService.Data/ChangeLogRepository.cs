@@ -30,9 +30,9 @@ public class ChangeLogRepository : IChangeLogRepository
     return changeLog.Id;
   }
 
-  public async Task<bool> EditAsync(Guid id, JsonPatchDocument<DbChangeLog> request, CancellationToken ct)
+  public async Task<bool> EditAsync(Guid changeLogId, JsonPatchDocument<DbChangeLog> request, CancellationToken ct)
   {
-    DbChangeLog changeLog = await _provider.ChangeLogs.FirstOrDefaultAsync(x => x.Id == id, ct);
+    DbChangeLog changeLog = await _provider.ChangeLogs.FirstOrDefaultAsync(x => x.Id == changeLogId, ct);
 
     if (changeLog is null || request is null)
     {
@@ -46,11 +46,11 @@ public class ChangeLogRepository : IChangeLogRepository
     return true;
   }
 
-  public async Task<DbChangeLog> GetAsync(Guid id, CancellationToken ct)
+  public async Task<DbChangeLog> GetAsync(Guid changeLogId, CancellationToken ct)
   {
     IQueryable<DbChangeLog> changeLog = _provider.ChangeLogs.AsNoTracking();
 
-    return await changeLog.FirstOrDefaultAsync(db => db.Id == id);
+    return await changeLog.FirstOrDefaultAsync(db => db.Id == changeLogId);
   }
 
   public async Task<(List<DbChangeLog>, int totalCount)> GetChangeLogsAsync(GetChangeLogsFilter filter, CancellationToken ct)
@@ -105,9 +105,9 @@ public class ChangeLogRepository : IChangeLogRepository
       await changeLogs.CountAsync(ct));
   }
 
-  public async Task<bool> RemoveAsync(Guid id, CancellationToken ct)
+  public async Task<bool> RemoveAsync(Guid changeLogId, CancellationToken ct)
   {
-    DbChangeLog changeLog = await _provider.ChangeLogs.FindAsync(id, ct);
+    DbChangeLog changeLog = await _provider.ChangeLogs.FindAsync(changeLogId, ct);
 
     if (changeLog is null)
     {

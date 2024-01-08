@@ -12,7 +12,7 @@ namespace LT.DigitalOffice.DashboardService.Data.Interfaces;
 [AutoInject]
 public interface IChangeLogRepository
 {
-  Task<Guid?> CreateAsync(DbChangeLog board);
+  Task<Guid?> CreateAsync(DbChangeLog changeLog);
 
   Task<(List<DbChangeLog>, int totalCount)> GetChangeLogsAsync(GetChangeLogsFilter filter, CancellationToken ct);
 

@@ -28,9 +28,9 @@ public class GetChangeLogCommand : IGetChangeLogCommand
     _responseCreator = responseCreator;
   }
 
-  public async Task<OperationResultResponse<ChangeLogInfo>> ExecuteAsync(Guid id, CancellationToken ct)
+  public async Task<OperationResultResponse<ChangeLogInfo>> ExecuteAsync(Guid changeLogId, CancellationToken ct)
   {
-    DbChangeLog dbChange = await _repository.GetAsync(id, ct);
+    DbChangeLog dbChange = await _repository.GetAsync(changeLogId, ct);
 
     if (dbChange is null)
     {
