@@ -54,7 +54,8 @@ public class CreateBoardCommand : ICreateBoardCommand
 
     if (!validationResult.IsValid)
     {
-      return _responseCreator.CreateFailureResponse<Guid?>(HttpStatusCode.BadRequest,
+      return _responseCreator.CreateFailureResponse<Guid?>(
+        HttpStatusCode.BadRequest,
         validationResult.Errors.ConvertAll(vf => vf.ErrorMessage));
     }
 

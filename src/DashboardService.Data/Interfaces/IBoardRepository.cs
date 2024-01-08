@@ -20,7 +20,7 @@ public interface IBoardRepository
 
   Task<bool> EditByIdAsync(Guid id, Guid modifiedById, JsonPatchDocument<DbBoard> request, CancellationToken ct);
 
-  Task<bool> RemoveAsync(Guid id, CancellationToken ct);
+  Task<bool> RemoveAsync(Guid id, Guid modifiedById, CancellationToken ct);
 
-  Task<bool> NameExistAsync(string name, Guid? projectId, CancellationToken ct, Guid? boardId = default);
+  Task<bool> NameExistAsync(string name, Guid projectId, CancellationToken ct, Guid? boardId = default);
 }

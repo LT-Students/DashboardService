@@ -1,6 +1,5 @@
 ﻿using LT.DigitalOffice.DashboardService.Business.Board.Interfaces;
 using LT.DigitalOffice.DashboardService.Data.Interfaces;
-using LT.DigitalOffice.DashboardService.Mappers.Models.Interfaces;
 using LT.DigitalOffice.DashboardService.Mappers.Responses.Interfaces;
 using LT.DigitalOffice.DashboardService.Models.Db;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Board.Filters;
@@ -19,18 +18,15 @@ public class GetBoardCommand : IGetBoardCommand
   private readonly IBoardRepository _boardRepository;
   private readonly IBoardResponseMapper _boardResponseMapper;
   private readonly IResponseCreator _responseCreator;
-  private readonly IGroupInfoMapper _groupInfoMapper;
 
   public GetBoardCommand(
     IBoardRepository repository,
     IBoardResponseMapper boardResponseMapper,
-    IResponseCreator responseCreator,
-    IGroupInfoMapper groupInfoMapper)
+    IResponseCreator responseCreator)
   {
     _boardRepository = repository;
     _boardResponseMapper = boardResponseMapper;
     _responseCreator = responseCreator;
-    _groupInfoMapper = groupInfoMapper;
   }
 
   public async Task<OperationResultResponse<BoardResponse>> ExecuteAsync(Guid id, GetBoardFilter filter, CancellationToken ct)
@@ -43,6 +39,6 @@ public class GetBoardCommand : IGetBoardCommand
     }
 
     return new OperationResultResponse<BoardResponse>(
-      body: _boardResponseMapper.Map(dbBoard, _groupInfoMapper.Map));
+      body: _boardResponseMapper.Map(dbBoard));
   }
 }

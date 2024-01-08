@@ -33,9 +33,9 @@ public class BoardRepository : IBoardRepository
 
   public async Task<bool> EditByIdAsync(Guid id, Guid modifiedById, JsonPatchDocument<DbBoard> request, CancellationToken ct)
   {
-    DbBoard board = await _provider.Boards.FirstOrDefaultAsync(x => x.Id == id, ct);
+    DbBoard board = await _provider.Boards.FindAsync(id, ct);
 
-    if (board is null || request is null)
+    if (board is null)
     {
       return false;
     }
@@ -50,16 +50,16 @@ public class BoardRepository : IBoardRepository
     return true;
   }
 
-  public async Task<DbBoard> GetAsync(Guid id, GetBoardFilter filter, CancellationToken ct)
+  public Task<DbBoard> GetAsync(Guid id, GetBoardFilter filter, CancellationToken ct)
   {
-    IQueryable<DbBoard> board = _provider.Boards.AsNoTracking();
+    IQueryable<DbBoard> boards = _provider.Boards.AsNoTracking();
 
     if (filter.IncludeGroups)
     {
-      board.Include(db => db.Groups);
+      boards.Include(db => db.Groups);
     }
 
-    return await board.FirstOrDefaultAsync(db => db.Id == id, ct);
+    return boards.FirstOrDefaultAsync(db => db.Id == id, ct);
   }
 
   public async Task<(List<DbBoard> boards, int totalCount)> GetAllAsync(GetBoardsFilter filter, CancellationToken ct)
@@ -92,9 +92,9 @@ public class BoardRepository : IBoardRepository
   }
 
   // TODO
-  // Remove entity or isActive = false?
+  // Do I need to change ModifiedBy and ModifyAtUtc, if i change isActive ?
 
-  public async Task<bool> RemoveAsync(Guid id, CancellationToken ct)
+  public async Task<bool> RemoveAsync(Guid id, Guid modifiedById, CancellationToken ct)
   {
     DbBoard board = await _provider.Boards.FindAsync(id, ct);
 
@@ -105,16 +105,22 @@ public class BoardRepository : IBoardRepository
 
     board.IsActive = false;
 
+    board.ModifiedBy = modifiedById;
+    board.ModifiedAtUtc = DateTime.UtcNow;
+
     foreach (DbGroup group in board.Groups)
     {
       group.IsActive = false;
+
+      group.ModifiedBy = modifiedById;
+      group.ModifiedAtUtc = DateTime.UtcNow;
     }
 
     await _provider.SaveAsync();
     return true;
   }
 
-  public Task<bool> NameExistAsync(string name, Guid? projectId, CancellationToken ct, Guid? boardId = default)
+  public Task<bool> NameExistAsync(string name, Guid projectId, CancellationToken ct, Guid? boardId = default)
   {
     IQueryable<DbBoard> boards = _provider.Boards.Where(x => x.IsActive && x.ProjectId == projectId);
 

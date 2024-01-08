@@ -11,7 +11,14 @@ namespace LT.DigitalOffice.DashboardService.Mappers.Responses;
 
 public class BoardResponseMapper : IBoardResponseMapper
 {
-  public BoardResponse Map(DbBoard dbBoard, Func<DbGroup, GroupInfo> map)
+  private readonly IGroupInfoMapper _groupInfoMapper;
+
+  public BoardResponseMapper(IGroupInfoMapper groupInfoMapper)
+  {
+    _groupInfoMapper = groupInfoMapper;
+  }
+
+  public BoardResponse Map(DbBoard dbBoard)
   {
     return new BoardResponse
     {
@@ -19,7 +26,7 @@ public class BoardResponseMapper : IBoardResponseMapper
       ProjectId = dbBoard.ProjectId,
       Name = dbBoard.Name,
       IsActive = dbBoard.IsActive,
-      Groups = dbBoard.Groups.Select(map).ToList()
+      Groups = dbBoard.Groups.Select(_groupInfoMapper.Map).ToList()
     };
   }
 }

@@ -11,5 +11,5 @@ namespace LT.DigitalOffice.DashboardService.Mappers.Responses.Interfaces;
 [AutoInject]
 public interface IBoardResponseMapper
 {
-  public BoardResponse Map(DbBoard dbBoard, Func<DbGroup, GroupInfo> func);
+  public BoardResponse Map(DbBoard dbBoard);
 }
