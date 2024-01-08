@@ -79,12 +79,12 @@ public class ChangeLogRepository : IChangeLogRepository
     if (filter.IsAscendingSortByEntityName.HasValue && filter.IsAscendingSortByCreatedAtUtc.HasValue)
     {
       changeLogs = (filter.IsAscendingSortByEntityName.Value
-              ? (filter.IsAscendingSortByCreatedAtUtc.Value
-                  ? changeLogs.OrderBy(x => x.EntityName).ThenBy(x => x.CreatedAtUtc)
-                  : changeLogs.OrderBy(x => x.EntityName).ThenByDescending(x => x.CreatedAtUtc))
-              : (filter.IsAscendingSortByCreatedAtUtc.Value
-                  ? changeLogs.OrderByDescending(x => x.EntityName).ThenBy(x => x.CreatedAtUtc)
-                  : changeLogs.OrderByDescending(x => x.EntityName).ThenByDescending(x => x.CreatedAtUtc)));
+        ? (filter.IsAscendingSortByCreatedAtUtc.Value
+          ? changeLogs.OrderBy(x => x.EntityName).ThenBy(x => x.CreatedAtUtc)
+          : changeLogs.OrderBy(x => x.EntityName).ThenByDescending(x => x.CreatedAtUtc))
+        : (filter.IsAscendingSortByCreatedAtUtc.Value
+          ? changeLogs.OrderByDescending(x => x.EntityName).ThenBy(x => x.CreatedAtUtc)
+          : changeLogs.OrderByDescending(x => x.EntityName).ThenByDescending(x => x.CreatedAtUtc)));
     }
 
     if (!string.IsNullOrWhiteSpace(filter.EntityNameIncludeSubstring))
