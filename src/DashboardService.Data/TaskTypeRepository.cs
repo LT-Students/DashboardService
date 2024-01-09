@@ -3,8 +3,11 @@ using LT.DigitalOffice.DashboardService.Data.Provider;
 using LT.DigitalOffice.DashboardService.Models.Db;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.TaskType.Filters;
 using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Data;
@@ -18,28 +21,78 @@ public class TaskTypeRepository : ITaskTypeRepository
     _provider = provider;
   }
   
-  public Task<Guid?> CreateAsync(DbTaskType dbDepartment)
+  public async Task<Guid?> CreateAsync(DbTaskType dbTaskType)
   {
-    throw new NotImplementedException();
+    _provider.TaskTypes.Add(dbTaskType);
+    await _provider.SaveAsync();
+
+    return dbTaskType.Id;
   }
 
-  public Task<List<DbTaskType>> GetAllAsync(GetTaskTypesFilter filter)
+  public async Task<(List<DbTaskType> dbTaskTypes, int totalCount)> GetAllAsync(GetTaskTypesFilter filter, CancellationToken ct)
   {
-    throw new NotImplementedException();
+    IQueryable<DbTaskType> taskTypes = _provider.TaskTypes.AsNoTracking();
+
+    if (filter.IsAscendingSort.HasValue)
+    {
+      taskTypes = filter.IsAscendingSort.Value
+        ? taskTypes.OrderBy(d => d.Name)
+        : taskTypes.OrderByDescending(d => d.Name);
+    }
+
+    if (!string.IsNullOrWhiteSpace(filter.NameIncludeSubstring))
+    {
+      taskTypes = taskTypes.Where(d => d.Name.Contains(filter.NameIncludeSubstring));
+    }
+
+    return (
+      await taskTypes
+        .Skip(filter.SkipCount)
+        .Take(filter.TakeCount)
+        .ToListAsync(ct),
+      await taskTypes.CountAsync(ct));
   }
 
-  public Task<DbTaskType> GetAsync(Guid id)
+  public async Task<DbTaskType> GetAsync(Guid id, CancellationToken ct)
   {
-    throw new NotImplementedException();
+    return await _provider.TaskTypes.AsNoTracking().FirstOrDefaultAsync(tt => tt.Id == id, ct);
   }
 
-  public Task<bool> EditAsync(Guid id, JsonPatchDocument<DbTaskType> request)
+  public async Task<bool> EditAsync(Guid id, JsonPatchDocument<DbTaskType> request, CancellationToken ct)
   {
-    throw new NotImplementedException();
+    DbTaskType dbTaskType = await _provider.TaskTypes.FindAsync(id, ct);
+
+    if (dbTaskType is null)
+    {
+      return false;
+    }
+
+    request.ApplyTo(dbTaskType);
+
+    await _provider.SaveAsync();
+
+    return true;
   }
 
-  public Task<bool> RemoveAsync(Guid id)
+  public async Task<bool> RemoveAsync(Guid id, CancellationToken ct)
   {
-    throw new NotImplementedException();
+    DbTaskType dbTaskType = await GetAsync(id, ct);
+
+    if (dbTaskType is null)
+    {
+      return false;
+    }
+
+    _provider.TaskTypes.Remove(dbTaskType);
+    await _provider.SaveAsync();
+
+    return true;
+  }
+
+  public Task<bool> NameExistAsync(string name, CancellationToken ct, Guid? taskTypeId = default)
+  {
+    return taskTypeId.HasValue
+      ? _provider.TaskTypes.AnyAsync(d => d.Name == name && d.Id != taskTypeId, ct)
+      : _provider.TaskTypes.AnyAsync(d => d.Name == name, ct);
   }
 }

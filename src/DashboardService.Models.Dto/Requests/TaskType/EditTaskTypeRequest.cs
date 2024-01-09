@@ -1,6 +1,6 @@
 namespace LT.DigitalOffice.DashboardService.Models.Dto.Requests.TaskType;
 
-public record PatchTaskTypeRequest
+public record EditTaskTypeRequest
 {
   public string Name { get; set; }
 }

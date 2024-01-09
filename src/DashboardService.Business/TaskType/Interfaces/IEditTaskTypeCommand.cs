@@ -3,6 +3,7 @@ using LT.DigitalOffice.Kernel.Attributes;
 using LT.DigitalOffice.Kernel.Responses;
 using Microsoft.AspNetCore.JsonPatch;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Business.TaskType.Interfaces;
@@ -10,5 +11,5 @@ namespace LT.DigitalOffice.DashboardService.Business.TaskType.Interfaces;
 [AutoInject]
 public interface IEditTaskTypeCommand
 {
-  Task<OperationResultResponse<bool>> ExecuteAsync(Guid id, JsonPatchDocument<PatchTaskTypeRequest> request);
+  Task<OperationResultResponse<bool>> ExecuteAsync(Guid id, JsonPatchDocument<EditTaskTypeRequest> request, CancellationToken ct);
 }

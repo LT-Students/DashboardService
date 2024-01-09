@@ -8,9 +8,7 @@ public class TaskTypeInfoMapper : ITaskTypeInfoMapper
 {
   public TaskTypeInfo Map(DbTaskType dbTaskType)
   {
-    return dbTaskType is null
-      ? null
-      : new()
+    return new()
       {
         Id = dbTaskType.Id, 
         Name = dbTaskType.Name
