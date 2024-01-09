@@ -84,7 +84,6 @@ public class Startup : BaseApiInfo
 
     string connStr = ConnectionStringHandler.Get(Configuration);
 
-    // TODO: Add db context here
     services.AddDbContext<DashboardServiceDbContext>(options =>
     {
       options.UseSqlServer(connStr);

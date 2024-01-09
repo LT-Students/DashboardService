@@ -4,6 +4,7 @@ using LT.DigitalOffice.Kernel.Attributes;
 using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Data.Interfaces;
@@ -12,8 +13,9 @@ namespace LT.DigitalOffice.DashboardService.Data.Interfaces;
 public interface IPriorityRepository
 {
   Task<Guid?> CreateAsync(DbPriority dbDepartment);
-  Task<List<DbPriority>> GetAllAsync(GetPrioritiesFilter filter);
-  Task<DbPriority> GetAsync(Guid id);
-  Task<bool> EditAsync(Guid id, JsonPatchDocument<DbPriority> request);
-  Task<bool> RemoveAsync(Guid id);
+  Task<(List<DbPriority> dbPriorities, int totalCount)> GetAllAsync(GetPrioritiesFilter filter, CancellationToken ct);
+  Task<DbPriority> GetAsync(Guid id, CancellationToken ct = default);
+  Task<bool> EditAsync(Guid id, JsonPatchDocument<DbPriority> request, CancellationToken ct);
+  Task<bool> RemoveAsync(Guid id, CancellationToken ct);
+  Task<bool> NameExistAsync(string name, CancellationToken ct, Guid? priorityId = default);
 }

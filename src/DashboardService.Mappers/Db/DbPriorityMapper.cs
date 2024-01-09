@@ -9,12 +9,10 @@ public class DbPriorityMapper : IDbPriorityMapper
 {
   public DbPriority Map(CreatePriorityRequest request)
   {
-    return request is null
-      ? null
-      : new()
-      {
-        Id = Guid.NewGuid(), 
-        Name = request.Name
-      };
+    return new() 
+    {
+      Id = Guid.NewGuid(), 
+      Name = request.Name
+    };
   }
 }
