@@ -6,7 +6,6 @@ using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog.Filter;
 using LT.DigitalOffice.Kernel.Responses;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 

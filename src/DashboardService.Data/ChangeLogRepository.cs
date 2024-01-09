@@ -48,9 +48,10 @@ public class ChangeLogRepository : IChangeLogRepository
 
   public async Task<DbChangeLog> GetAsync(Guid changeLogId, CancellationToken ct)
   {
-    IQueryable<DbChangeLog> changeLog = _provider.ChangeLogs.AsNoTracking();
-
-    return await changeLog.FirstOrDefaultAsync(db => db.Id == changeLogId);
+    return
+      await _provider.ChangeLogs
+        .AsNoTracking()
+        .FirstOrDefaultAsync(db => db.Id == changeLogId, ct);
   }
 
   public async Task<(List<DbChangeLog>, int totalCount)> GetChangeLogsAsync(GetChangeLogsFilter filter, CancellationToken ct)
@@ -72,8 +73,8 @@ public class ChangeLogRepository : IChangeLogRepository
     if (filter.IsAscendingSortByEntityName.HasValue && !filter.IsAscendingSortByCreatedAtUtc.HasValue)
     {
       changeLogs = filter.IsAscendingSortByEntityName.Value
-              ? changeLogs.OrderBy(x => x.EntityName)
-              : changeLogs.OrderByDescending(x => x.EntityName);
+        ? changeLogs.OrderBy(x => x.EntityName)
+        : changeLogs.OrderByDescending(x => x.EntityName);
     }
 
     if (filter.IsAscendingSortByEntityName.HasValue && filter.IsAscendingSortByCreatedAtUtc.HasValue)
@@ -105,16 +106,17 @@ public class ChangeLogRepository : IChangeLogRepository
       await changeLogs.CountAsync(ct));
   }
 
-  public async Task<bool> RemoveAsync(Guid changeLogId, CancellationToken ct)
+  public async Task<bool> RemoveByTaskIdAsync(Guid taskId, CancellationToken ct)
   {
-    DbChangeLog changeLog = await _provider.ChangeLogs.FindAsync(changeLogId, ct);
+    IQueryable<DbChangeLog> changeLogs =_provider.ChangeLogs.Where(x => x.TaskId == taskId);
 
-    if (changeLog is null)
+    if (changeLogs is null)
     {
       return false;
     }
 
-    _provider.ChangeLogs.Remove(changeLog);
+    await _provider.ChangeLogs.ForEachAsync(x => _provider.ChangeLogs.Remove(x), ct);
+
     await _provider.SaveAsync();
 
     return true;

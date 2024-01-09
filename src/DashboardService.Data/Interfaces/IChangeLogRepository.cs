@@ -20,5 +20,5 @@ public interface IChangeLogRepository
 
   Task<bool> EditAsync(Guid id, JsonPatchDocument<DbChangeLog> request, CancellationToken ct);
 
-  Task<bool> RemoveAsync(Guid id, CancellationToken ct);
+  Task<bool> RemoveByTaskIdAsync(Guid taskId, CancellationToken ct);
 }
