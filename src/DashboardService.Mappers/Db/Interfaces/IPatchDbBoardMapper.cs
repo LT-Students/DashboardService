@@ -9,5 +9,5 @@ namespace LT.DigitalOffice.DashboardService.Mappers.Db.Interfaces;
 [AutoInject]
 public interface IPatchDbBoardMapper
 {
-  JsonPatchDocument<DbBoard> Map(JsonPatchDocument<PatchBoardRequest> request, Guid modifiedById);
+  JsonPatchDocument<DbBoard> Map(JsonPatchDocument<PatchBoardRequest> request);
 }

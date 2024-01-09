@@ -50,7 +50,7 @@ public class Startup : BaseApiInfo
     StartTime = DateTime.UtcNow;
     ApiName = $"LT Digital Office - {_serviceInfoConfig.Name}";
   }
-  
+
   public void ConfigureServices(IServiceCollection services)
   {
     services.AddCors(options =>
@@ -83,7 +83,7 @@ public class Startup : BaseApiInfo
       });
 
     string connStr = ConnectionStringHandler.Get(Configuration);
-    
+
     services.AddDbContext<DashboardServiceDbContext>(options =>
     {
       options.UseSqlServer(connStr);
