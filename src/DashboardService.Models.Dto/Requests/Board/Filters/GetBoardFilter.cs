@@ -4,6 +4,6 @@ namespace LT.DigitalOffice.DashboardService.Models.Dto.Requests.Board.Filters;
 
 public record GetBoardFilter
 {
-  [FromQuery(Name = "includegroup")]
-  public bool IncludeGroup { get; set; } = true;
+  [FromQuery(Name = "includegroups")]
+  public bool IncludeGroups { get; set; } = true;
 }

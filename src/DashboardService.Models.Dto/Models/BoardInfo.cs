@@ -11,7 +11,5 @@ public class BoardInfo
   public string Name { get; set; }
 
   public bool IsActive { get; set; }
-
-  /* public GroupInfo Group {get; set;} */
 }
 

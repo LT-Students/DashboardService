@@ -7,53 +7,59 @@ using LT.DigitalOffice.Kernel.Responses;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LT.DigitalOffice.DashboardService.Controllers;
 
-[Route("api/[controller]")]
+[Route("[controller]")]
 [ApiController]
 public class BoardsController : ControllerBase
 {
   [HttpPost]
   public async Task<OperationResultResponse<Guid?>> CreateAsync(
     [FromServices] ICreateBoardCommand command,
-    [FromBody] CreateBoardRequest request)
+    [FromBody] CreateBoardRequest request,
+    CancellationToken ct)
   {
-    return await command.ExecuteAsync(request);
+    return await command.ExecuteAsync(request, ct);
   }
 
   [HttpGet]
   public async Task<FindResultResponse<BoardInfo>> GetAsync(
     [FromServices] IGetBoardsCommand command,
-    [FromQuery] GetBoardsFilter filter)
+    [FromQuery] GetBoardsFilter filter,
+    CancellationToken ct)
   {
-    return await command.ExecuteAsync(filter);
+    return await command.ExecuteAsync(filter, ct);
   }
 
   [HttpGet("{id}")]
   public async Task<OperationResultResponse<BoardResponse>> GetAsync(
     [FromServices] IGetBoardCommand command,
     [FromRoute] Guid id,
-    [FromQuery] GetBoardFilter filter)
+    [FromQuery] GetBoardFilter filter,
+    CancellationToken ct)
   {
-    return await command.ExecuteAsync(id, filter);
+    return await command.ExecuteAsync(id, filter, ct);
   }
 
   [HttpPatch("{id}")]
   public async Task<OperationResultResponse<bool>> EditAsync(
     [FromServices] IEditBoardCommand command,
     [FromRoute] Guid id,
-    [FromBody] JsonPatchDocument<PatchBoardRequest> request)
+    [FromBody] JsonPatchDocument<PatchBoardRequest> request,
+    CancellationToken ct)
   {
-    return await command.ExecuteAsync(id, request);
+    return await command.ExecuteAsync(id, request, ct);
   }
 
   [HttpDelete("{id}")]
   public async Task<OperationResultResponse<bool>> RemoveAsync(
     [FromServices] IRemoveBoardCommand command,
-    [FromRoute] Guid id)
+    [FromRoute] Guid id,
+    CancellationToken ct)
   {
-    return await command.ExecuteAsync(id);
+    return await command.ExecuteAsync(id, ct);
   }
 }

@@ -4,19 +4,23 @@ using System;
 using LT.DigitalOffice.Kernel.Attributes;
 using LT.DigitalOffice.DashboardService.Models.Db;
 using Microsoft.AspNetCore.JsonPatch;
+using LT.DigitalOffice.DashboardService.Models.Dto.Requests.Board.Filters;
+using System.Threading;
 
 namespace LT.DigitalOffice.DashboardService.Data.Interfaces;
 
 [AutoInject]
 public interface IBoardRepository
 {
-  Task CreateAsync(DbBoard board);
+  Task<Guid?> CreateAsync(DbBoard board);
 
-  Task<List<DbBoard>> GetAllAsync();
+  Task<(List<DbBoard> boards, int totalCount)> GetAllAsync(GetBoardsFilter filter, CancellationToken ct);
 
-  Task<DbBoard> GetAsync(Guid id);
+  Task<DbBoard> GetAsync(Guid id, GetBoardFilter filter, CancellationToken ct);
 
-  Task<bool> EditByIdAsync(Guid id, JsonPatchDocument<DbChangeLog> dbChangeLog);
+  Task<bool> EditByIdAsync(Guid id, Guid modifiedById, JsonPatchDocument<DbBoard> request, CancellationToken ct);
 
-  Task<bool> RemoveAsync(Guid id);
+  Task<bool> RemoveAsync(Guid id, Guid modifiedById, CancellationToken ct);
+
+  Task<bool> NameExistAsync(string name, Guid projectId, CancellationToken ct, Guid? boardId = default);
 }
