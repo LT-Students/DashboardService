@@ -28,14 +28,6 @@ public class GetChangeLogsCommand : IGetChangeLogsCommand
   {
     (List<DbChangeLog> dbChanges, int totalCount) = await _repository.GetChangeLogsAsync(filter, ct);
 
-    if (dbChanges is null || dbChanges.Count == 0)
-    {
-      return new()
-      {
-        Body = new List<ChangeLogInfo>(),
-      };
-    }
-
     return new()
     {
       Body = dbChanges.ConvertAll(_changeLogInfoMapper.Map),
