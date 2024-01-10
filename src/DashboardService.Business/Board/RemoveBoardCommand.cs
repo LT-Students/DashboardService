@@ -33,12 +33,14 @@ public class RemoveBoardCommand : IRemoveBoardCommand
 
   public async Task<OperationResultResponse<bool>> ExecuteAsync(Guid boardId, CancellationToken ct)
   {
-    if (!await _accessValidator.IsAdminAsync())
+    Guid userId = _httpContext.HttpContext.GetUserId();
+
+    if (!await _accessValidator.IsAdminAsync(userId))
     {
       _responseCreator.CreateFailureResponse<bool>(HttpStatusCode.Forbidden);
     }
 
-    if (!await _boardRepository.RemoveAsync(boardId, _httpContext.HttpContext.GetUserId(), ct))
+    if (!await _boardRepository.RemoveAsync(boardId, userId, ct))
     {
       return _responseCreator.CreateFailureResponse<bool>(
         HttpStatusCode.NotFound,

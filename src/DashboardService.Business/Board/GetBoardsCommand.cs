@@ -28,14 +28,6 @@ public class GetBoardsCommand : IGetBoardsCommand
   {
     (List<DbBoard> boards, int totalCount) = await _boardRepository.GetAllAsync(filter, ct);
 
-    if (boards is null || boards.Count == 0)
-    {
-      return new()
-      {
-        Body = new List<BoardInfo>(),
-      };
-    }
-
     return new()
     {
       Body = boards.ConvertAll(_boardInfoMapper.Map),

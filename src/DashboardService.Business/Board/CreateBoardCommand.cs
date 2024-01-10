@@ -45,7 +45,9 @@ public class CreateBoardCommand : ICreateBoardCommand
 
   public async Task<OperationResultResponse<Guid?>> ExecuteAsync(CreateBoardRequest request, CancellationToken ct)
   {
-    if (!await _accessValidator.IsAdminAsync())
+    Guid userId = _httpContextAccessor.HttpContext.GetUserId();
+
+    if (!await _accessValidator.IsAdminAsync(userId))
     {
       return _responseCreator.CreateFailureResponse<Guid?>(HttpStatusCode.Forbidden);
     }
@@ -61,7 +63,7 @@ public class CreateBoardCommand : ICreateBoardCommand
 
     _httpContextAccessor.HttpContext.Response.StatusCode = (int)HttpStatusCode.Created;
 
-    DbBoard dbBoard = _dbBoardMapper.Map(request, _httpContextAccessor.HttpContext.GetUserId());
+    DbBoard dbBoard = _dbBoardMapper.Map(request, userId);
 
     return new()
     {

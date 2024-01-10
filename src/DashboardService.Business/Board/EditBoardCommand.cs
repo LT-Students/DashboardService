@@ -48,7 +48,9 @@ public class EditBoardCommand : IEditBoardCommand
     JsonPatchDocument<PatchBoardRequest> request,
     CancellationToken ct)
   {
-    if (!await _accessValidator.IsAdminAsync())
+    Guid userId = _httpContext.HttpContext.GetUserId();
+
+    if (!await _accessValidator.IsAdminAsync(userId))
     {
       return _responseCreator.CreateFailureResponse<bool>(HttpStatusCode.Forbidden);
     }
@@ -61,8 +63,6 @@ public class EditBoardCommand : IEditBoardCommand
         HttpStatusCode.BadRequest,
         validationResult.Errors.ConvertAll(vf => vf.ErrorMessage));
     }
-
-    Guid userId = _httpContext.HttpContext.GetUserId();
 
     return new OperationResultResponse<bool>(
       body: await _boardRepository.EditByIdAsync(boardId, userId, _patchDbBoardMapper.Map(request), ct));
