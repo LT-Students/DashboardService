@@ -66,6 +66,11 @@ public class BoardRepository : IBoardRepository
   {
     IQueryable<DbBoard> boards = _provider.Boards.AsNoTracking();
 
+    if (filter.ProjectId.HasValue)
+    {
+      boards = boards.Where(d => d.ProjectId == filter.ProjectId);
+    }
+
     if (filter.IsActive.HasValue)
     {
       boards = boards.Where(d => d.IsActive == filter.IsActive);
