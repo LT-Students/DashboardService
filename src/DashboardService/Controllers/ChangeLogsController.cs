@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
 using LT.DigitalOffice.DashboardService.Models.Dto.Requests.ChangeLog.Filter;
-using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 using System.Threading;
 
@@ -14,15 +13,6 @@ namespace LT.DigitalOffice.DashboardService.Controllers;
 [ApiController]
 public class ChangeLogsController : ControllerBase
 {
-  [HttpGet("{id}")]
-  public async Task<OperationResultResponse<ChangeLogInfo>> GetAsync(
-    [FromServices] IGetChangeLogCommand command,
-    [FromRoute] Guid id,
-    CancellationToken ct)
-  {
-    return await command.ExecuteAsync(id, ct);
-  }
-
   [HttpGet]
   public async Task<FindResultResponse<ChangeLogInfo>> GetAsync(
     [FromServices] IGetChangeLogsCommand command,

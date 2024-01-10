@@ -9,12 +9,15 @@ public record GetChangeLogsFilter : BaseFindFilter
   [FromQuery]
   public Guid? TaskId { get; set; }
 
-  [FromQuery]
-  public DateTime? LastDateTime { get; set; }
+  [FromQuery(Name = "isAscendingSortByCreatedAtUtc")]
+  public bool? IsAscendingSortByCreatedAtUtc { get; set; } = false;
 
-  [FromQuery(Name = "isAscendingSort")]
-  public bool? IsAscendingSort { get; set; }
+  [FromQuery(Name = "isAscendingSortByEntityName")]
+  public bool? IsAscendingSortByEntityName { get; set; }
 
-  [FromQuery(Name = "nameIncludeSubstring")]
-  public string NameIncludeSubstring { get; set; }
+  [FromQuery(Name = "entityNameIncludeSubstring")]
+  public string EntityNameIncludeSubstring { get; set; }
+
+  [FromQuery(Name = "propertyNameIncludeSubstring")]
+  public string PropertyNameIncludeSubstring { get; set; }
 }
