@@ -53,7 +53,7 @@ public class EditPriorityRequestValidator : ExtendedEditRequestValidator<Guid, E
       new()
       {
         { x => !string.IsNullOrEmpty(x.value?.ToString().Trim()), "Name must not be empty." },
-        { x => x.value.ToString().Trim().Length <= 50, "Name is too long." },
+        { x => x.value.ToString().Trim().Length < 51, "Name is too long." },
         
       }, CascadeMode.Stop);
 

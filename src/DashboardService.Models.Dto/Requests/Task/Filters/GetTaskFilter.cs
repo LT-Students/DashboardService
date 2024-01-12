@@ -4,10 +4,6 @@ namespace LT.DigitalOffice.DashboardService.Models.Dto.Requests.Task.Filters;
 
 public record GetTaskFilter
 {
-  // TODO: Wait for groups implementation
-  //[FromQuery(Name = "includegroup")]
-  //public bool IncludeGroup { get; set; } = true;
-
   [FromQuery(Name = "includetasktype")]
   public bool IncludeTaskType { get; set; } = true;
   

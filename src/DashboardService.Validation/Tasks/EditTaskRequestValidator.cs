@@ -14,16 +14,13 @@ namespace LT.DigitalOffice.DashboardService.Validation.Tasks;
 
 public class EditTaskRequestValidator : ExtendedEditRequestValidator<Guid, EditTaskRequest>, IEditTaskRequestValidator
 {
-  private readonly ITaskRepository _repository;
   private readonly ITaskTypeRepository _taskTypeRepository;
   private readonly IPriorityRepository _priorityRepository;
 
   public EditTaskRequestValidator(
-    ITaskRepository repository,
     ITaskTypeRepository taskTypeRepository,
     IPriorityRepository priorityRepository)
   {
-    _repository = repository;
     _taskTypeRepository = taskTypeRepository;
     _priorityRepository = priorityRepository;
 
@@ -68,7 +65,7 @@ public class EditTaskRequestValidator : ExtendedEditRequestValidator<Guid, EditT
       new()
       {
         { x => !string.IsNullOrEmpty(x.value?.ToString().Trim()), "Name must not be empty." },
-        { x => x.value.ToString().Trim().Length <= 50, "Name is too long." },
+        { x => x.value.ToString().Trim().Length < 51, "Name is too long." },
         
       }, CascadeMode.Stop);
     
@@ -88,14 +85,14 @@ public class EditTaskRequestValidator : ExtendedEditRequestValidator<Guid, EditT
         {
           x =>
           {
-            string deadLineStr = x.value?.ToString();
+            string deadlineStr = x.value?.ToString();
             
-            if (deadLineStr is null)
+            if (deadlineStr is null)
             {
               return true;
             }
 
-            return DateTime.TryParse(deadLineStr, out DateTime deadLineAtUtc) && deadLineAtUtc > DateTime.UtcNow;
+            return DateTime.TryParse(deadlineStr, out DateTime deadLineAtUtc) && deadLineAtUtc > DateTime.UtcNow;
           }, "DeadlineAtUtc cannot be less then Utc now." },
       }, CascadeMode.Stop);
     

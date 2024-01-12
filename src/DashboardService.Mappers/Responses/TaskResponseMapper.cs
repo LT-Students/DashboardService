@@ -41,8 +41,6 @@ public class TaskResponseMapper : ITaskResponseMapper
       CreatedAtUtc = dbTask.CreatedAtUtc,
       DeadlineAtUtc = dbTask.DeadlineAtUtc,
       
-      // TODO: Wait for groups implementation
-      //Group = _groupInfoMapper.Map(dbTask.Group),
       TaskType = _taskTypeInfoMapper.Map(dbTask.TaskType),
       Priority = _priorityInfoMapper.Map(dbTask.Priority),
       Comments = dbTask.Comments.ConvertAll(_commentInfoMapper.Map),

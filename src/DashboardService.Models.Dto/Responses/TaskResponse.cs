@@ -15,8 +15,6 @@ public record TaskResponse
   public string Content { get; set; }
   public DateTime CreatedAtUtc { get; set; }
   public DateTime? DeadlineAtUtc { get; set; }
-  
-  public GroupInfo Group { get; set; }
   public TaskTypeInfo TaskType { get; set; }
   public PriorityInfo Priority { get; set; }
   public List<CommentInfo> Comments { get; set; }

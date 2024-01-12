@@ -17,17 +17,17 @@ public class CreateTaskRequestValidator : AbstractValidator<CreateTaskRequest>, 
     /*RuleFor(request => request.GroupId)
       .NotEmpty()
       .WithMessage("GroupId must not be empty.")
-      .MustAsync(async (groupId, _) => await groupRepository.ExistAsync(groupId.Value))
+      .MustAsync((groupId, _) => groupRepository.ExistAsync(groupId.Value))
       .WithMessage("This group id doesn't exist.");*/
     
     RuleFor(request => request.Name)
-      .NotNull()
+      .NotEmpty()
       .WithMessage("Task name is empty.")
       .MaximumLength(50)
       .WithMessage("Task name is too long.");
 
     RuleFor(request => request.Content)
-      .NotNull().
+      .NotEmpty().
       WithMessage("Task content is empty.");
     
     When(request => request.TaskTypeId.HasValue, () =>
@@ -35,7 +35,7 @@ public class CreateTaskRequestValidator : AbstractValidator<CreateTaskRequest>, 
       RuleFor(request => request.TaskTypeId)
         .NotEmpty()
         .WithMessage("TaskTypeId must not be default.")
-        .MustAsync(async (taskTypeId, ct) => await taskTypeRepository.ExistAsync(taskTypeId.Value, ct))
+        .MustAsync((taskTypeId, ct) => taskTypeRepository.ExistAsync(taskTypeId.Value, ct))
         .WithMessage("This task type id doesn't exist.");
     });
     
@@ -44,7 +44,7 @@ public class CreateTaskRequestValidator : AbstractValidator<CreateTaskRequest>, 
       RuleFor(request => request.PriorityId)
         .NotEmpty()
         .WithMessage("PriorityId must not be default.")
-        .MustAsync(async (priorityId, ct) => await priorityRepository.ExistAsync(priorityId.Value, ct))
+        .MustAsync((priorityId, ct) => priorityRepository.ExistAsync(priorityId.Value, ct))
         .WithMessage("This priority id doesn't exist.");
     });
     
@@ -54,7 +54,7 @@ public class CreateTaskRequestValidator : AbstractValidator<CreateTaskRequest>, 
         .NotEmpty()
         .WithMessage("DeadlineAtUtc must not be default.")
         .Must(t => t.Value > DateTime.UtcNow)
-        .WithMessage("DeadlineAtUtc incorrect.");
+        .WithMessage("DeadlineAtUtc is incorrect.");
     });
   }
 }

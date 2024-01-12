@@ -29,11 +29,9 @@ public class TaskRepository : ITaskRepository
     return dbTask.Id;
   }
 
-  public async Task<(List<DbTask> dbTasks, int totalCount)> GetAllAsync(GetTasksFilter filter, CancellationToken cancellationToken)
+  public async Task<(List<DbTask> dbTasks, int totalCount)> GetAllAsync(GetTasksFilter filter, CancellationToken ct)
   {
-    // TODO: Wait for groups implementation
-    //IQueryable<DbTask> dbTasks = _provider.Tasks.Where(t => t.GroupId == filter.GroupId).AsNoTracking();
-    IQueryable<DbTask> dbTasks = _provider.Tasks.AsNoTracking();
+    IQueryable<DbTask> dbTasks = _provider.Tasks.Where(t => !filter.GroupId.HasValue || t.GroupId == filter.GroupId).AsNoTracking();
 
     if (filter.IsAscendingSort.HasValue)
     {
@@ -51,13 +49,15 @@ public class TaskRepository : ITaskRepository
       await dbTasks
         .Skip(filter.SkipCount)
         .Take(filter.TakeCount)
-        .ToListAsync(cancellationToken),
-      await dbTasks.CountAsync(cancellationToken));
+        .ToListAsync(ct),
+      await dbTasks.CountAsync(ct));
   }
 
-  public async Task<DbTask> GetAsync(Guid id, GetTaskFilter filter, CancellationToken cancellationToken = default)
+  public async Task<DbTask> GetAsync(Guid id, GetTaskFilter filter, CancellationToken ct)
   {
-    return await IncludeRelatedEntities(filter, _provider.Tasks).AsNoTracking().FirstOrDefaultAsync(t => t.Id == id, cancellationToken);
+    return await IncludeRelatedEntities(filter, _provider.Tasks).
+      AsNoTracking().
+      FirstOrDefaultAsync(t => t.Id == id, ct);
   }
 
   public async Task<bool> EditAsync(Guid id, JsonPatchDocument<DbTask> request, CancellationToken ct)
@@ -93,12 +93,6 @@ public class TaskRepository : ITaskRepository
 
   private IQueryable<DbTask> IncludeRelatedEntities(GetTaskFilter filter, IQueryable<DbTask> dbTasks)
   {
-    // TODO: Wait for groups implementation
-    //if (filter.IncludeGroup)
-    //{
-    //  dbTasks = dbTasks.Include(t => t.Group);
-    //}
-
     if (filter.IncludeTaskType)
     {
       dbTasks = dbTasks.Include(t => t.TaskType);
