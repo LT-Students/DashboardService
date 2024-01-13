@@ -33,6 +33,22 @@ public class TaskRepository : ITaskRepository
   {
     IQueryable<DbTask> dbTasks = _provider.Tasks.Where(t => !filter.GroupId.HasValue || t.GroupId == filter.GroupId).AsNoTracking();
 
+    if (filter.BoardId.HasValue)
+    {
+      DbBoard dbBoard = await _provider.Boards
+        .Include(b => b.Groups)
+        .FirstOrDefaultAsync(b => b.Id == filter.BoardId, ct);
+      
+      dbTasks = dbTasks
+        .Include(t => t.Group)
+        .Where(t => dbBoard.Groups.FirstOrDefault(t.Group) != default);
+    }
+    
+    dbTasks = dbTasks.Where(t => !filter.PriorityId.HasValue || t.PriorityId == filter.PriorityId).AsNoTracking();
+    dbTasks = dbTasks.Where(t => !filter.TaskTypeId.HasValue || t.TaskTypeId == filter.TaskTypeId).AsNoTracking();
+    dbTasks = dbTasks.Where(t => !filter.DeadlineAtUtc.HasValue || t.DeadlineAtUtc < filter.DeadlineAtUtc).AsNoTracking();
+    dbTasks = dbTasks.Where(t => !filter.CreatedBy.HasValue || t.CreatedBy == filter.CreatedBy).AsNoTracking();
+
     if (filter.IsAscendingSort.HasValue)
     {
       dbTasks = filter.IsAscendingSort.Value
