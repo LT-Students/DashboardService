@@ -27,8 +27,8 @@ public class CreateTaskRequestValidator : AbstractValidator<CreateTaskRequest>, 
       .WithMessage("Task name is too long.");
 
     RuleFor(request => request.Content)
-      .NotEmpty().
-      WithMessage("Task content is empty.");
+      .NotEmpty()
+      .WithMessage("Task content is empty.");
     
     When(request => request.TaskTypeId.HasValue, () =>
     {

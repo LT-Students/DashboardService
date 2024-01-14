@@ -7,5 +7,5 @@ namespace LT.DigitalOffice.DashboardService.Mappers.Responses.Interfaces;
 [AutoInject]
 public interface ITaskResponseMapper
 {
-  public TaskResponse Map(DbTask dbTask);
+  TaskResponse Map(DbTask dbTask);
 }

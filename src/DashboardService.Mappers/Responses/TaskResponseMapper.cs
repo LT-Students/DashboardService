@@ -40,7 +40,6 @@ public class TaskResponseMapper : ITaskResponseMapper
       Content = dbTask.Content,
       CreatedAtUtc = dbTask.CreatedAtUtc,
       DeadlineAtUtc = dbTask.DeadlineAtUtc,
-      
       TaskType = _taskTypeInfoMapper.Map(dbTask.TaskType),
       Priority = _priorityInfoMapper.Map(dbTask.Priority),
       Comments = dbTask.Comments.ConvertAll(_commentInfoMapper.Map),

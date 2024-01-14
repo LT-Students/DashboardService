@@ -31,23 +31,39 @@ public class TaskRepository : ITaskRepository
 
   public async Task<(List<DbTask> dbTasks, int totalCount)> GetAllAsync(GetTasksFilter filter, CancellationToken ct)
   {
-    IQueryable<DbTask> dbTasks = _provider.Tasks.Where(t => !filter.GroupId.HasValue || t.GroupId == filter.GroupId).AsNoTracking();
+    IQueryable<DbTask> dbTasks = _provider.Tasks.AsNoTracking();
+
+    if (filter.GroupId.HasValue)
+    {
+      dbTasks = dbTasks.Where(t => t.GroupId == filter.GroupId);
+    }
 
     if (filter.BoardId.HasValue)
     {
-      DbBoard dbBoard = await _provider.Boards
-        .Include(b => b.Groups)
-        .FirstOrDefaultAsync(b => b.Id == filter.BoardId, ct);
-      
       dbTasks = dbTasks
         .Include(t => t.Group)
-        .Where(t => dbBoard.Groups.FirstOrDefault(t.Group) != default);
+        .Where(t => t.Group.BoardId == filter.BoardId);
     }
     
-    dbTasks = dbTasks.Where(t => !filter.PriorityId.HasValue || t.PriorityId == filter.PriorityId).AsNoTracking();
-    dbTasks = dbTasks.Where(t => !filter.TaskTypeId.HasValue || t.TaskTypeId == filter.TaskTypeId).AsNoTracking();
-    dbTasks = dbTasks.Where(t => !filter.DeadlineAtUtc.HasValue || t.DeadlineAtUtc < filter.DeadlineAtUtc).AsNoTracking();
-    dbTasks = dbTasks.Where(t => !filter.CreatedBy.HasValue || t.CreatedBy == filter.CreatedBy).AsNoTracking();
+    if (filter.PriorityId.HasValue)
+    {
+      dbTasks = dbTasks.Where(t => t.PriorityId == filter.PriorityId);
+    }
+    
+    if (filter.TaskTypeId.HasValue)
+    {
+      dbTasks = dbTasks.Where(t => t.TaskTypeId == filter.TaskTypeId);
+    }
+    
+    if (filter.DeadlineAtUtc.HasValue)
+    {
+      dbTasks = dbTasks.Where(t => t.DeadlineAtUtc < filter.DeadlineAtUtc);
+    }
+    
+    if (filter.CreatedBy.HasValue)
+    {
+      dbTasks = dbTasks.Where(t => t.CreatedBy == filter.CreatedBy);
+    }
 
     if (filter.IsAscendingSort.HasValue)
     {
@@ -71,9 +87,9 @@ public class TaskRepository : ITaskRepository
 
   public async Task<DbTask> GetAsync(Guid id, GetTaskFilter filter, CancellationToken ct)
   {
-    return await IncludeRelatedEntities(filter, _provider.Tasks).
-      AsNoTracking().
-      FirstOrDefaultAsync(t => t.Id == id, ct);
+    return await IncludeRelatedEntities(filter, _provider.Tasks)
+      .AsNoTracking()
+      .FirstOrDefaultAsync(t => t.Id == id, ct);
   }
 
   public async Task<bool> EditAsync(Guid id, JsonPatchDocument<DbTask> request, CancellationToken ct)
