@@ -95,4 +95,9 @@ public class PriorityRepository : IPriorityRepository
       ? _provider.Priorities.AnyAsync(d => d.Name == name && d.Id != priorityId, ct)
       : _provider.Priorities.AnyAsync(d => d.Name == name, ct);
   }
+
+  public async Task<bool> ExistAsync(Guid id, CancellationToken ct)
+  {
+    return await GetAsync(id, ct) is not null;
+  }
 }

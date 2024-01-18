@@ -14,8 +14,9 @@ public interface IPriorityRepository
 {
   Task<Guid?> CreateAsync(DbPriority dbDepartment);
   Task<(List<DbPriority> dbPriorities, int totalCount)> GetAllAsync(GetPrioritiesFilter filter, CancellationToken ct);
-  Task<DbPriority> GetAsync(Guid id, CancellationToken ct = default);
+  Task<DbPriority> GetAsync(Guid id, CancellationToken ct);
   Task<bool> EditAsync(Guid id, JsonPatchDocument<DbPriority> request, CancellationToken ct);
   Task<bool> RemoveAsync(Guid id, CancellationToken ct);
   Task<bool> NameExistAsync(string name, CancellationToken ct, Guid? priorityId = default);
+  Task<bool> ExistAsync(Guid id, CancellationToken ct);
 }

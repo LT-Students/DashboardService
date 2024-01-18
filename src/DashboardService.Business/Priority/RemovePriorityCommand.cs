@@ -42,7 +42,7 @@ public class RemovePriorityCommand : IRemovePriorityCommand
     {
       return _responseCreator.CreateFailureResponse<bool>(
         HttpStatusCode.NotFound, 
-        new() {"Cannot remove task priority with given Id"});
+        new() { "Cannot remove task priority with given Id" });
     }
 
     return new()

@@ -9,13 +9,6 @@ namespace LT.DigitalOffice.DashboardService.Mappers.Models;
 
 public class GroupInfoMapper : IGroupInfoMapper
 {
-  private readonly IHttpContextAccessor _httpContextAccessor;
-
-  public GroupInfoMapper(IHttpContextAccessor httpContextAccessor)
-  {
-    _httpContextAccessor = httpContextAccessor;
-  }
-
   public GroupInfo Map(DbGroup dbGroup)
   {
     return new()

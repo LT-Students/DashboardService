@@ -18,4 +18,5 @@ public interface ITaskTypeRepository
   Task<bool> EditAsync(Guid id, JsonPatchDocument<DbTaskType> request, CancellationToken ct);
   Task<bool> RemoveAsync(Guid id, CancellationToken ct);
   Task<bool> NameExistAsync(string name, CancellationToken ct, Guid? priorityId = default);
+  Task<bool> ExistAsync(Guid id, CancellationToken ct);
 }
