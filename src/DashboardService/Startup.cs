@@ -1,7 +1,10 @@
 ﻿using AspNetCoreRateLimit;
+using DigitalOffice.Kernel.Configurations;
+using DigitalOffice.Kernel.OpenApi.SchemaFilters;
 using HealthChecks.UI.Client;
 using LT.DigitalOffice.DashboardService.Broker;
 using LT.DigitalOffice.DashboardService.Data.Provider.MsSql.Ef;
+using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
 using LT.DigitalOffice.Kernel.BrokerSupport.Configurations;
 using LT.DigitalOffice.Kernel.BrokerSupport.Extensions;
 using LT.DigitalOffice.Kernel.BrokerSupport.Middlewares.Token;
@@ -17,9 +20,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Reflection;
 using System.Text.Json.Serialization;
 
 namespace LT.DigitalOffice.DashboardService;
@@ -30,6 +36,7 @@ public class Startup : BaseApiInfo
 
   private readonly RabbitMqConfig _rabbitMqConfig;
   private readonly BaseServiceInfoConfig _serviceInfoConfig;
+  private readonly SwaggerConfiguration _swaggerConfiguration;
 
   public IConfiguration Configuration { get; }
 
@@ -44,6 +51,10 @@ public class Startup : BaseApiInfo
     _serviceInfoConfig = Configuration
       .GetSection(BaseServiceInfoConfig.SectionName)
       .Get<BaseServiceInfoConfig>();
+    
+    _swaggerConfiguration = Configuration
+      .GetSection(SwaggerConfiguration.SectionName)
+      .Get<SwaggerConfiguration>() ?? new();
 
     Version = "1.0";
     Description = "DashboardService is an API intended to work with dashboards";
@@ -92,6 +103,26 @@ public class Startup : BaseApiInfo
     services.AddBusinessObjects();
 
     services.ConfigureMassTransit(_rabbitMqConfig);
+    
+    services.AddSwaggerGen(options =>
+    {
+      options.SwaggerDoc($"{Version}", new OpenApiInfo
+      {
+        Version = Version,
+        Title = _serviceInfoConfig.Name,
+        Description = Description
+      });
+
+      string controllersXmlFileName = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+      string modelsXmlFileName = $"{Assembly.GetAssembly(typeof(TaskResponse)).GetName().Name}.xml";
+
+      options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, controllersXmlFileName));
+      options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, modelsXmlFileName));
+
+      options.EnableAnnotations();
+
+      options.SchemaFilter<JsonPatchDocumentSchemaFilter>();
+    });
 
     services.AddMemoryCache();
 
@@ -119,6 +150,19 @@ public class Startup : BaseApiInfo
     app.UseApiInformation();
 
     app.UseRouting();
+    
+    string backendUrl = $"{Environment.GetEnvironmentVariable("BaseDomain")}{_swaggerConfiguration.ServicePath}";
+    app.UseSwagger(options =>
+    {
+      options.PreSerializeFilters.Add((swagger, httpReq) =>
+      {
+        swagger.Servers = new List<OpenApiServer> { new OpenApiServer { Url = backendUrl } };
+      });
+    })
+    .UseSwaggerUI(options =>
+    {
+      options.SwaggerEndpoint($"{_swaggerConfiguration.ServicePath}/swagger/{Version}/swagger.json", $"{Version}");
+    });
 
     app.UseMiddleware<TokenMiddleware>();
 
