@@ -3,10 +3,6 @@
   <Import Project="$(ProjectDir)..\..\Common.Configurations.targets" />
 
   <ItemGroup>
-    <Folder Include="Migrations" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\DashboardService.Data.Provider\DashboardService.Data.Provider.csproj" />
   </ItemGroup>
 

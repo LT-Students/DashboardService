@@ -23,4 +23,6 @@ public interface IBoardRepository
   Task<bool> RemoveAsync(Guid id, Guid modifiedById, CancellationToken ct);
 
   Task<bool> NameExistAsync(string name, Guid projectId, CancellationToken ct, Guid? boardId = default);
+  
+  Task<bool> ExistAsync(Guid boardId);
 }

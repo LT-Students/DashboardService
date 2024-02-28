@@ -1,10 +1,9 @@
-﻿using LT.DigitalOffice.DashboardService.Mappers.Models;
+﻿using DigitalOffice.Models.Broker.Models.User;
 using LT.DigitalOffice.DashboardService.Mappers.Models.Interfaces;
 using LT.DigitalOffice.DashboardService.Mappers.Responses.Interfaces;
 using LT.DigitalOffice.DashboardService.Models.Db;
-using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 using LT.DigitalOffice.DashboardService.Models.Dto.Responses;
-using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LT.DigitalOffice.DashboardService.Mappers.Responses;
@@ -18,7 +17,7 @@ public class BoardResponseMapper : IBoardResponseMapper
     _groupInfoMapper = groupInfoMapper;
   }
 
-  public BoardResponse Map(DbBoard dbBoard)
+  public BoardResponse Map(DbBoard dbBoard, List<UserData> usersData)
   {
     return new BoardResponse
     {
@@ -26,7 +25,8 @@ public class BoardResponseMapper : IBoardResponseMapper
       ProjectId = dbBoard.ProjectId,
       Name = dbBoard.Name,
       IsActive = dbBoard.IsActive,
-      Groups = dbBoard.Groups.Select(_groupInfoMapper.Map).ToList()
+      Groups = dbBoard.Groups.Select(_groupInfoMapper.Map).ToList(),
+      Users = usersData
     };
   }
 }

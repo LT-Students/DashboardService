@@ -1,4 +1,5 @@
-﻿using LT.DigitalOffice.DashboardService.Models.Dto.Models;
+﻿using DigitalOffice.Models.Broker.Models.User;
+using LT.DigitalOffice.DashboardService.Models.Dto.Models;
 using System;
 using System.Collections.Generic;
 
@@ -15,4 +16,5 @@ public class BoardResponse
   public bool IsActive { get; set; }
 
   public List<GroupInfo> Groups {get; set;}
+  public List<UserData> Users { get; set; }
 }

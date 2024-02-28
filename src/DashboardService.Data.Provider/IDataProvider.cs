@@ -16,4 +16,5 @@ public interface IDataProvider : IBaseDataProvider
   DbSet<DbPriority> Priorities { get; set; }
   DbSet<DbTask> Tasks { get; set; }
   DbSet<DbTaskType> TaskTypes { get; set; }
+  DbSet<DbDashboardUser> DashboardUsers { get; set; }
 }

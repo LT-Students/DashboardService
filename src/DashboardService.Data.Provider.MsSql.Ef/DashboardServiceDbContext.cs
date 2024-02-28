@@ -15,6 +15,7 @@ public class DashboardServiceDbContext : DbContext, IDataProvider
   public DbSet<DbPriority> Priorities { get; set; }
   public DbSet<DbTask> Tasks { get; set; }
   public DbSet<DbTaskType> TaskTypes { get; set; }
+  public DbSet<DbDashboardUser> DashboardUsers { get; set; }
 
   public DashboardServiceDbContext(DbContextOptions<DashboardServiceDbContext> options) : base(options) { }
 

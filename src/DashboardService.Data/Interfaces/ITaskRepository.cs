@@ -12,7 +12,7 @@ namespace LT.DigitalOffice.DashboardService.Data.Interfaces;
 [AutoInject]
 public interface ITaskRepository
 {
-  Task<Guid> CreateAsync(DbTask dbDepartment);
+  Task<Guid> CreateAsync(DbTask dbTask);
   Task<(List<DbTask> dbTasks, int totalCount)> GetAllAsync(GetTasksFilter filter, CancellationToken ct);
   Task<DbTask> GetAsync(Guid id, GetTaskFilter filter, CancellationToken ct);
   Task<bool> EditAsync(Guid id, JsonPatchDocument<DbTask> request, CancellationToken ct);

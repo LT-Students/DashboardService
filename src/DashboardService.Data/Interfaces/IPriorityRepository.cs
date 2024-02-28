@@ -12,7 +12,7 @@ namespace LT.DigitalOffice.DashboardService.Data.Interfaces;
 [AutoInject]
 public interface IPriorityRepository
 {
-  Task<Guid?> CreateAsync(DbPriority dbDepartment);
+  Task<Guid?> CreateAsync(DbPriority dbPriority);
   Task<(List<DbPriority> dbPriorities, int totalCount)> GetAllAsync(GetPrioritiesFilter filter, CancellationToken ct);
   Task<DbPriority> GetAsync(Guid id, CancellationToken ct);
   Task<bool> EditAsync(Guid id, JsonPatchDocument<DbPriority> request, CancellationToken ct);

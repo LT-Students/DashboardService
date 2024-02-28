@@ -133,4 +133,9 @@ public class BoardRepository : IBoardRepository
       ? boards.AnyAsync(x => x.Name == name && boardId != x.Id, ct)
       : boards.AnyAsync(x => x.Name == name, ct);
   }
+  
+  public Task<bool> ExistAsync(Guid boardId)
+  {
+    return _provider.Boards.AnyAsync(x => x.Id == boardId && x.IsActive);
+  }
 }

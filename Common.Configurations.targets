@@ -2,7 +2,7 @@
 
 <Project>
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<AssemblyName>LT.DigitalOffice.$(MSBuildProjectName)</AssemblyName>
 		<RootNamespace>LT.DigitalOffice.$(MSBuildProjectName)</RootNamespace>
 	</PropertyGroup>
@@ -26,11 +26,11 @@
 	</PropertyGroup>
 
 	<ItemGroup Condition="$(AssemblyName.Contains('.UnitTests')) != 'true'">
-		<PackageReference Include="LTDO.Kernel" Version="1.0.34" />
-		<PackageReference Include="LTDO.Kernel.BrokerSupport" Version="1.0.18" />
-		<PackageReference Include="LTDO.Kernel.EndpointSupport" Version="1.0.11" />
-		<PackageReference Include="LTDO.Kernel.EFSupport" Version="1.0.8" />
-		<PackageReference Include="LTDO.Models" Version="1.0.59" />
+		<PackageReference Include="LTDO.Kernel" Version="2.0.2" />
+		<PackageReference Include="LTDO.Kernel.RedisSupport" Version="2.0.0" />
+		<PackageReference Include="LTDO.Kernel.BrokerSupport" Version="2.0.0" />
+		<PackageReference Include="LTDO.Kernel.EFSupport" Version="2.0.0" />
+		<PackageReference Include="LTDO.Models" Version="2.0.7" />
 	</ItemGroup>
 
 	<ItemGroup Condition="$(AssemblyName.Contains('.UnitTests'))">

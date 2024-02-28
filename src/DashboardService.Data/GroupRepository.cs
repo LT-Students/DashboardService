@@ -10,7 +10,7 @@ namespace LT.DigitalOffice.DashboardService.Data;
 
 public class GroupRepository : IGroupRepository
 {
-  public Task<Guid?> CreateAsync(DbGroup dbDepartment)
+  public Task<Guid?> CreateAsync(DbGroup dbGroup)
   {
     throw new NotImplementedException();
   }

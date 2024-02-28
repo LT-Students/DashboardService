@@ -19,6 +19,7 @@ public class DbBoard
   public DateTime? ModifiedAtUtc { get; set; }
 
   public ICollection<DbGroup> Groups { get; set; } = new List<DbGroup>();
+  public ICollection<DbDashboardUser> Users { get; set; } = new List<DbDashboardUser>();
 }
 
 public class DbBoardConfiguration : IEntityTypeConfiguration<DbBoard>
@@ -29,31 +30,35 @@ public class DbBoardConfiguration : IEntityTypeConfiguration<DbBoard>
       .ToTable(DbBoard.TableName);
 
     builder
-      .HasKey(p => p.Id);
+      .HasKey(b => b.Id);
 
     builder
-      .Property(p => p.Name)
+      .Property(b => b.Name)
       .HasMaxLength(50)
       .IsRequired();
 
     builder
-      .Property(p => p.CreatedBy)
+      .Property(b => b.CreatedBy)
       .IsRequired();
 
     builder
-      .Property(p => p.ProjectId)
+      .Property(b => b.ProjectId)
       .IsRequired();
 
     builder
-      .Property(p => p.CreatedAtUtc)
+      .Property(b => b.CreatedAtUtc)
       .IsRequired();
 
     builder
-      .Property(p => p.IsActive)
+      .Property(b => b.IsActive)
       .IsRequired();
 
     builder
-      .HasMany(p => p.Groups)
-      .WithOne(t => t.Board);
+      .HasMany(b => b.Groups)
+      .WithOne(g => g.Board);
+    
+    builder
+      .HasMany(b => b.Users)
+      .WithOne(du => du.Board);
   }
 }

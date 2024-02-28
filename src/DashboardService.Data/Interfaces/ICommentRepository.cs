@@ -11,7 +11,7 @@ namespace LT.DigitalOffice.DashboardService.Data.Interfaces;
 [AutoInject]
 public interface ICommentRepository
 {
-  Task<Guid?> CreateAsync(DbComment dbDepartment);
+  Task<Guid?> CreateAsync(DbComment dbComment);
   Task<DbComment> GetAllAsync(GetCommentsFilter filter);
   Task<DbComment> GetAsync(Guid id, GetCommentFilter filter);
   Task<bool> EditAsync(Guid id, JsonPatchDocument<DbComment> request);

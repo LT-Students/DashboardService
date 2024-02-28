@@ -11,7 +11,7 @@ namespace LT.DigitalOffice.DashboardService.Data.Interfaces;
 [AutoInject]
 public interface IGroupRepository
 {
-  Task<Guid?> CreateAsync(DbGroup dbDepartment);
+  Task<Guid?> CreateAsync(DbGroup dbGroup);
   Task<DbGroup> GetAllAsync(GetGroupsFilter filter);
   Task<DbGroup> GetAsync(Guid id, GetGroupFilter filter);
   Task<bool> EditAsync(Guid id, JsonPatchDocument<DbGroup> request);

@@ -10,7 +10,7 @@ namespace LT.DigitalOffice.DashboardService.Data;
 
 public class CommentRepository : ICommentRepository
 {
-  public Task<Guid?> CreateAsync(DbComment dbDepartment)
+  public Task<Guid?> CreateAsync(DbComment dbComment)
   {
     throw new NotImplementedException();
   }
